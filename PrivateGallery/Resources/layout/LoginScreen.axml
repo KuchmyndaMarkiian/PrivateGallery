@@ -12,6 +12,7 @@
          android:padding="6dp">
         <EditText
             android:hint="login"
+            android:id="@+id/loginView"
             android:textColor="#0000FF"
             android:singleLine="true"
             android:textAlignment="center"
@@ -20,6 +21,7 @@
             android:layout_height="match_parent" />
       <EditText
             android:hint="password"
+            android:id="@+id/passwordView"
             android:textColor="#0000FF"
             android:singleLine="true"
             android:maxLines="1"
@@ -39,6 +41,7 @@
                     android:gravity="center">
       <Button
         android:text ="Sign in"
+        android:id="@+id/signIn"
         android:textAlignment="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -46,5 +49,11 @@
                    android:layout_height="36dp"
                    android:src="@drawable/facebook"/>
     </LinearLayout>
+    <Button
+      android:text ="Register"
+      android:id="@+id/registerButton"
+      android:textAlignment="center"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
     </LinearLayout>
 </RelativeLayout>

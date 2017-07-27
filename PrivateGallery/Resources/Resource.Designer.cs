@@ -66,26 +66,44 @@ namespace PrivateGallery
 		public partial class Attribute
 		{
 			
-			// aapt resource value: 0x7f010006
-			public const int fab_colorDisabled = 2130771974;
+			// aapt resource value: 0x7f01000c
+			public const int fab_colorDisabled = 2130771980;
 			
-			// aapt resource value: 0x7f010005
-			public const int fab_colorNormal = 2130771973;
+			// aapt resource value: 0x7f01000b
+			public const int fab_colorNormal = 2130771979;
 			
-			// aapt resource value: 0x7f010004
-			public const int fab_colorPressed = 2130771972;
+			// aapt resource value: 0x7f01000a
+			public const int fab_colorPressed = 2130771978;
 			
-			// aapt resource value: 0x7f010007
-			public const int fab_colorRipple = 2130771975;
+			// aapt resource value: 0x7f01000d
+			public const int fab_colorRipple = 2130771981;
 			
-			// aapt resource value: 0x7f010008
-			public const int fab_shadow = 2130771976;
+			// aapt resource value: 0x7f01000e
+			public const int fab_shadow = 2130771982;
+			
+			// aapt resource value: 0x7f01000f
+			public const int fab_size = 2130771983;
 			
 			// aapt resource value: 0x7f010009
-			public const int fab_size = 2130771977;
+			public const int indicatorColor = 2130771977;
+			
+			// aapt resource value: 0x7f010008
+			public const int indicatorName = 2130771976;
 			
 			// aapt resource value: 0x7f010000
 			public const int layoutManager = 2130771968;
+			
+			// aapt resource value: 0x7f010007
+			public const int maxHeight = 2130771975;
+			
+			// aapt resource value: 0x7f010005
+			public const int maxWidth = 2130771973;
+			
+			// aapt resource value: 0x7f010006
+			public const int minHeight = 2130771974;
+			
+			// aapt resource value: 0x7f010004
+			public const int minWidth = 2130771972;
 			
 			// aapt resource value: 0x7f010002
 			public const int reverseLayout = 2130771970;
@@ -109,8 +127,8 @@ namespace PrivateGallery
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f060000
-			public const int fab_material_blue_500 = 2131099648;
+			// aapt resource value: 0x7f080000
+			public const int fab_material_blue_500 = 2131230720;
 			
 			static Color()
 			{
@@ -181,20 +199,41 @@ namespace PrivateGallery
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050004
-			public const int FabButton = 2131034116;
+			// aapt resource value: 0x7f050009
+			public const int FabButton = 2131034121;
+			
+			// aapt resource value: 0x7f050008
+			public const int GalleryList = 2131034120;
+			
+			// aapt resource value: 0x7f05000a
+			public const int imageReg = 2131034122;
 			
 			// aapt resource value: 0x7f050003
-			public const int GalleryList = 2131034115;
+			public const int indicator = 2131034115;
 			
 			// aapt resource value: 0x7f050000
 			public const int item_touch_helper_previous_elevation = 2131034112;
+			
+			// aapt resource value: 0x7f050004
+			public const int loginView = 2131034116;
 			
 			// aapt resource value: 0x7f050001
 			public const int mini = 2131034113;
 			
 			// aapt resource value: 0x7f050002
 			public const int normal = 2131034114;
+			
+			// aapt resource value: 0x7f050005
+			public const int passwordView = 2131034117;
+			
+			// aapt resource value: 0x7f05000b
+			public const int pickImageReg = 2131034123;
+			
+			// aapt resource value: 0x7f050007
+			public const int registerButton = 2131034119;
+			
+			// aapt resource value: 0x7f050006
+			public const int signIn = 2131034118;
 			
 			static Id()
 			{
@@ -213,16 +252,19 @@ namespace PrivateGallery
 			public const int ForgotPasswordScreen = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int LoginScreen = 2130903041;
+			public const int LoadingDialog = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int MainScreen = 2130903042;
+			public const int LoginScreen = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int PhotoEditScreen = 2130903043;
+			public const int MainScreen = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int RegistrationScreen = 2130903044;
+			public const int PhotoEditScreen = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int RegistrationScreen = 2130903045;
 			
 			static Layout()
 			{
@@ -237,11 +279,14 @@ namespace PrivateGallery
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f070001
-			public const int ApplicationName = 2131165185;
+			// aapt resource value: 0x7f060002
+			public const int ApplicationName = 2131099650;
 			
-			// aapt resource value: 0x7f070000
-			public const int Hello = 2131165184;
+			// aapt resource value: 0x7f060001
+			public const int Hello = 2131099649;
+			
+			// aapt resource value: 0x7f060000
+			public const int app_name = 2131099648;
 			
 			static String()
 			{
@@ -256,8 +301,17 @@ namespace PrivateGallery
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f080000
-			public const int NoActionBar = 2131230720;
+			// aapt resource value: 0x7f070000
+			public const int AVLoadingIndicatorView = 2131165184;
+			
+			// aapt resource value: 0x7f070001
+			public const int AVLoadingIndicatorView_Large = 2131165185;
+			
+			// aapt resource value: 0x7f070002
+			public const int AVLoadingIndicatorView_Small = 2131165186;
+			
+			// aapt resource value: 0x7f070003
+			public const int NoActionBar = 2131165187;
 			
 			static Style()
 			{
@@ -272,13 +326,39 @@ namespace PrivateGallery
 		public partial class Styleable
 		{
 			
-			public static int[] FloatingActionButton = new int[] {
+			public static int[] AVLoadingIndicatorView = new int[] {
 					2130771972,
 					2130771973,
 					2130771974,
 					2130771975,
 					2130771976,
 					2130771977};
+			
+			// aapt resource value: 5
+			public const int AVLoadingIndicatorView_indicatorColor = 5;
+			
+			// aapt resource value: 4
+			public const int AVLoadingIndicatorView_indicatorName = 4;
+			
+			// aapt resource value: 3
+			public const int AVLoadingIndicatorView_maxHeight = 3;
+			
+			// aapt resource value: 1
+			public const int AVLoadingIndicatorView_maxWidth = 1;
+			
+			// aapt resource value: 2
+			public const int AVLoadingIndicatorView_minHeight = 2;
+			
+			// aapt resource value: 0
+			public const int AVLoadingIndicatorView_minWidth = 0;
+			
+			public static int[] FloatingActionButton = new int[] {
+					2130771978,
+					2130771979,
+					2130771980,
+					2130771981,
+					2130771982,
+					2130771983};
 			
 			// aapt resource value: 2
 			public const int FloatingActionButton_fab_colorDisabled = 2;
