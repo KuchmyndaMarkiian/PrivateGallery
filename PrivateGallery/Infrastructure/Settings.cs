@@ -25,15 +25,14 @@ namespace PrivateGallery.Infrastructure
         public string RegisterAdress { get; } = "/api/Account/Register";
         public string LoginAdress { get; } = "/Token";
         public string LogoutAdress { get; } = "/api/Account/LogOut";
-        public string UserInfo { get; } = "api/Account/AccountInfo";
-
-
+        public string UserInfo { get; } = "/api/Account/AccountInfo";
+        public string PictureAdress { get; } = "/api/Account/UpdateAvatar";
         #endregion
 
         #region Game
 
         public string AchievementsAdress { get; } = "/api/UserData/UserAchievements";
-        public string PictureAdress { get; } = "/api/Upload";
+       
         public string TopicsAddress { get; set; } = "/get_word_topics/";
 
         #endregion

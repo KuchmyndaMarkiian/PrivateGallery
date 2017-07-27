@@ -26,7 +26,7 @@ namespace PrivateGallery.Infrastructure
             try
             {
                 var requestMessage = HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get, $"{_hostUrl}{url}", AccessToken);
-                var responseMessage = await _client.SendAsync(requestMessage);
+                var responseMessage =  _client.SendAsync(requestMessage).Result;
                 return responseMessage.IsSuccessStatusCode
                     ? JsonConvert.DeserializeObject<T>(await responseMessage.Content.ReadAsStringAsync())
                     : default(T);
@@ -42,7 +42,7 @@ namespace PrivateGallery.Infrastructure
                 return default(Stream);
             try
             {
-                var requestMessage = HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get, url, AccessToken);
+                var requestMessage = HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get, $"{_hostUrl}{url}", AccessToken);
                 var responseMessage = await _client.SendAsync(requestMessage);
                 return responseMessage.IsSuccessStatusCode
                     ? await responseMessage.Content.ReadAsStreamAsync()
@@ -51,6 +51,30 @@ namespace PrivateGallery.Infrastructure
             catch (Exception exception)
             {
                 return default(Stream);
+            }
+        }
+        //todo It doesn't works
+        public bool PostFile(string url, (string fullname, string name, Stream content) file)
+        {
+            try
+            {
+                Console.WriteLine("Start Uploading");
+                if (string.IsNullOrEmpty(url))
+                    throw new NullReferenceException(nameof(url) + "isn`t correct");
+                Console.WriteLine("Norm URL");
+                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{_hostUrl}{url}");
+                var content = new MultipartFormDataContent();
+                content.Add(new StreamContent(file.content), file.name, file.fullname);
+                Console.WriteLine("Content Added");
+                requestMessage.Content = content;
+                Console.WriteLine("Sending");
+                var responseMessage = _client.SendAsync(requestMessage).Result;
+                Console.WriteLine("Done");
+                return responseMessage.IsSuccessStatusCode;
+            }
+            catch (Exception exception)
+            {
+                return false;
             }
         }
 

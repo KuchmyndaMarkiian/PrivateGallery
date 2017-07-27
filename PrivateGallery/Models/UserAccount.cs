@@ -1,19 +1,22 @@
-﻿namespace PrivateGallery.Models
+﻿using System;
+
+namespace PrivateGallery.Models
 {
     class UserAccount:AccountInfoViewModel
     {
-        private static UserAccount _instance;
+        private static Lazy<UserAccount> _instance=new Lazy<UserAccount>();
+       
 
-        public static UserAccount Instance
-        {
-            get
-            {
-                lock (_instance)
-                    return _instance ?? new UserAccount();
-            }
-        }
+        public static UserAccount Instance => _instance.Value ?? new Lazy<UserAccount>().Value;
         public string Password { get; set; }
         public  UserToken UserToken { get; set; }
         public byte[] Avatar { get; set; }
+
+        public void Clone(AccountInfoViewModel model)
+        {
+            FirstName = model.FirstName;
+            LastName = model.LastName;
+            Email = model.Email;
+        }
     }
 }

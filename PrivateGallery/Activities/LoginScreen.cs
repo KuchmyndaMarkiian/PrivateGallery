@@ -13,15 +13,14 @@ namespace PrivateGallery.Activities
     [Activity(Label = "Anonymous Gallery", MainLauncher = true, Theme = "@style/NoActionBar")]
     public class LoginScreen : Activity
     {
-        EditText _loginView;
-        EditText _passwordView;
-        UserAccount _userAccount=UserAccount.Instance;
+        UserAccount _userAccount;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.LoginScreen);
             // Create your application here
 
+            _userAccount=UserAccount.Instance;
             #region Buttons init
 
             var registerButton = FindViewById<Button>(Resource.Id.registerButton);
@@ -34,10 +33,10 @@ namespace PrivateGallery.Activities
             #region Textviews init
 
             
-            _loginView = FindViewById<EditText>(Resource.Id.loginView);
-            _passwordView = FindViewById<EditText>(Resource.Id.passwordView);
-            _loginView.AfterTextChanged += (sender, args) => _userAccount.Email = (sender as EditText).Text;
-            _passwordView.AfterTextChanged += (sender, args) => _userAccount.Password = (sender as EditText).Text;
+            var loginView = FindViewById<EditText>(Resource.Id.loginView);
+            var passwordView = FindViewById<EditText>(Resource.Id.passwordView);
+            loginView.AfterTextChanged += (sender, args) => _userAccount.Email = (sender as EditText).Text;
+            passwordView.AfterTextChanged += (sender, args) => _userAccount.Password = (sender as EditText).Text;
             #endregion
         }
 
@@ -47,6 +46,7 @@ namespace PrivateGallery.Activities
         {
             var loadingDialog= new Dialog(this);
             loadingDialog.InitializeLoadingDialog();
+            loadingDialog.Show();
             Task.Run(async () =>
             {
                 using (var service = new AutorizationService())
@@ -57,12 +57,22 @@ namespace PrivateGallery.Activities
                         using (HttpManager manager = new HttpManager(Settings.Instance.ServerAdress))
                         {
                             manager.AccessToken = _userAccount.UserToken.AccessToken;
-                            _userAccount =
-                                (UserAccount) await manager.GetData<AccountInfoViewModel>(Settings.Instance.UserInfo);
+                            _userAccount.Clone(await manager.GetData<AccountInfoViewModel>(Settings.Instance.UserInfo));
                         }
-                        RunOnUiThread(() => loadingDialog.Dismiss());
+                        RunOnUiThread(() =>
+                        {
+                            loadingDialog.Dismiss();
+                            var main = new Intent(this, typeof(MainScreen));
+                            StartActivity(main);
+                            Finish();
+                        });
+                    }
+                    else
+                    {
+                        RunOnUiThread(() => Toast.MakeText(this,"Signing in isn`t executed.",ToastLength.Short).Show());
                     }
                 }
+                RunOnUiThread(() => loadingDialog.Dismiss());
             });
         }
         void OnRegisterButtonOnClick(object sender, EventArgs args)
@@ -71,7 +81,6 @@ namespace PrivateGallery.Activities
             StartActivity(intent);
             Finish();
         }
-
         #endregion
     }
 }

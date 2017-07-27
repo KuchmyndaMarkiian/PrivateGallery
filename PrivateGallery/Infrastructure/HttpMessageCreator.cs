@@ -26,8 +26,7 @@ namespace PrivateGallery.Infrastructure
         public static HttpRequestMessage CreateHeaderRequestMessage(HttpMethod method, string uri,
             string accessToken = null)
         {
-            var requestMessage = new HttpRequestMessage(method,
-                $"{Settings.Instance.ServerAdress}{uri}");
+            var requestMessage = new HttpRequestMessage(method,uri);
             if (accessToken != null)
             {
                 requestMessage.Headers.Authorization =
