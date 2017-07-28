@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.Database;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Provider;
 using Android.Widget;
@@ -32,6 +32,7 @@ namespace PrivateGalleryNew.Activities
             SetContentView(Resource.Layout.RegistrationScreen);
             // Create your application here
             _userAccount = UserAccount.Instance;
+
             #region Dialog Setup
 
             _dialog = new AlertDialog.Builder(this);
@@ -49,7 +50,7 @@ namespace PrivateGalleryNew.Activities
                     Intent.SetAction(Intent.ActionGetContent);
                     StartActivityForResult(Intent.CreateChooser(Intent, "Select Picture"), (int) PickFileTypes.Device);
                 })
-                .SetNegativeButton("Cancel", (sender, args) => (sender as AlertDialog).Cancel());
+                .SetNegativeButton("Cancel", (sender, args) => ((AlertDialog) sender).Cancel());
 
             #endregion
 
@@ -72,13 +73,13 @@ namespace PrivateGalleryNew.Activities
             #region Fields init
 
             FindViewById<EditText>(Resource.Id.firstNameField).AfterTextChanged +=
-                (sender, args) => _userAccount.FirstName = (sender as EditText).Text;
+                (sender, args) => _userAccount.FirstName = ((EditText) sender).Text;
             FindViewById<EditText>(Resource.Id.lastNameField).AfterTextChanged +=
-                (sender, args) => _userAccount.LastName = (sender as EditText).Text;
+                (sender, args) => _userAccount.LastName = ((EditText) sender).Text;
             FindViewById<EditText>(Resource.Id.emailField).AfterTextChanged +=
-                (sender, args) => _userAccount.Email = (sender as EditText).Text;
+                (sender, args) => _userAccount.Email = ((EditText) sender).Text;
             FindViewById<EditText>(Resource.Id.passwordField).AfterTextChanged +=
-                (sender, args) => _userAccount.Password= (sender as EditText).Text;
+                (sender, args) => _userAccount.Password = ((EditText) sender).Text;
 
             #endregion
 
@@ -89,11 +90,11 @@ namespace PrivateGalleryNew.Activities
             #endregion
         }
 
-       
+
 
         #region Registration
 
-         private void RegistrationScreen_Click(object sender, EventArgs e)
+        private void RegistrationScreen_Click(object sender, EventArgs e)
         {
             var loadingDialog = new Dialog(this);
             loadingDialog.InitializeLoadingDialog();
@@ -114,7 +115,6 @@ namespace PrivateGalleryNew.Activities
                                 _userAccount.Clone(
                                     await manager.GetData<AccountInfoViewModel>(Settings.Instance.UserInfo));
                                 var name = _userAccount.Email.Split('@').First();
-                                //todo:need normal split params
                                 var format = App.File.Name.Split('.').Last();
                                 var compressType = Bitmap.CompressFormat.Webp;
                                 if (format.ToLowerInvariant() == "jpg" || format.ToLowerInvariant() == "jpeg")
@@ -123,28 +123,36 @@ namespace PrivateGalleryNew.Activities
                                 {
                                     compressType = Bitmap.CompressFormat.Png;
                                 }
-                                var stream = ImageConvert(_imageView.DrawingCache, compressType);
-                                if (!manager.PostFile(Settings.Instance.PictureAdress,
+                                Drawable d = _imageView.Drawable;
+                                Bitmap bitmap = ((BitmapDrawable) d).Bitmap;
+                                var stream = new MemoryStream();
+                                bitmap.Compress(compressType, 100, stream);
+
+                                if (manager.PostFile(Settings.Instance.PictureAdress,
                                     new HttpManager.StreamPack
                                     {
-                                        Stream = stream,
-                                        FullName = name + App.File.Name.Split('.').Last(),
+                                        Stream = stream.ToArray(),
+                                        FullName = $"{name}.{App.File.Name.Split('.').Last()}",
                                         Name = _userAccount.Email.Split('@').First()
                                     })
                                 )
+                                {
+
+                                    RunOnUiThread(() =>
+                                    {
+                                        loadingDialog.Dismiss();
+                                        var main = new Intent(this, typeof(MainScreen));
+                                        StartActivity(main);
+                                        Finish();
+                                    });
+                                }
+                                else
                                 {
                                     RunOnUiThread(() => Toast
                                         .MakeText(this, "Picture didn't uploaded.", ToastLength.Short)
                                         .Show());
                                 }
                             }
-                            RunOnUiThread(() =>
-                            {
-                                loadingDialog.Dismiss();
-                                var main = new Intent(this, typeof(MainScreen));
-                                StartActivity(main);
-                                Finish();
-                            });
                         }
                         else
                         {
@@ -159,20 +167,10 @@ namespace PrivateGalleryNew.Activities
                 }
                 RunOnUiThread(() => loadingDialog.Dismiss());
             });
-
-
-            Stream ImageConvert(Bitmap imageViewDrawable, Bitmap.CompressFormat compressType)
-            {
-                string path = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "image.png");
-                using (var stream = System.IO.File.OpenWrite(path))
-                {
-                    imageViewDrawable.Compress(compressType, 100, stream);
-                    return stream;
-                }
-            }
         }
 
         #endregion
+
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
@@ -199,7 +197,8 @@ namespace PrivateGalleryNew.Activities
                     if (resultCode == Result.Ok && data != null)
                     {
                         uri = data.Data;
-                        //App.File = new File(GetRealPathFromUri(uri));
+                        var path = GetRealPathFromUri(uri);
+                        App.File = new File(path);
                         _imageView.SetImageURI(uri);
                     }
                     break;
@@ -210,34 +209,28 @@ namespace PrivateGalleryNew.Activities
 
         private string GetRealPathFromUri(Uri contentUri)
         {
-            ICursor cursor = null;
-            try
+            string docId;
+            using (var c1 = ContentResolver.Query(contentUri, null, null, null, null))
             {
-                string[] proj = { MediaStore.Images.ImageColumns.Data };
-                cursor = ContentResolver.Query(contentUri, proj, null, null, null);
-                var columnIndex = cursor.GetColumnIndexOrThrow(MediaStore.Images.ImageColumns.Data);
+                c1.MoveToFirst();
+                var documentId = c1.GetString(0);
+                docId = documentId.Substring(documentId.LastIndexOf(":", StringComparison.Ordinal) + 1);
+            }
+
+            string path = null;
+
+            // The projection contains the columns we want to return in our query.
+            string selection = Android.Provider.MediaStore.Images.Media.InterfaceConsts.Id + " =? ";
+            using (var cursor = ManagedQuery(MediaStore.Images.Media.ExternalContentUri, null, selection, new[] {docId},
+                null))
+            {
+                if (cursor == null) return path;
+                var columnIndex =
+                    cursor.GetColumnIndexOrThrow(Android.Provider.MediaStore.Images.Media.InterfaceConsts.Data);
                 cursor.MoveToFirst();
-                return cursor.GetString(columnIndex);
+                path = cursor.GetString(columnIndex);
             }
-            finally
-            {
-                cursor?.Close();
-            }
-            /*String result;
-            ICursor cursor = ContentResolver.Query(contentUri, null, null, null, null);
-            if (cursor == null)
-            { // Source is Dropbox or other similar local file path
-                result = contentUri.Path;
-            }
-            else
-            {
-                cursor.MoveToFirst();
-                int idx = cursor.GetColumnIndex(MediaStore.Images.Me.Data);
-                result = cursor.GetString(idx);
-                cursor.Close();
-            }
-            return result;*/
+            return path;
         }
     }
-
 }

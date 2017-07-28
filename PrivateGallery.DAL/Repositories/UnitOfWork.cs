@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading;
+using System.Threading.Tasks;
 using PrivateGallery.DAL.Contexts;
 using PrivateGallery.DAL.Entities;
 
@@ -19,6 +20,7 @@ namespace PrivateGallery.DAL.Repositories
         public IRepository<Photo> Photos { get; set; } = new PhotoRepository(_context);
         public IRepository<User> Users { get; set; } = new UserRepository(_context);
         public void Save() => _context.SaveChanges();
+        public Task SaveAsync() => _context.SaveChangesAsync();
 
         public void Dispose()
         {

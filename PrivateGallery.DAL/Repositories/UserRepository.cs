@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 using PrivateGallery.DAL.Contexts;
 using PrivateGallery.DAL.Entities;
 
@@ -27,9 +30,9 @@ namespace PrivateGallery.DAL.Repositories
 
         public override User Get(Func<User, bool> func) => Context.Users.FirstOrDefault(func);
 
-        public override void Create(User item)
-        {
-            Context.Users.Add(item);
-        }
+        public override Task<User> GetAsync(Expression<Func<User, bool>> func) => Context.Users.FirstOrDefaultAsync(
+            func);
+
+        public override void Create(User item) => Context.Users.Add(item);
     }
 }

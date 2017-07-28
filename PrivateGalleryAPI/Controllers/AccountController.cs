@@ -30,31 +30,28 @@ namespace PrivateGalleryAPI.Controllers
 {
     [System.Web.Http.Authorize]
     [System.Web.Http.RoutePrefix("api/Account")]
-    public class AccountController : ApiController
+    public class AccountController : ApiControllerBase
     {
         // GET api/Account/AccountInfo
         [System.Web.Http.Route("AccountInfo"),
-         System.Web.Http.HttpGet,
-         HostAuthentication(DefaultAuthenticationTypes.ExternalBearer),
-         ValidateAntiForgeryToken,ResponseType(typeof(AccountInfoViewModel))]
+         System.Web.Http.HttpGet]
+        [ResponseType(typeof(AccountInfoViewModel))]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [ValidateAntiForgeryToken]
         public async Task<IHttpActionResult> AccountInfo()
         {
             try
             {
-                return await Task.Run(() =>
-                {
-                    var name = User.Identity.Name;
-                    var db = UnitOfWork.Instance;
-                    var found = db.Users.Get(user => user.UserName == name);
-                    if (found == null)
-                        return GetErrorResult(IdentityResult.Failed("Wrong login or token."));
+                var name = User.Identity.Name;
+                var found = await UnitOfWork.Users.GetAsync(user => user.UserName == name);
+                if (found == null)
+                    return GetErrorResult(IdentityResult.Failed("Wrong login or token."));
 
-                    return Ok(new AccountInfoViewModel
-                    {
-                        Email = found.Email,
-                        LastName = found.LastName,
-                        FirstName = found.FirstName
-                    });
+                return Ok(new AccountInfoViewModel
+                {
+                    Email = found.Email,
+                    LastName = found.LastName,
+                    FirstName = found.FirstName
                 });
             }
             catch (Exception e)
@@ -95,7 +92,8 @@ namespace PrivateGalleryAPI.Controllers
 
         // POST api/Account/UpdateAvatar
         [System.Web.Http.Route("UpdateAvatar"),
-            System.Web.Http.HttpPost]
+            System.Web.Http.HttpPost, HostAuthentication(DefaultAuthenticationTypes.ExternalBearer),
+         ValidateAntiForgeryToken]
         public async Task<IEnumerable<UploadedFile>> UpdateAvatar()
         {
             string folderName = "App_Data\\Avatars";
@@ -137,6 +135,29 @@ namespace PrivateGalleryAPI.Controllers
             }
             throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotAcceptable,
                 "This request is not properly formatted"));
+        }
+
+
+        // GET api/Account/DownloadAvatar
+        [System.Web.Http.Route("DownloadAvatar")]
+        [System.Web.Http.HttpGet]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [ValidateAntiForgeryToken]
+        public async Task<HttpResponseMessage> DownloadAvatar()
+        {
+            string main = AppDomain.CurrentDomain.BaseDirectory;
+            string userName = User.Identity.Name;
+            if (string.IsNullOrEmpty(userName))
+            {
+                return new HttpResponseMessage(HttpStatusCode.NoContent);
+            }
+            var user =await UnitOfWork.Instance.Users.GetAsync(x => x.UserName == userName);
+            if (user == null)
+            {
+                return new HttpResponseMessage(HttpStatusCode.NoContent);
+            }
+            var file = $"{main}{user.AvatarPath.TrimStart('~')}";
+            return await StreamManager.GetStreamContent(file);
         }
 
         #region Trash

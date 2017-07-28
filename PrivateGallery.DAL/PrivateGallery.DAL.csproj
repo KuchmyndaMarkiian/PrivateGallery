@@ -57,6 +57,7 @@
     <Compile Include="Entities\Gallery.cs" />
     <Compile Include="Entities\Photo.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Infrastructure\DalEntityCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GalleryRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -69,6 +70,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\PrivateGalleryCommon\PrivateGallery.Common.csproj">
+      <Project>{1C9954EC-D172-4292-B9A6-DD9E5A643040}</Project>
+      <Name>PrivateGallery.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -58,25 +58,23 @@ namespace PrivateGalleryNew.Infrastructure
         {
             public string FullName { get; set; }
             public string Name { get; set; }
-            public Stream Stream { get; set; }
+            public byte[] Stream { get; set; }
         }
         //todo It doesn't works
         public bool PostFile(string url, StreamPack file)
         {
             try
             {
-                Console.WriteLine("Start Uploading");
                 if (string.IsNullOrEmpty(url))
                     throw new NullReferenceException(nameof(url) + "isn`t correct");
-                Console.WriteLine("Norm URL");
-                var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{_hostUrl}{url}");
-                var content = new MultipartFormDataContent();
-                content.Add(new StreamContent(file.Stream), file.Name, file.FullName);
-                Console.WriteLine("Content Added");
+                var requestMessage =
+                    HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Post, $"{_hostUrl}{url}", AccessToken);//new HttpRequestMessage(HttpMethod.Post, $"{_hostUrl}{url}");
+                var content = new MultipartFormDataContent
+                {
+                    {new StreamContent(new MemoryStream(file.Stream)), file.Name, file.FullName}
+                };
                 requestMessage.Content = content;
-                Console.WriteLine("Sending");
                 var responseMessage = _client.SendAsync(requestMessage).Result;
-                Console.WriteLine("Done");
                 return responseMessage.IsSuccessStatusCode;
             }
             catch (Exception exception)
