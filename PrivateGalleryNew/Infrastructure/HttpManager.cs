@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Exception = Java.Lang.Exception;
 
-namespace PrivateGallery.Infrastructure
+namespace PrivateGalleryNew.Infrastructure
 {
     public class HttpManager:IDisposable
     {
         private readonly HttpClient _client;
-        private string _hostUrl;
+        private readonly string _hostUrl;
         public string AccessToken { get; set; }
 
         public HttpManager(string hostUrl)

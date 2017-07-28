@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.Common", "Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.DAL", "PrivateGallery.DAL\PrivateGallery.DAL.csproj", "{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGalleryNew", "PrivateGalleryNew\PrivateGalleryNew.csproj", "{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,12 @@ Global
 		{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D47CF38F-2DD9-4404-865E-E9B83C376929}</ProjectGuid>
+    <ProjectGuid>{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrivateGallery</RootNamespace>
-    <AssemblyName>PrivateGallery</AssemblyName>
+    <RootNamespace>PrivateGalleryNew</RootNamespace>
+    <AssemblyName>PrivateGalleryNew</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
@@ -47,7 +47,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Refractored.FloatingActionButton, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -55,10 +55,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Messaging">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7\System.Messaging.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
@@ -73,9 +69,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\RegistrationScreen.cs" />
-    <Compile Include="Activities\MainScreen.cs" />
     <Compile Include="Activities\LoginScreen.cs" />
+    <Compile Include="Activities\MainScreen.cs" />
+    <Compile Include="Activities\RegistrationScreen.cs" />
     <Compile Include="Helpers\UiInitializators.cs" />
     <Compile Include="Infrastructure\AutorizationService.cs" />
     <Compile Include="Infrastructure\HttpManager.cs" />
@@ -83,8 +79,8 @@
     <Compile Include="Infrastructure\ImagePicker.cs" />
     <Compile Include="Infrastructure\PickFileTypes.cs" />
     <Compile Include="Infrastructure\Settings.cs" />
-    <Compile Include="Models\App.cs" />
     <Compile Include="Models\AccountInfoViewModel.cs" />
+    <Compile Include="Models\App.cs" />
     <Compile Include="Models\Errors\RegisterError.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserToken.cs" />
@@ -96,13 +92,13 @@
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\LoginScreen.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\ForgotPasswordScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\RegistrationScreen.axml">
+    <AndroidResource Include="Resources\layout\LoadingDialog.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\LoginScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MainScreen.axml">
@@ -111,7 +107,12 @@
     <AndroidResource Include="Resources\layout\PhotoEditScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\LoadingDialog.axml">
+    <AndroidResource Include="Resources\layout\RegistrationScreen.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

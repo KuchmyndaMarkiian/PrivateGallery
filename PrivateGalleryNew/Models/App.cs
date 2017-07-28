@@ -1,7 +1,7 @@
 ﻿using Android.Graphics;
 using Java.IO;
 
-namespace PrivateGallery.Models
+namespace PrivateGalleryNew.Models
 {
     public static class App
     {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Messaging;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -10,17 +9,15 @@ using Android.Graphics;
 using Android.OS;
 using Android.Provider;
 using Android.Widget;
-using PrivateGallery.Helpers;
-using PrivateGallery.Infrastructure;
-using PrivateGallery.Models;
-using static Android.Graphics.Bitmap.CompressFormat;
-using static PrivateGallery.Models.App;
+using PrivateGalleryNew.Helpers;
+using PrivateGalleryNew.Infrastructure;
+using PrivateGalleryNew.Models;
 using Bitmap = Android.Graphics.Bitmap;
 using File = Java.IO.File;
-using Settings = PrivateGallery.Infrastructure.Settings;
+using Settings = PrivateGalleryNew.Infrastructure.Settings;
 using Uri = Android.Net.Uri;
 
-namespace PrivateGallery.Activities
+namespace PrivateGalleryNew.Activities
 {
     [Activity(Label = "Anonymous Gallery", Theme = "@style/NoActionBar")]
     public class RegistrationScreen : Activity
@@ -41,7 +38,7 @@ namespace PrivateGallery.Activities
             _dialog.SetPositiveButton("Camera", (sender, args) =>
                 {
                     Intent intent = new Intent(MediaStore.ActionImageCapture);
-                    App.File = new File(Dir, $"file_{DateTime.Now.ToLongTimeString()}.jpg");
+                    App.File = new File(App.Dir, $"file_{DateTime.Now.ToLongTimeString()}.jpg");
                     intent.PutExtra(MediaStore.ExtraOutput, Uri.FromFile(App.File));
                     StartActivityForResult(intent, (int) PickFileTypes.Camera);
                 })
@@ -119,12 +116,12 @@ namespace PrivateGallery.Activities
                                 var name = _userAccount.Email.Split('@').First();
                                 //todo:need normal split params
                                 var format = App.File.Name.Split('.').Last();
-                                var compressType = Webp;
+                                var compressType = Bitmap.CompressFormat.Webp;
                                 if (format.ToLowerInvariant() == "jpg" || format.ToLowerInvariant() == "jpeg")
-                                    compressType = Jpeg;
+                                    compressType = Bitmap.CompressFormat.Jpeg;
                                 else if (format.ToLowerInvariant() == "png")
                                 {
-                                    compressType = Png;
+                                    compressType = Bitmap.CompressFormat.Png;
                                 }
                                 var stream = ImageConvert(_imageView.DrawingCache, compressType);
                                 if (!manager.PostFile(Settings.Instance.PictureAdress,

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrivateGallery.Infrastructure
+namespace PrivateGalleryNew.Infrastructure
 {
     class Settings
     {
