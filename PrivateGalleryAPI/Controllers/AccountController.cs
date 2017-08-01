@@ -107,7 +107,6 @@ namespace PrivateGalleryAPI.Controllers
                 var task = Request.Content.ReadAsMultipartAsync(streamProvider)
                     .ContinueWith(t =>
                     {
-
                         if (t.IsCanceled)
                         {
                             throw new HttpResponseException(HttpStatusCode.InternalServerError);

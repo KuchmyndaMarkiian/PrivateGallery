@@ -60,7 +60,6 @@ namespace PrivateGalleryNew.Infrastructure
             public string Name { get; set; }
             public byte[] Stream { get; set; }
         }
-        //todo It doesn't works
         public bool PostFile(string url, StreamPack file)
         {
             try
@@ -68,7 +67,7 @@ namespace PrivateGalleryNew.Infrastructure
                 if (string.IsNullOrEmpty(url))
                     throw new NullReferenceException(nameof(url) + "isn`t correct");
                 var requestMessage =
-                    HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Post, $"{_hostUrl}{url}", AccessToken);//new HttpRequestMessage(HttpMethod.Post, $"{_hostUrl}{url}");
+                    HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Post, $"{_hostUrl}{url}", AccessToken);
                 var content = new MultipartFormDataContent
                 {
                     {new StreamContent(new MemoryStream(file.Stream)), file.Name, file.FullName}

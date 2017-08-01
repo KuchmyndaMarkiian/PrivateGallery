@@ -8,7 +8,7 @@ namespace PrivateGallery.DAL.Contexts
     public class PrivateGalleryDbContext : IdentityDbContext<User>
     {
         public PrivateGalleryDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("StockConnection", throwIfV1Schema: false)
         {
         }
 

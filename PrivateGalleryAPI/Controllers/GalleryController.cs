@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PrivateGallery.Common.BindingModels;
@@ -13,6 +15,57 @@ namespace PrivateGalleryAPI.Controllers
     [System.Web.Http.RoutePrefix("api/Gallery")]
     public class GalleryController : ApiControllerBase
     {
+        // GET api/Gallery?name={}
+        [System.Web.Http.HttpGet]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [ValidateAntiForgeryToken]
+        [ResponseType(typeof(GalleryBindindModel))]
+        public async Task<IHttpActionResult> Get(string name)
+        {
+            var user = await UnitOfWork.Users.GetAsync(x => x.UserName == User.Identity.Name);
+            if (user == null)
+            {
+                throw new NullReferenceException();
+            }
+            if (user.Galleries.Any(x => x.Header == name))
+            {
+                var found = user.Galleries.FirstOrDefault(x => x.Header == name);
+                return Ok(new GalleryBindindModel {Name = name, DateTime = found.CreatedDate.Value});
+            }
+            return NotFound();
+        }
+        // GET api/Gallery/List
+        [System.Web.Http.HttpGet]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [ValidateAntiForgeryToken]
+        [System.Web.Http.Route("List")]
+        [ResponseType(typeof(ICollection<GalleryStructure>))]
+        public async Task<IHttpActionResult> List()
+        {
+            var user = await UnitOfWork.Users.GetAsync(x => x.UserName == User.Identity.Name);
+            if (user == null)
+            {
+                throw new NullReferenceException();
+            }
+            if (user.Galleries.Any())
+            {
+
+                return Ok(user.Galleries.Select(g => new GalleryStructure
+                {
+                    Name = g.Header,
+                    DateTime = g.CreatedDate.Value,
+                    Pictures = g.Photos.Select(p => new PictureBindingModel
+                    {
+                        Name = p.Name,
+                        DateTime = p.CreatedDate.Value,
+                        Description = p.Description,
+                        Geolocation = p.Geolocation
+                    })
+                }));
+            }
+            return NotFound();
+        }
+
         // PUT api/Gallery/
         [System.Web.Http.HttpPut]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -27,15 +80,16 @@ namespace PrivateGalleryAPI.Controllers
                     return BadRequest(ModelState);
                 }
                 var user = await UnitOfWork.Users.GetAsync(x => x.UserName == User.Identity.Name);
-                if (user == null)
+                if (user != null)
                 {
-                    throw new NullReferenceException();
+                    var newItem = new DalEntityCreator().CreateGalleryEntity(model);
+                    newItem.Header = model.Name;
+                    newItem.OwnerUser = user;
+                    UnitOfWork.Gallery.Create(newItem);
+                    await UnitOfWork.SaveAsync();
+                    return Ok();
                 }
-                var newItem = new DalEntityCreator().CreateGalleryEntity(model);
-                newItem.Header = model.Name;
-                user.Galleries.Add(newItem);
-                await UnitOfWork.SaveAsync();
-                return Ok();
+                throw new NullReferenceException();
             }
             catch (Exception e)
             {
