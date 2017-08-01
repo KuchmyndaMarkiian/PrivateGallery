@@ -175,16 +175,22 @@ namespace PrivateGalleryNew
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int fab_shadow = 2130837504;
+			public const int add = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int fab_shadow_mini = 2130837505;
+			public const int fab_shadow = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int facebook = 2130837506;
+			public const int fab_shadow_mini = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int Icon = 2130837507;
+			public const int facebook = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int gallery = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int Icon = 2130837509;
 			
 			static Drawable()
 			{
@@ -210,6 +216,15 @@ namespace PrivateGalleryNew
 			
 			// aapt resource value: 0x7f05000c
 			public const int firstNameField = 2131034124;
+			
+			// aapt resource value: 0x7f050013
+			public const int galleryCount = 2131034131;
+			
+			// aapt resource value: 0x7f050012
+			public const int galleryDate = 2131034130;
+			
+			// aapt resource value: 0x7f050011
+			public const int galleryHeader = 2131034129;
 			
 			// aapt resource value: 0x7f05000a
 			public const int imageReg = 2131034122;
@@ -283,6 +298,9 @@ namespace PrivateGalleryNew
 			
 			// aapt resource value: 0x7f030006
 			public const int RegistrationScreen = 2130903046;
+			
+			// aapt resource value: 0x7f030007
+			public const int UCGalleryItem = 2130903047;
 			
 			static Layout()
 			{

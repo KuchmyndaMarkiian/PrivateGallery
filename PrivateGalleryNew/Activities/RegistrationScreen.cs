@@ -109,11 +109,11 @@ namespace PrivateGalleryNew.Activities
                         service.SignIn(ref _userAccount);
                         if (service.IsSuccessful())
                         {
-                            using (HttpManager manager = new HttpManager(Settings.Instance.ServerAdress))
+                            using (HttpManager manager = new HttpManager(Settings.ServerAdress))
                             {
                                 manager.AccessToken = _userAccount.UserToken.AccessToken;
                                 _userAccount.Clone(
-                                    await manager.GetData<AccountInfoViewModel>(Settings.Instance.UserInfo));
+                                    await manager.GetData<AccountInfoViewModel>(Settings.UserInfo));
                                 var name = _userAccount.Email.Split('@').First();
                                 var format = App.File.Name.Split('.').Last();
                                 var compressType = Bitmap.CompressFormat.Webp;
@@ -128,7 +128,7 @@ namespace PrivateGalleryNew.Activities
                                 var stream = new MemoryStream();
                                 bitmap.Compress(compressType, 100, stream);
 
-                                if (manager.PostFile(Settings.Instance.PictureAdress,
+                                if (manager.PostFile(Settings.PictureAdress,
                                     new HttpManager.StreamPack
                                     {
                                         Stream = stream.ToArray(),

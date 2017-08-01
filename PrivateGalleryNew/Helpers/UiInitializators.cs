@@ -6,17 +6,18 @@ using Com.Wang.Avi;
 
 namespace PrivateGalleryNew.Helpers
 {
-    static class UiInitializators
+    internal static class UiInitializators
     {
         public static void InitializeLoadingDialog(this Dialog dialog)
         {
             dialog.SetContentView(Resource.Layout.LoadingDialog);
             dialog.SetCancelable(false);
             dialog.Window.SetBackgroundDrawable(new ColorDrawable(Color.Transparent));
-            WindowManagerLayoutParams layoutParams = new WindowManagerLayoutParams();
+            var layoutParams = new WindowManagerLayoutParams();
             layoutParams.CopyFrom(dialog.Window.Attributes);
             layoutParams.Height = layoutParams.Width = ViewGroup.LayoutParams.WrapContent;
             dialog.Window.Attributes = layoutParams;
+            dialog.Window.RequestFeature(WindowFeatures.NoTitle);
             var indicatorView = dialog.FindViewById<AVLoadingIndicatorView>(Resource.Id.indicator);
             indicatorView.SmoothToShow();
         }

@@ -1,6 +1,7 @@
 ﻿using System;
+using PrivateGalleryNew.Models;
 
-namespace PrivateGalleryNew.Models
+namespace PrivateGalleryNew.Infrastructure
 {
     class UserAccount:AccountInfoViewModel
     {

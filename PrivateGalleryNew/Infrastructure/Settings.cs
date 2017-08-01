@@ -18,22 +18,21 @@ namespace PrivateGalleryNew.Infrastructure
 
         #region URL Constants
 
-        public string ServerAdress { get; } = "http://192.168.0.100:57643";
+        public static string ServerAdress { get; } = "http://192.168.0.104:57643";
 
         #region Authorization
 
-        public string RegisterAdress { get; } = "/api/Account/Register";
-        public string LoginAdress { get; } = "/Token";
-        public string LogoutAdress { get; } = "/api/Account/LogOut";
-        public string UserInfo { get; } = "/api/Account/AccountInfo";
-        public string PictureAdress { get; } = "/api/Account/UpdateAvatar";
+        public static string RegisterAdress { get; } = "/api/Account/Register";
+        public static string LoginAdress { get; } = "/Token";
+        public static string LogoutAdress { get; } = "/api/Account/LogOut";
+        public static string UserInfo { get; } = "/api/Account/AccountInfo";
+        public static string PictureAdress { get; } = "/api/Account/UpdateAvatar";
         #endregion
 
-        #region Game
+        #region Data
 
-        public string AchievementsAdress { get; } = "/api/UserData/UserAchievements";
-       
-        public string TopicsAddress { get; set; } = "/get_word_topics/";
+        public static string GalleryListAdress { get; } = "/api/Gallery/List";
+        public static string DownloadPhotoAdress { get; } = "/api/Picture/Download";
 
         #endregion
 

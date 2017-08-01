@@ -38,7 +38,7 @@ namespace PrivateGalleryNew.Infrastructure
                     var json = JsonConvert.SerializeObject(model);
                     var content = new StringContent(json, Encoding.UTF8, Settings.Instance.MimeJson);
                     _responseMessage = client.PostAsync(
-                            Settings.Instance.ServerAdress + Settings.Instance.RegisterAdress,
+                            Settings.ServerAdress + Settings.RegisterAdress,
                             content)
                         .Result;
                     if (_responseMessage.IsSuccessStatusCode)
@@ -72,7 +72,9 @@ namespace PrivateGalleryNew.Infrastructure
             {
                 try
                 {
-                    _responseMessage = client.SendAsync(HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Post, Settings.Instance.LogoutAdress, account.UserToken.AccessToken)).Result;
+                    _responseMessage = client.SendAsync(HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Post,
+                            Settings.LogoutAdress, account.UserToken.AccessToken))
+                        .Result;
                     if (!_responseMessage.IsSuccessStatusCode)
                         _message = _responseMessage.Content.ReadAsStringAsync().Result;
                 }
@@ -127,7 +129,7 @@ namespace PrivateGalleryNew.Infrastructure
                 try
                 {
                     _responseMessage =
-                        client.PostAsync(Settings.Instance.ServerAdress + Settings.Instance.LoginAdress,
+                        client.PostAsync(Settings.ServerAdress + Settings.LoginAdress,
                                 content)
                             .Result;
                     String result = _responseMessage.Content.ReadAsStringAsync().Result;

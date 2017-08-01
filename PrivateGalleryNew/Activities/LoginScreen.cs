@@ -54,10 +54,10 @@ namespace PrivateGalleryNew.Activities
                     service.SignIn(ref _userAccount);
                     if (service.IsSuccessful())
                     {
-                        using (HttpManager manager = new HttpManager(Settings.Instance.ServerAdress))
+                        using (HttpManager manager = new HttpManager(Settings.ServerAdress))
                         {
                             manager.AccessToken = _userAccount.UserToken.AccessToken;
-                            _userAccount.Clone(await manager.GetData<AccountInfoViewModel>(Settings.Instance.UserInfo));
+                            _userAccount.Clone(await manager.GetData<AccountInfoViewModel>(Settings.UserInfo));
                         }
                         RunOnUiThread(() =>
                         {
