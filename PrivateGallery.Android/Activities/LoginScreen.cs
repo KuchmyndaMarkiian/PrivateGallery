@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -14,14 +13,19 @@ namespace PrivateGallery.Android.Activities
     [Activity(Label = "Anonymous Gallery", MainLauncher = true, Theme = "@style/NoActionBar")]
     public class LoginScreen : Activity
     {
+        
+        private void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
         private UserAccount _userAccount;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.LoginScreen);
             // Create your application here
-
-            _userAccount=UserAccount.Instance;
+            System.AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            _userAccount =UserAccount.Instance;
             #region Buttons init
 
             var registerButton = FindViewById<Button>(Resource.Id.registerButton);
@@ -36,8 +40,8 @@ namespace PrivateGallery.Android.Activities
             
             var loginView = FindViewById<EditText>(Resource.Id.loginView);
             var passwordView = FindViewById<EditText>(Resource.Id.passwordView);
-            loginView.AfterTextChanged += (sender, args) => _userAccount.Email = (sender as EditText).Text.ToString(CultureInfo.InvariantCulture);
-            passwordView.AfterTextChanged += (sender, args) => _userAccount.Password = (sender as EditText).Text.ToString(CultureInfo.InvariantCulture);
+            loginView.AfterTextChanged += (sender, args) => _userAccount.Email = (sender as EditText).Text;
+            passwordView.AfterTextChanged += (sender, args) => _userAccount.Password = (sender as EditText).Text;
             #endregion
         }
 

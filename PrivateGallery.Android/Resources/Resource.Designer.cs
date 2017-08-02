@@ -217,6 +217,9 @@ namespace PrivateGallery.Android
 			// aapt resource value: 0x7f050009
 			public const int GalleryList = 2131034121;
 			
+			// aapt resource value: 0x7f050003
+			public const int PictureList = 2131034115;
+			
 			// aapt resource value: 0x7f05000f
 			public const int emailField = 2131034127;
 			
@@ -262,8 +265,14 @@ namespace PrivateGallery.Android
 			// aapt resource value: 0x7f05000c
 			public const int pickImageReg = 2131034124;
 			
-			// aapt resource value: 0x7f050003
-			public const int pictureGridLayout = 2131034115;
+			// aapt resource value: 0x7f050017
+			public const int pictureDate = 2131034135;
+			
+			// aapt resource value: 0x7f050016
+			public const int pictureHeader = 2131034134;
+			
+			// aapt resource value: 0x7f050015
+			public const int pictureView = 2131034133;
 			
 			// aapt resource value: 0x7f050008
 			public const int registerButton = 2131034120;
@@ -313,6 +322,9 @@ namespace PrivateGallery.Android
 			
 			// aapt resource value: 0x7f030008
 			public const int UCGalleryItem = 2130903048;
+			
+			// aapt resource value: 0x7f030009
+			public const int UCPictureItem = 2130903049;
 			
 			static Layout()
 			{

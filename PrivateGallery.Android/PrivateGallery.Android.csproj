@@ -110,6 +110,7 @@
     <Compile Include="Activities\LoginScreen.cs" />
     <Compile Include="Activities\MainScreen.cs" />
     <Compile Include="Activities\RegistrationScreen.cs" />
+    <Compile Include="CustomControls\CustomListItemPicture.cs" />
     <Compile Include="CustomControls\CustomListItemGallery.cs" />
     <Compile Include="Helpers\GalleryAdapter.cs" />
     <Compile Include="Helpers\PictureAdapter.cs" />
@@ -148,6 +149,7 @@
     <AndroidResource Include="Resources\layout\PhotoEditScreen.axml" />
     <AndroidResource Include="Resources\layout\RegistrationScreen.axml" />
     <AndroidResource Include="Resources\layout\UCGalleryItem.axml" />
+    <AndroidResource Include="Resources\layout\UCPictureItem.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

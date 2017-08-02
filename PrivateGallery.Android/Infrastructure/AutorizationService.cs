@@ -137,7 +137,7 @@ namespace PrivateGallery.Android.Infrastructure
                     String result = _responseMessage.Content.ReadAsStringAsync().Result;
                     if (_responseMessage.IsSuccessStatusCode)
                     {
-                        return JsonConvert.DeserializeObject<UserToken>(result,new JsonSerializerSettings {Culture=CultureInfo.InvariantCulture});
+                        return JsonConvert.DeserializeObject<UserToken>(result);
                     }
                     string key = "error_description";
                     var messageDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);

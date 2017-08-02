@@ -19,22 +19,17 @@ using PrivateGallery.Common.BindingModels;
 
 namespace PrivateGallery.Android.Activities
 {
-    [Activity(Label = "Anonymous Gallery")]
+    [Activity(Label = "Anonymous Gallery", Theme = "@style/NoActionBar")]
     class GalleryScreen : Activity
     {
-        private GridView _layout;
+        private ListView _layout;
         private PictureAdapter _pictureAdapter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.GalleryScreen);
-            _layout = FindViewById<GridView>(Resource.Id.pictureGridLayout);
-            if (RequestedOrientation == ScreenOrientation.Portrait)
-            {
-                _layout.SetNumColumns(3);
-            }
-
+            _layout = FindViewById<ListView>(Resource.Id.PictureList);
         }
 
         protected override void OnResume()

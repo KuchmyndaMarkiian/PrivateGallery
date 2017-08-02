@@ -12,6 +12,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using PrivateGallery.Android.CustomControls;
 using PrivateGallery.Android.Infrastructure;
 using PrivateGallery.Common.BindingModels;
 
@@ -35,15 +36,11 @@ namespace PrivateGallery.Android.Helpers
             {
                 if (convertView == null)
                 {
-                    var imageView = new ImageView(_activity);
-                    var param = ViewGroup.LayoutParams.MatchParent;
-                    imageView.LayoutParameters = new ViewGroup.LayoutParams(param, param);
-                    imageView.SetScaleType(ImageView.ScaleType.CenterCrop);
-                    var item = _list.ElementAt(position);
-                    //todo It doesn't work
-                    imageView.SetImageDrawable(Drawable.CreateFromStream(item.Content,item.Name));
-                    return imageView;
+                    var layout=new CustomListItemPicture(_activity){_model = this[position]};
+                    layout.Initialize();
+                    return layout;
                 }
+                return null;
             }
             catch (Exception e)
             {

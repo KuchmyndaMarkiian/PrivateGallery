@@ -26,6 +26,8 @@ namespace PrivateGallery.Android.Activities
             fab.AttachToListView(_listView);
         }
 
+       
+
         protected override void OnResume()
         {
             base.OnResume();
