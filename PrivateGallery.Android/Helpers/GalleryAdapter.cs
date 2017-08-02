@@ -9,7 +9,7 @@ using PrivateGallery.Common.BindingModels;
 
 namespace PrivateGallery.Android.Helpers
 {
-    class GalleryAdapter : BaseAdapter
+    class GalleryAdapter : BaseAdapter<GalleryStructure>
     {
         private List<GalleryStructure> _list=new List<GalleryStructure>();
         private readonly Activity _activity;
@@ -20,14 +20,14 @@ namespace PrivateGallery.Android.Helpers
             _activity = activity;
         }
 
+        
 
-        public override Object GetItem(int position) => null;
+        public override GalleryStructure this[int position] => _list.ElementAt(position);
 
         public override long GetItemId(int position) => position;
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            //LinearLayout layout = null;
             if (convertView == null)
             {
                 var item = _list.ElementAtOrDefault(position);

@@ -43,7 +43,7 @@ namespace PrivateGallery.Android.Infrastructure
             try
             {
                 var requestMessage = HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get, $"{_hostUrl}{url}", AccessToken);
-                var responseMessage = await _client.SendAsync(requestMessage);
+                var responseMessage = _client.SendAsync(requestMessage).Result;
                 return responseMessage.IsSuccessStatusCode
                     ? await responseMessage.Content.ReadAsStreamAsync()
                     : default(Stream);

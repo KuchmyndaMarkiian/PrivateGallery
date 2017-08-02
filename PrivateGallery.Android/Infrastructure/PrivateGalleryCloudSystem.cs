@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using PrivateGallery.Common.BindingModels;
+using Task = Microsoft.Build.Utilities.Task;
 
 namespace PrivateGallery.Android.Infrastructure
 {
@@ -21,6 +23,18 @@ namespace PrivateGallery.Android.Infrastructure
                 return await _httpManager.GetData<List<GalleryStructure>>(Settings.GalleryListAdress);
             }
             catch(Exception e)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Stream> DownloadPicture(string gallery, string name)
+        {
+            try
+            {
+                return await _httpManager.GetFile($@"{Settings.DownloadPhotoAdress}?gallery={gallery}&photo={name}");
+            }
+            catch (Exception e)
             {
                 return null;
             }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace PrivateGallery.Common.BindingModels
 {
@@ -11,5 +12,6 @@ namespace PrivateGallery.Common.BindingModels
         [StringLength(100, ErrorMessage = "Empty geolocation for creating object", MinimumLength = 1)]
         public string Geolocation { get; set; }
         public string GalleryName { get; set; }
+        public Stream Content { get; set; }
     }
 }

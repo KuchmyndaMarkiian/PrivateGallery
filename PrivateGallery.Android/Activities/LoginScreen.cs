@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -13,7 +14,7 @@ namespace PrivateGallery.Android.Activities
     [Activity(Label = "Anonymous Gallery", MainLauncher = true, Theme = "@style/NoActionBar")]
     public class LoginScreen : Activity
     {
-        UserAccount _userAccount;
+        private UserAccount _userAccount;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -35,8 +36,8 @@ namespace PrivateGallery.Android.Activities
             
             var loginView = FindViewById<EditText>(Resource.Id.loginView);
             var passwordView = FindViewById<EditText>(Resource.Id.passwordView);
-            loginView.AfterTextChanged += (sender, args) => _userAccount.Email = (sender as EditText).Text;
-            passwordView.AfterTextChanged += (sender, args) => _userAccount.Password = (sender as EditText).Text;
+            loginView.AfterTextChanged += (sender, args) => _userAccount.Email = (sender as EditText).Text.ToString(CultureInfo.InvariantCulture);
+            passwordView.AfterTextChanged += (sender, args) => _userAccount.Password = (sender as EditText).Text.ToString(CultureInfo.InvariantCulture);
             #endregion
         }
 

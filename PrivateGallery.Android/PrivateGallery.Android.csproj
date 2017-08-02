@@ -106,11 +106,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\GalleryScreen.cs" />
     <Compile Include="Activities\LoginScreen.cs" />
     <Compile Include="Activities\MainScreen.cs" />
     <Compile Include="Activities\RegistrationScreen.cs" />
     <Compile Include="CustomControls\CustomListItemGallery.cs" />
     <Compile Include="Helpers\GalleryAdapter.cs" />
+    <Compile Include="Helpers\PictureAdapter.cs" />
     <Compile Include="Helpers\UiInitializators.cs" />
     <Compile Include="Infrastructure\AutorizationService.cs" />
     <Compile Include="Infrastructure\HttpManager.cs" />
@@ -128,6 +130,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\layout\GalleryScreen.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />

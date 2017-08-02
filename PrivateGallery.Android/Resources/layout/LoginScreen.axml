@@ -13,6 +13,7 @@
         <EditText
             android:hint="login"
             android:id="@+id/loginView"
+            android:text="harrisonford@gmail.com"
             android:textColor="#0000FF"
             android:singleLine="true"
             android:textAlignment="center"
@@ -22,6 +23,7 @@
         <EditText
             android:hint="password"
             android:id="@+id/passwordView"
+            android:text="Mark95!"
             android:textColor="#0000FF"
             android:singleLine="true"
             android:maxLines="1"
