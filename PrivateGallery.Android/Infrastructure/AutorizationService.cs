@@ -74,7 +74,7 @@ namespace PrivateGallery.Android.Infrastructure
             {
                 try
                 {
-                    _responseMessage = client.SendAsync(HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Post,
+                    _responseMessage = client.SendAsync(HttpRequestMessageCreator.CreateHeaderRequestMessage(HttpMethod.Post,
                             Settings.LogoutAdress, account.UserToken.AccessToken))
                         .Result;
                     if (!_responseMessage.IsSuccessStatusCode)

@@ -18,7 +18,7 @@ namespace PrivateGallery.Android.Infrastructure
 
         #region URL Constants
 
-        public static string ServerAdress { get; } = "http://192.168.0.104:57643";
+        public static string ServerAdress { get; } = "http://192.168.0.105:57643";
 
         #region Authorization
 
@@ -26,13 +26,18 @@ namespace PrivateGallery.Android.Infrastructure
         public static string LoginAdress { get; } = "/Token";
         public static string LogoutAdress { get; } = "/api/Account/LogOut";
         public static string UserInfo { get; } = "/api/Account/AccountInfo";
-        public static string PictureAdress { get; } = "/api/Account/UpdateAvatar";
+        public static string AvatarAdress { get; } = "/api/Account/UpdateAvatar";
         #endregion
 
-        #region Data
-
+        #region Gallery
+        public static string GalleryAdress { get; } = "/api/Gallery";
         public static string GalleryListAdress { get; } = "/api/Gallery/List";
-        public static string DownloadPhotoAdress { get; } = "/api/Picture/Download";
+        
+
+        #endregion
+        #region Picture
+        public static string DownloadPictureAdress { get; } = "/api/Picture/Download";
+        public static string PictureAdress { get; } = "/api/Picture";
 
         #endregion
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Exception = Java.Lang.Exception;
@@ -25,7 +26,7 @@ namespace PrivateGallery.Android.Infrastructure
                 return default(T);
             try
             {
-                var requestMessage = HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get, $"{_hostUrl}{url}", AccessToken);
+                var requestMessage = HttpRequestMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get, $"{_hostUrl}{url}", AccessToken);
                 var responseMessage =  _client.SendAsync(requestMessage).Result;
                 return responseMessage.IsSuccessStatusCode
                     ? JsonConvert.DeserializeObject<T>(await responseMessage.Content.ReadAsStringAsync())
@@ -42,7 +43,7 @@ namespace PrivateGallery.Android.Infrastructure
                 return default(Stream);
             try
             {
-                var requestMessage = HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get, $"{_hostUrl}{url}", AccessToken);
+                var requestMessage = HttpRequestMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get, $"{_hostUrl}{url}", AccessToken);
                 var responseMessage = _client.SendAsync(requestMessage).Result;
                 return responseMessage.IsSuccessStatusCode
                     ? await responseMessage.Content.ReadAsStreamAsync()
@@ -53,6 +54,25 @@ namespace PrivateGallery.Android.Infrastructure
                 return default(Stream);
             }
         }
+
+        public async Task<bool> OperateData<T>(T model, string url, HttpMethod method)
+        {
+            if (string.IsNullOrEmpty(url))
+                return false;
+            try
+            {
+                var requestMessage=HttpRequestMessageCreator.CreateHeaderRequestMessage(method, $"{_hostUrl}{url}", AccessToken);
+                requestMessage.Content=new StringContent(JsonConvert.SerializeObject(model),Encoding.UTF8,Settings.Instance.MimeJson);
+                var responseMessage = await _client.SendAsync(requestMessage);
+                return responseMessage.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
 
         public class StreamPack
         {
@@ -67,7 +87,7 @@ namespace PrivateGallery.Android.Infrastructure
                 if (string.IsNullOrEmpty(url))
                     throw new NullReferenceException(nameof(url) + "isn`t correct");
                 var requestMessage =
-                    HttpMessageCreator.CreateHeaderRequestMessage(HttpMethod.Post, $"{_hostUrl}{url}", AccessToken);
+                    HttpRequestMessageCreator.CreateHeaderRequestMessage(HttpMethod.Post, $"{_hostUrl}{url}", AccessToken);
                 var content = new MultipartFormDataContent
                 {
                     {new StreamContent(new MemoryStream(file.Stream)), file.Name, file.FullName}

@@ -21,5 +21,6 @@ namespace PrivateGallery.Android.Helpers
             var indicatorView = dialog.FindViewById<AVLoadingIndicatorView>(Resource.Id.indicator);
             indicatorView.SmoothToShow();
         }
+
     }
 }

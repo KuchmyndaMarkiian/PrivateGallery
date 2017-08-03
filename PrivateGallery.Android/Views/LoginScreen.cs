@@ -8,23 +8,17 @@ using PrivateGallery.Android.Helpers;
 using PrivateGallery.Android.Infrastructure;
 using PrivateGallery.Android.Models;
 
-namespace PrivateGallery.Android.Activities
+namespace PrivateGallery.Android.Views
 {
-    [Activity(Label = "Anonymous Gallery", MainLauncher = true, Theme = "@style/NoActionBar")]
+    [Activity(Label = "Anonymous Gallery", MainLauncher = true, Theme = "@style/Theme.Custom")]
     public class LoginScreen : Activity
     {
-        
-        private void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
         private UserAccount _userAccount;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.LoginScreen);
             // Create your application here
-            System.AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             _userAccount =UserAccount.Instance;
             #region Buttons init
 

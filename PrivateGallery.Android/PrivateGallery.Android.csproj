@@ -16,7 +16,7 @@
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <NuGetPackageImportStamp>
@@ -106,18 +106,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\GalleryScreen.cs" />
-    <Compile Include="Activities\LoginScreen.cs" />
-    <Compile Include="Activities\MainScreen.cs" />
-    <Compile Include="Activities\RegistrationScreen.cs" />
-    <Compile Include="CustomControls\CustomListItemPicture.cs" />
+    <Compile Include="CustomControls\CustomPictureItem.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Views\Fragments\ManageGalleryFragment.cs" />
+    <Compile Include="Views\GalleryScreen.cs" />
+    <Compile Include="Views\LoginScreen.cs" />
+    <Compile Include="Views\MainScreen.cs" />
+    <Compile Include="Views\PhotoEditScreen.cs" />
+    <Compile Include="Views\RegistrationScreen.cs" />
     <Compile Include="CustomControls\CustomListItemGallery.cs" />
     <Compile Include="Helpers\GalleryAdapter.cs" />
     <Compile Include="Helpers\PictureAdapter.cs" />
     <Compile Include="Helpers\UiInitializators.cs" />
     <Compile Include="Infrastructure\AutorizationService.cs" />
     <Compile Include="Infrastructure\HttpManager.cs" />
-    <Compile Include="Infrastructure\HttpMessageCreator.cs" />
+    <Compile Include="Infrastructure\HttpRequestMessageCreator.cs" />
     <Compile Include="Infrastructure\ImagePicker.cs" />
     <Compile Include="Infrastructure\PickFileTypes.cs" />
     <Compile Include="Infrastructure\PrivateGalleryCloudSystem.cs" />
@@ -149,10 +152,10 @@
     <AndroidResource Include="Resources\layout\PhotoEditScreen.axml" />
     <AndroidResource Include="Resources\layout\RegistrationScreen.axml" />
     <AndroidResource Include="Resources\layout\UCGalleryItem.axml" />
-    <AndroidResource Include="Resources\layout\UCPictureItem.axml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml">
+    <AndroidResource Include="Resources\layout\CreateGalleryFragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UCPictureLayout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -166,16 +169,10 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\add.9.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\facebook.9.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\gallery.9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\add.9.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\facebook.9.png" />
@@ -184,25 +181,16 @@
     <AndroidResource Include="Resources\drawable-mdpi\gallery.9.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\add.9.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\facebook.9.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\gallery.9.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\add.9.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\facebook.9.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\gallery.9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\add.9.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\facebook.9.png" />
@@ -218,6 +206,44 @@
       <Project>{1C9954EC-D172-4292-B9A6-DD9E5A643040}</Project>
       <Name>PrivateGallery.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\theme.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\galleryMenu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\uploadfolder.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\uploadfolder.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\uploadfolder.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\uploadfolder.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\uploadfolder.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\uploadphoto.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\uploadphoto.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\uploadphoto.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\uploadphoto.9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\uploadphoto.9.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

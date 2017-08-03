@@ -31,7 +31,7 @@ namespace PrivateGallery.Android.Helpers
             if (convertView == null)
             {
                 var item = _list.ElementAtOrDefault(position);
-                CustomListItemGallery itemGallery = new CustomListItemGallery(_activity)
+                CustomListItemGallery itemGallery = new CustomListItemGallery(new ContextThemeWrapper(_activity, Resource.Style.Theme_Custom))
                 {
                     Header = item.Name,
                     Date = item.DateTime.ToShortDateString(),

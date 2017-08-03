@@ -130,6 +130,9 @@ namespace PrivateGallery.Android
 			// aapt resource value: 0x7f080000
 			public const int fab_material_blue_500 = 2131230720;
 			
+			// aapt resource value: 0x7f080001
+			public const int theme_devicedefault_background = 2131230721;
+			
 			static Color()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -181,22 +184,25 @@ namespace PrivateGallery.Android
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int add = 2130837504;
+			public const int fab_shadow = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int fab_shadow = 2130837505;
+			public const int fab_shadow_mini = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int fab_shadow_mini = 2130837506;
+			public const int facebook = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int facebook = 2130837507;
+			public const int gallery = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int gallery = 2130837508;
+			public const int Icon = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int Icon = 2130837509;
+			public const int uploadfolder = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int uploadphoto = 2130837510;
 			
 			static Drawable()
 			{
@@ -211,77 +217,98 @@ namespace PrivateGallery.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f05000a
-			public const int FabButton = 2131034122;
-			
-			// aapt resource value: 0x7f050009
-			public const int GalleryList = 2131034121;
-			
-			// aapt resource value: 0x7f050003
-			public const int PictureList = 2131034115;
-			
-			// aapt resource value: 0x7f05000f
-			public const int emailField = 2131034127;
-			
 			// aapt resource value: 0x7f05000d
-			public const int firstNameField = 2131034125;
+			public const int FabButtonGallery = 2131034125;
 			
-			// aapt resource value: 0x7f050014
-			public const int galleryCount = 2131034132;
+			// aapt resource value: 0x7f050006
+			public const int FabButtonPicture = 2131034118;
 			
-			// aapt resource value: 0x7f050013
-			public const int galleryDate = 2131034131;
+			// aapt resource value: 0x7f05000c
+			public const int GalleryList = 2131034124;
 			
-			// aapt resource value: 0x7f050012
-			public const int galleryHeader = 2131034130;
-			
-			// aapt resource value: 0x7f05000b
-			public const int imageReg = 2131034123;
+			// aapt resource value: 0x7f050005
+			public const int PictureList = 2131034117;
 			
 			// aapt resource value: 0x7f050004
-			public const int indicator = 2131034116;
+			public const int applyGalleryButton = 2131034116;
+			
+			// aapt resource value: 0x7f05001e
+			public const int deleteGallery = 2131034142;
+			
+			// aapt resource value: 0x7f05001d
+			public const int editGallery = 2131034141;
+			
+			// aapt resource value: 0x7f050016
+			public const int emailField = 2131034134;
+			
+			// aapt resource value: 0x7f050014
+			public const int firstNameField = 2131034132;
+			
+			// aapt resource value: 0x7f05001b
+			public const int galleryCount = 2131034139;
+			
+			// aapt resource value: 0x7f05001a
+			public const int galleryDate = 2131034138;
+			
+			// aapt resource value: 0x7f050019
+			public const int galleryHeader = 2131034137;
+			
+			// aapt resource value: 0x7f050012
+			public const int imageReg = 2131034130;
+			
+			// aapt resource value: 0x7f050007
+			public const int indicator = 2131034119;
 			
 			// aapt resource value: 0x7f050000
 			public const int item_touch_helper_previous_elevation = 2131034112;
 			
-			// aapt resource value: 0x7f05000e
-			public const int lastNameField = 2131034126;
+			// aapt resource value: 0x7f050015
+			public const int lastNameField = 2131034133;
 			
-			// aapt resource value: 0x7f050005
-			public const int loginView = 2131034117;
+			// aapt resource value: 0x7f050008
+			public const int loginView = 2131034120;
 			
 			// aapt resource value: 0x7f050001
 			public const int mini = 2131034113;
 			
+			// aapt resource value: 0x7f050003
+			public const int newGalleryHeader = 2131034115;
+			
 			// aapt resource value: 0x7f050002
 			public const int normal = 2131034114;
 			
-			// aapt resource value: 0x7f050010
-			public const int passwordField = 2131034128;
-			
-			// aapt resource value: 0x7f050006
-			public const int passwordView = 2131034118;
-			
-			// aapt resource value: 0x7f05000c
-			public const int pickImageReg = 2131034124;
-			
 			// aapt resource value: 0x7f050017
-			public const int pictureDate = 2131034135;
+			public const int passwordField = 2131034135;
 			
-			// aapt resource value: 0x7f050016
-			public const int pictureHeader = 2131034134;
+			// aapt resource value: 0x7f050009
+			public const int passwordView = 2131034121;
 			
-			// aapt resource value: 0x7f050015
-			public const int pictureView = 2131034133;
+			// aapt resource value: 0x7f050013
+			public const int pickImageReg = 2131034131;
 			
-			// aapt resource value: 0x7f050008
-			public const int registerButton = 2131034120;
+			// aapt resource value: 0x7f05000f
+			public const int pickPicture = 2131034127;
 			
-			// aapt resource value: 0x7f050007
-			public const int signIn = 2131034119;
+			// aapt resource value: 0x7f05000e
+			public const int pickedPhoto = 2131034126;
+			
+			// aapt resource value: 0x7f050010
+			public const int pictureDescription = 2131034128;
+			
+			// aapt resource value: 0x7f05000b
+			public const int registerButton = 2131034123;
+			
+			// aapt resource value: 0x7f05000a
+			public const int signIn = 2131034122;
+			
+			// aapt resource value: 0x7f050018
+			public const int signUpButton = 2131034136;
+			
+			// aapt resource value: 0x7f05001c
+			public const int ucPicture = 2131034140;
 			
 			// aapt resource value: 0x7f050011
-			public const int signUpButton = 2131034129;
+			public const int uploadPictureFull = 2131034129;
 			
 			static Id()
 			{
@@ -297,19 +324,19 @@ namespace PrivateGallery.Android
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int ForgotPasswordScreen = 2130903040;
+			public const int CreateGalleryFragment = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int GalleryScreen = 2130903041;
+			public const int ForgotPasswordScreen = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int LoadingDialog = 2130903042;
+			public const int GalleryScreen = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int LoginScreen = 2130903043;
+			public const int LoadingDialog = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int Main = 2130903044;
+			public const int LoginScreen = 2130903044;
 			
 			// aapt resource value: 0x7f030005
 			public const int MainScreen = 2130903045;
@@ -324,7 +351,7 @@ namespace PrivateGallery.Android
 			public const int UCGalleryItem = 2130903048;
 			
 			// aapt resource value: 0x7f030009
-			public const int UCPictureItem = 2130903049;
+			public const int UCPictureLayout = 2130903049;
 			
 			static Layout()
 			{
@@ -332,6 +359,22 @@ namespace PrivateGallery.Android
 			}
 			
 			private Layout()
+			{
+			}
+		}
+		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f090000
+			public const int galleryMenu = 2131296256;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
 			{
 			}
 		}
@@ -372,6 +415,9 @@ namespace PrivateGallery.Android
 			
 			// aapt resource value: 0x7f070003
 			public const int NoActionBar = 2131165187;
+			
+			// aapt resource value: 0x7f070004
+			public const int Theme_Custom = 2131165188;
 			
 			static Style()
 			{

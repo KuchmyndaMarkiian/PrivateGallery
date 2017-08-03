@@ -34,13 +34,17 @@ namespace PrivateGallery.Android.Helpers
         {
             try
             {
+                CustomPictureItem layout =null;
                 if (convertView == null)
                 {
-                    var layout=new CustomListItemPicture(_activity){_model = this[position]};
+                    layout=new CustomPictureItem(_activity,this[position]);
                     layout.Initialize();
-                    return layout;
                 }
-                return null;
+                else
+                {
+                    layout = (CustomPictureItem) convertView;
+                }
+                return layout;
             }
             catch (Exception e)
             {

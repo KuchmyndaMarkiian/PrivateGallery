@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 
 namespace PrivateGallery.Android.Infrastructure
 {
-    internal static class HttpMessageCreator
+    internal static class HttpRequestMessageCreator
     {
         /// <summary>
         /// Returns full http token header to get some datas from server.

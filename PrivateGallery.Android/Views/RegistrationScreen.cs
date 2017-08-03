@@ -17,9 +17,9 @@ using File = Java.IO.File;
 using Settings = PrivateGallery.Android.Infrastructure.Settings;
 using Uri = Android.Net.Uri;
 
-namespace PrivateGallery.Android.Activities
+namespace PrivateGallery.Android.Views
 {
-    [Activity(Label = "Anonymous Gallery", Theme = "@style/NoActionBar")]
+    [Activity(Label = "Anonymous Gallery", Theme = "@style/Theme.Custom")]
     public class RegistrationScreen : Activity
     {
         private ImageView _imageView;
@@ -197,7 +197,7 @@ namespace PrivateGallery.Android.Activities
                     if (resultCode == Result.Ok && data != null)
                     {
                         uri = data.Data;
-                        var path = GetRealPathFromUri(uri);
+                        var path = FileHelper.GetRealPathFromUri(uri,this);
                         App.File = new File(path);
                         _imageView.SetImageURI(uri);
                     }
@@ -207,30 +207,6 @@ namespace PrivateGallery.Android.Activities
             }
         }
 
-        private string GetRealPathFromUri(Uri contentUri)
-        {
-            string docId;
-            using (var c1 = ContentResolver.Query(contentUri, null, null, null, null))
-            {
-                c1.MoveToFirst();
-                var documentId = c1.GetString(0);
-                docId = documentId.Substring(documentId.LastIndexOf(":", StringComparison.Ordinal) + 1);
-            }
-
-            string path = null;
-
-            // The projection contains the columns we want to return in our query.
-            string selection = global::Android.Provider.MediaStore.Images.Media.InterfaceConsts.Id + " =? ";
-            using (var cursor = ManagedQuery(MediaStore.Images.Media.ExternalContentUri, null, selection, new[] {docId},
-                null))
-            {
-                if (cursor == null) return path;
-                var columnIndex =
-                    cursor.GetColumnIndexOrThrow(global::Android.Provider.MediaStore.Images.Media.InterfaceConsts.Data);
-                cursor.MoveToFirst();
-                path = cursor.GetString(columnIndex);
-            }
-            return path;
-        }
+        
     }
 }

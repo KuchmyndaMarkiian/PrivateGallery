@@ -165,9 +165,15 @@ namespace PrivateGalleryAPI.Controllers
                 {
                     return BadRequest("Doesn`t authorized");
                 }
+                string main = AppDomain.CurrentDomain.BaseDirectory;
+                var path=UnitOfWork.Photos.Get(photo => photo.Folder.OwnerUser.UserName == user.UserName &&
+                                               photo.Folder.Header == model.GalleryName && photo.Name == model.Name).Path;
+                var file = $"{main}{path.TrimStart('~')}";
+                File.Delete(file);
                 UnitOfWork.Photos.Delete(photo => photo.Folder.OwnerUser.UserName == user.UserName &&
                                                   photo.Folder.Header == model.GalleryName && photo.Name == model.Name);
                 await UnitOfWork.SaveAsync();
+
                 return Ok();
             }
             catch (Exception e)

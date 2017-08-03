@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -34,6 +35,7 @@ namespace PrivateGalleryAPI.Controllers
             }
             return NotFound();
         }
+
         // GET api/Gallery/List
         [System.Web.Http.HttpGet]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -148,6 +150,12 @@ namespace PrivateGalleryAPI.Controllers
                 }
                 if (user.Galleries.Any(x => x.Header == model.Name))
                 {
+                    string main = AppDomain.CurrentDomain.BaseDirectory;
+                    var found = user.Galleries.FirstOrDefault(x => x.Header == model.Name);
+                    found.Photos.ForEach(photo =>
+                    {
+                        File.Delete($"{main}{photo.Path.TrimStart('~')}");
+                    });
                     UnitOfWork.Gallery.Delete(gallery => gallery.Header == model.Name);
                     await UnitOfWork.SaveAsync();
                     return Ok();

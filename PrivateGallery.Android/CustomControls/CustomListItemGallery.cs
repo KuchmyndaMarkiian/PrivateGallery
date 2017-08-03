@@ -1,4 +1,5 @@
 ﻿using Android.Content;
+using Android.Util;
 using Android.Widget;
 
 namespace PrivateGallery.Android.CustomControls
@@ -12,6 +13,7 @@ namespace PrivateGallery.Android.CustomControls
         public CustomListItemGallery(Context context) : base(context)
         {
             Inflate(Context, Resource.Layout.UCGalleryItem, this);
+            
         }
 
         public void Initialize()
