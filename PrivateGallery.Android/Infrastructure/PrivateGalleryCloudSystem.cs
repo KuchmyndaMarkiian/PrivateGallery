@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Android.Util;
+using Java.Lang;
 using PrivateGallery.Common.BindingModels;
+using Exception = System.Exception;
 using Task = Microsoft.Build.Utilities.Task;
 
 namespace PrivateGallery.Android.Infrastructure
 {
-    class PrivateGalleryCloudSystem:IDisposable
+    class PrivateGalleryCloudSystem : IDisposable
     {
         private HttpManager _httpManager;
 
@@ -25,8 +28,9 @@ namespace PrivateGallery.Android.Infrastructure
             {
                 return await _httpManager.GetData<List<GalleryStructure>>(Settings.GalleryListAdress);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
+                Log.Error("Cloud", exception.Message);
                 return null;
             }
         }
@@ -38,9 +42,9 @@ namespace PrivateGallery.Android.Infrastructure
                 return await _httpManager.OperateData(new GalleryBindindModel {Name = name, DateTime = dateTime},
                     Settings.GalleryAdress, HttpMethod.Put);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e);
+                Log.Error("Cloud", exception.Message);
                 return false;
             }
         }
@@ -52,22 +56,23 @@ namespace PrivateGallery.Android.Infrastructure
                 return await _httpManager.OperateData(new GalleryBindindModel {Name = name, NewName = newName},
                     Settings.GalleryAdress, new HttpMethod("PATCH"));
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e);
+                Log.Error("Cloud", exception.Message);
                 return false;
             }
         }
+
         public async Task<bool> DeleteGallery(string name)
         {
             try
             {
-                return await _httpManager.OperateData(new GalleryBindindModel { Name = name},
+                return await _httpManager.OperateData(new GalleryBindindModel {Name = name},
                     Settings.GalleryAdress, HttpMethod.Delete);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e);
+                Log.Error("Cloud", exception.Message);
                 return false;
             }
         }
@@ -77,7 +82,8 @@ namespace PrivateGallery.Android.Infrastructure
 
         #region Pictures
 
-        public async Task<bool> CreatePicture(string name,string galleryName, DateTime dateTime, string description, string geolocation)
+        public async Task<bool> CreatePicture(string name, string galleryName, DateTime dateTime, string description,
+            string geolocation)
         {
             try
             {
@@ -92,9 +98,9 @@ namespace PrivateGallery.Android.Infrastructure
                     },
                     Settings.PictureAdress, HttpMethod.Put);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e);
+                Log.Error("Cloud", exception.Message);
                 return false;
             }
         }
@@ -113,9 +119,9 @@ namespace PrivateGallery.Android.Infrastructure
                     },
                     Settings.PictureAdress, new HttpMethod("PATCH"));
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e);
+                Log.Error("Cloud", exception.Message);
                 return false;
             }
         }
@@ -127,9 +133,9 @@ namespace PrivateGallery.Android.Infrastructure
                 return await _httpManager.OperateData(new PictureBindingModel {Name = name, GalleryName = galleryName},
                     Settings.PictureAdress, HttpMethod.Delete);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e);
+                Log.Error("Cloud", exception.Message);
                 return false;
             }
         }
@@ -141,8 +147,9 @@ namespace PrivateGallery.Android.Infrastructure
             {
                 return await _httpManager.GetFile($@"{Settings.DownloadPictureAdress}?gallery={gallery}&photo={name}");
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
+                Log.Error("Cloud", exception.Message);
                 return null;
             }
         }
@@ -153,9 +160,9 @@ namespace PrivateGallery.Android.Infrastructure
             {
                 return _httpManager.PostFile(Settings.PictureAdress, pack);
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.WriteLine(e);
+                Log.Error("Cloud", exception.Message);
                 return false;
             }
         }
@@ -167,8 +174,5 @@ namespace PrivateGallery.Android.Infrastructure
         {
             _httpManager?.Dispose();
         }
-
-
-       
     }
 }

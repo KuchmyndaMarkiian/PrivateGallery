@@ -17,7 +17,7 @@ namespace PrivateGallery.Android.Infrastructure
         #endregion
 
         #region URL Constants
-
+        
         public static string ServerAdress { get; } = "http://192.168.0.105:57643";
 
         #region Authorization
@@ -27,6 +27,8 @@ namespace PrivateGallery.Android.Infrastructure
         public static string LogoutAdress { get; } = "/api/Account/LogOut";
         public static string UserInfo { get; } = "/api/Account/AccountInfo";
         public static string AvatarAdress { get; } = "/api/Account/UpdateAvatar";
+
+        public static string RestorePasswordAdress { get; } = "/api/Account/RestorePassword";
         #endregion
 
         #region Gallery
@@ -46,6 +48,7 @@ namespace PrivateGallery.Android.Infrastructure
         #region Types
 
         public string MimeJson => "application/json";
+        
 
         #endregion
 

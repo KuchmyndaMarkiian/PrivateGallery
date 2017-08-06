@@ -7,6 +7,7 @@ using System.Text;
 using Newtonsoft.Json;
 using PrivateGallery.Android.Models;
 using PrivateGallery.Android.Models.Errors;
+using PrivateGallery.Common.BindingModels;
 
 namespace PrivateGallery.Android.Infrastructure
 {
@@ -87,6 +88,24 @@ namespace PrivateGallery.Android.Infrastructure
                 finally
                 {
                     //Todo need destroy session & datas
+                }
+            }
+        }
+
+        public void RestorePassword(RestorePasswordBindingModel model)
+        {
+            using (var client=new HttpClient())
+            {
+                try
+                {
+                    _responseMessage = client.PostAsync(Settings.ServerAdress + Settings.RestorePasswordAdress,
+                            new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8,
+                                Settings.Instance.MimeJson))
+                        .Result;
+                }
+                catch (Exception e)
+                {
+                    _message = e.Message;
                 }
             }
         }

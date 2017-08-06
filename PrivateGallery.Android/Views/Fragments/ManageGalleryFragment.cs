@@ -1,22 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using PrivateGallery.Android.Helpers;
-using PrivateGallery.Android.Infrastructure;
 
 namespace PrivateGallery.Android.Views.Fragments
 {
     [Activity(Theme = "@style/Theme_Custom")]
-    public class ManageGalleryFragment : DialogFragment
+    public sealed class ManageGalleryFragment : DialogFragment
     {
         private readonly  Action<string> _action;
 

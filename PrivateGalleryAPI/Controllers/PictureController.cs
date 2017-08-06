@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PrivateGallery.Common.BindingModels;
+using PrivateGalleryAPI.Controllers;
 using PrivateGallery.DAL.Entities;
 using PrivateGallery.DAL.Infrastructure;
 using PrivateGalleryAPI.Infrastructure;

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PrivateGalleryAPI.Models
+namespace PrivateGalleryAPI.Models.Etc
 {
     public class ChangePasswordBindingModel
     {

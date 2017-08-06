@@ -1,11 +1,9 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using PrivateGallery.DAL.Contexts;
 using PrivateGallery.DAL.Entities;
-using PrivateGalleryAPI.Models;
 
 namespace PrivateGalleryAPI
 {

@@ -239,7 +239,6 @@
     <Compile Include="Infrastructure\CustomMultipartFormDataStreamProvider.cs" />
     <Compile Include="Infrastructure\StreamManager.cs" />
     <Compile Include="Models\UploadedFile.cs" />
-    <Compile Include="Models\Etc\SetPasswordBindingModel.cs" />
     <Compile Include="Models\Etc\AddExternalLoginBindingModel.cs" />
     <Compile Include="Models\Etc\ChangePasswordBindingModel.cs" />
     <Compile Include="Models\Etc\RegisterExternalBindingModel.cs" />

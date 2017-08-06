@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -23,6 +24,7 @@ using PrivateGallery.DAL.Entities;
 using PrivateGallery.DAL.Repositories;
 using PrivateGalleryAPI.Infrastructure;
 using PrivateGalleryAPI.Models;
+using PrivateGalleryAPI.Models.Etc;
 using PrivateGalleryAPI.Providers;
 using PrivateGalleryAPI.Results;
 
@@ -32,6 +34,73 @@ namespace PrivateGalleryAPI.Controllers
     [System.Web.Http.RoutePrefix("api/Account")]
     public class AccountController : ApiControllerBase
     {
+        // POST api/Account/Logout
+        [System.Web.Http.Route("Logout")]
+        public IHttpActionResult Logout()
+        {
+            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            return Ok();
+        }
+        // POST api/Account/RemoveLogin
+        [System.Web.Http.Route("RemoveLogin")]
+        public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            IdentityResult result;
+
+            if (model.LoginProvider == LocalLoginProvider)
+            {
+                result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
+            }
+            else
+            {
+                result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
+                    new UserLoginInfo(model.LoginProvider, model.ProviderKey));
+            }
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok();
+        }
+
+        // POST api/Account/RestorePassword
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.Route("RestorePassword")]
+        public async Task<IHttpActionResult> RestorePassword(RestorePasswordBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var found = await UnitOfWork.Instance.Users.GetAsync(x => x.Email == model.Email);
+            if (found != null)
+            {
+                IdentityResult result =
+                    await UserManager.RemovePasswordAsync(found.Id);
+                if (result.Succeeded)
+                {
+                    result= await UserManager.AddPasswordAsync(found.Id, model.NewPassword);
+                }
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+            }
+            else
+            {
+                return  new NotFoundResult(this);
+            }
+            return Ok();
+        }
+
         // GET api/Account/AccountInfo
         [System.Web.Http.Route("AccountInfo"),
          System.Web.Http.HttpGet]
@@ -198,13 +267,7 @@ namespace PrivateGalleryAPI.Controllers
             };
         }
 
-        // POST api/Account/Logout
-        [System.Web.Http.Route("Logout")]
-        public IHttpActionResult Logout()
-        {
-            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-            return Ok();
-        }
+        
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [System.Web.Http.Route("ManageInfo")]
@@ -268,7 +331,7 @@ namespace PrivateGalleryAPI.Controllers
 
         // POST api/Account/SetPassword
         [System.Web.Http.Route("SetPassword")]
-        public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
+        public async Task<IHttpActionResult> SetPassword(RestorePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -323,36 +386,7 @@ namespace PrivateGalleryAPI.Controllers
 
             return Ok();
         }
-
-        // POST api/Account/RemoveLogin
-        [System.Web.Http.Route("RemoveLogin")]
-        public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            IdentityResult result;
-
-            if (model.LoginProvider == LocalLoginProvider)
-            {
-                result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
-            }
-            else
-            {
-                result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
-                    new UserLoginInfo(model.LoginProvider, model.ProviderKey));
-            }
-
-            if (!result.Succeeded)
-            {
-                return GetErrorResult(result);
-            }
-
-            return Ok();
-        }
-
+        
         // GET api/Account/ExternalLogin
         [System.Web.Http.OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]

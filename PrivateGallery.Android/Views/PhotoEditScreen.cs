@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Android.Locations;
 using Android.OS;
 using Android.Provider;
 using Android.Widget;
@@ -20,14 +23,15 @@ using Uri = Android.Net.Uri;
 namespace PrivateGallery.Android.Views
 {
     [Activity(Label = "Anonymous Gallery", Theme = "@style/Theme.Custom")]
-    public class PhotoEditScreen : Activity
+    public class PhotoEditScreen : Activity,ILocationListener
     {
-        private bool _isCapturedPicture = false;
         private AlertDialog.Builder _dialog;
         private PictureBindingModel _model = new PictureBindingModel();
         private MemoryStream _stream=new MemoryStream();
-        string path;
-
+        string _path;
+        private Location _currentLocation;
+        private LocationManager _locationManager;
+        private string _locationProvider;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -40,6 +44,7 @@ namespace PrivateGallery.Android.Views
             FindViewById<EditText>(Resource.Id.pictureDescription).AfterTextChanged +=
                 (sender, args) => _model.Description = (sender as EditText).Text;
             FindViewById<Button>(Resource.Id.uploadPictureFull).Click += UploadPhoto;
+            FindViewById<Button>(Resource.Id.setGeoButton).Click += SetGeo;
 
             #endregion
 
@@ -77,20 +82,53 @@ namespace PrivateGallery.Android.Views
             }
 
             #endregion
+
+            InitializeLocationService();
         }
 
+        private async void SetGeo(object sender, EventArgs e)
+        {
+            if (_currentLocation == null)
+            {
+                Toast.MakeText(this, "Error with searching geolocation", ToastLength.Short).Show();
+            }
+            else
+            {
+                Address address = await ReverseGeocodeCurrentLocation();
+                DisplayAddress(address);
+            }
+        }
 
+        private void InitializeLocationService()
+        {
+            _locationManager = GetSystemService(LocationService) as LocationManager;
+            Criteria criteria = new Criteria() {Accuracy = Accuracy.Fine};
+            var providers = _locationManager.GetProviders(criteria, true);
+            _locationProvider = providers.Any() ? providers.First() : string.Empty;
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            _locationManager.RequestLocationUpdates(_locationProvider,0,0,this);
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            _locationManager.RemoveUpdates(this);
+        }
 
         private void UploadPhoto(object sender, EventArgs e)
         {
-            if (_model.Content == null || string.IsNullOrEmpty(path)) return;
+            if (_model.Content == null || string.IsNullOrEmpty(_path)) return;
             var dialog = new Dialog(this);
             dialog.InitializeLoadingDialog();
             dialog.Show();
             var instance = UserAccount.Instance;
             var date = DateTime.Now;
             string name =
-                $"{instance.FirstName + instance.LastName}{Math.Round(date.TimeOfDay.TotalMilliseconds)}.{path.Split('.').Last()}";
+                $"{instance.FirstName + instance.LastName}{Math.Round(date.TimeOfDay.TotalMilliseconds)}.{_path.Split('.').Last()}";
             Task.Run(async () =>
             {
                 using (var cloud =
@@ -101,7 +139,7 @@ namespace PrivateGallery.Android.Views
                         }))
                 {
 
-                    if (await cloud.CreatePicture(name, _model.GalleryName, date, _model.Description, "2222"))
+                    if (await cloud.CreatePicture(name, _model.GalleryName, date, _model.Description, _model.Geolocation))
                     {
                         int i = 0;
                         while (i++ < 3)
@@ -121,7 +159,11 @@ namespace PrivateGallery.Android.Views
                     {
                         RunOnUiThread(() => Toast.MakeText(this, "Server Error", ToastLength.Short).Show());
                     }
-                    RunOnUiThread(() => dialog.Dismiss());
+                    RunOnUiThread(() =>
+                    {
+                        dialog.Dismiss();
+                        this.MoveTaskToBack(true);
+                    });
                 }
             });
         }
@@ -138,12 +180,12 @@ namespace PrivateGallery.Android.Views
                 {
                     var mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
                     uri = Uri.FromFile(App.File);
-                    path = App.File.Path;
+                    _path = App.File.Path;
                     mediaScanIntent.SetData(uri);
                     SendBroadcast(mediaScanIntent);
                     if (App.Bitmap != null)
                     {
-                        var bit = BitmapFactory.DecodeFile(path);
+                        var bit = BitmapFactory.DecodeFile(_path);
                         imageView.SetImageBitmap(bit);
                     }
                     break;
@@ -153,14 +195,14 @@ namespace PrivateGallery.Android.Views
                     if (resultCode == Result.Ok && data != null)
                     {
                         uri = data.Data;
-                        path = FileHelper.GetRealPathFromUri(uri, this);
-                        var bit = BitmapFactory.DecodeFile(path);
+                        _path = FileHelper.GetRealPathFromUri(uri, this);
+                        var bit = BitmapFactory.DecodeFile(_path);
                         imageView.SetImageBitmap(bit);
                     }
                     break;
                 }
             }
-            var format = path.Split('.').Last();
+            var format = _path.Split('.').Last();
             var compressType = Bitmap.CompressFormat.Webp;
             if (format.ToLowerInvariant() == "jpg" || format.ToLowerInvariant() == "jpeg")
                 compressType = Bitmap.CompressFormat.Jpeg;
@@ -171,6 +213,54 @@ namespace PrivateGallery.Android.Views
             Drawable d = imageView.Drawable;
             Bitmap bitmap = ((BitmapDrawable) d).Bitmap;
             bitmap.Compress(compressType, 100, _stream);
+        }
+
+        public void OnLocationChanged(Location location)
+        {
+            _currentLocation = location;
+            SetGeo(null, new EventArgs());
+        }
+
+        private async Task<Address> ReverseGeocodeCurrentLocation()
+        {
+            Geocoder geocoder = new Geocoder(this);
+            IList<Address> addressList =
+                await geocoder.GetFromLocationAsync(_currentLocation.Latitude, _currentLocation.Longitude, 10);
+
+            Address address = addressList.FirstOrDefault();
+            return address;
+        }
+
+        private void DisplayAddress(Address address)
+        {
+            if (address != null)
+            {
+                StringBuilder deviceAddress = new StringBuilder();
+                for (int i = 0; i < address.MaxAddressLineIndex; i++)
+                {
+                    deviceAddress.AppendLine(address.GetAddressLine(i));
+                }
+                // Remove the last comma from the end of the address.
+                _model.Geolocation = deviceAddress.ToString().TrimEnd(',');
+                Toast.MakeText(this, "Coordinates are found", ToastLength.Short).Show();
+            }
+            else
+            {
+                Toast.MakeText(this, "Unable to determine the address. Try again in a few minutes.", ToastLength.Short)
+                    .Show();
+            }
+        }
+
+        public void OnProviderDisabled(string provider)
+        {
+        }
+
+        public void OnProviderEnabled(string provider)
+        {
+        }
+
+        public void OnStatusChanged(string provider, Availability status, Bundle extras)
+        {
         }
     }
 }

@@ -26,7 +26,13 @@ namespace PrivateGallery.Android.Views
             registerButton.Click += OnRegisterButtonOnClick;
             var signInButton = FindViewById<Button>(Resource.Id.signIn);
             signInButton.Click += OnSignInButtonOnClick;
-
+            var forgotPasswordLabel = FindViewById<TextView>(Resource.Id.forgotPasswordLabel);
+            forgotPasswordLabel.Clickable = true;
+            forgotPasswordLabel.Click += (sender, args) =>
+            {
+                Intent intent=new Intent(this,typeof(ForgotPasswordScreen));
+                StartActivity(intent);
+            };
             #endregion
 
             #region Textviews init

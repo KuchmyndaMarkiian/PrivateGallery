@@ -26,7 +26,6 @@ namespace PrivateGallery.Android.Views
     {
         private GridView _gridView;
         private PictureAdapter _pictureAdapter;
-        private AlertDialog.Builder _dialog;
         private GalleryStructure _galleryStructure;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -48,9 +47,20 @@ namespace PrivateGallery.Android.Views
             StartActivity(intent);
         }
 
-        private void ShowPicture(object sender, EventArgs e)
+        private void ShowPicture(object sender, AdapterView.ItemClickEventArgs e)
         {
-            throw new NotImplementedException();
+            Intent intent = new Intent(this, typeof(ShowedPictureScreen));
+            var x = _galleryStructure.Pictures.ElementAt(e.Position);
+            intent.PutExtra("picture", JsonConvert.SerializeObject(new PictureModel
+            {
+                Content = ((MemoryStream) x.Content).ToArray(),
+                GalleryName = x.GalleryName,
+                Name = x.Name,
+                DateTime = x.DateTime,
+                Description = x.Description,
+                Geolocation = x.Geolocation
+            }));
+            StartActivity(intent);
         }
 
         protected override void OnResume()
