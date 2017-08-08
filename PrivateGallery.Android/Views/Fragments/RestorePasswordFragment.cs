@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using PrivateGallery.Android.Helpers;
-using PrivateGallery.Android.Infrastructure;
 using PrivateGallery.Common.BindingModels;
 
 namespace PrivateGallery.Android.Views.Fragments
@@ -23,8 +14,8 @@ namespace PrivateGallery.Android.Views.Fragments
 
         public delegate void DialogDelegate(Dialog dialog,DialogFragment dialogFragment);
 
-        private DialogDelegate _dialogDelegate;
-        private Activity _parent;
+        private readonly DialogDelegate _dialogDelegate;
+        private readonly Activity _parent;
         public RestorePasswordFragment(RestorePasswordBindingModel model, DialogDelegate action, Activity parent)
         {
             _model = model;

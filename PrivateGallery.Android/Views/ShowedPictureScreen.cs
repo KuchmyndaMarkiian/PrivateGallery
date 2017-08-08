@@ -19,23 +19,31 @@ namespace PrivateGallery.Android.Views
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ShowedPictureScreen);
-
-            // Create your application here
             _model = JsonConvert.DeserializeObject<PictureModel>(Intent.GetStringExtra("picture"));
             FindViewById<ImageView>(Resource.Id.showPictureView)
                 .SetImageBitmap(BitmapFactory.DecodeStream(new MemoryStream(_model.Content)));
             FindViewById<ImageButton>(Resource.Id.deletePictureButton).Click += DeleteEvent;
             FindViewById<ImageButton>(Resource.Id.infoPictureButton).Click += ShowInfo;
         }
-
+        /// <summary>
+        /// Show details
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShowInfo(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //Todo: need detail window
         }
-
+        /// <summary>
+        /// Delete picture from server
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void DeleteEvent(object sender, System.EventArgs e)
         {
-            using (var cloud = new PrivateGalleryCloudSystem(new HttpManager(Settings.ServerAdress){AccessToken = UserAccount.Instance.UserToken.AccessToken}))
+            using (var cloud =
+                new PrivateGalleryCloudSystem(
+                    new HttpManager(Settings.ServerAdress) {AccessToken = UserAccount.Instance.UserToken.AccessToken}))
             {
                 Toast.MakeText(this,
                         await cloud.DeletePicture(_model.Name, _model.GalleryName) ? "Deleted" : "ServerError",

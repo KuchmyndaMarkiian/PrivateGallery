@@ -9,6 +9,9 @@ using Exception = Java.Lang.Exception;
 
 namespace PrivateGallery.Android.Infrastructure
 {
+    /// <summary>
+    /// Simpler access to API Resources
+    /// </summary>
     public class HttpManager : IDisposable
     {
         private readonly HttpClient _client;
@@ -21,6 +24,12 @@ namespace PrivateGallery.Android.Infrastructure
             _hostUrl = hostUrl;
         }
 
+        /// <summary>
+        /// Get any object
+        /// </summary>
+        /// <typeparam name="T">type of object</typeparam>
+        /// <param name="url">secondary url</param>
+        /// <returns></returns>
         public async Task<T> GetData<T>(string url)
         {
             try
@@ -42,6 +51,11 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Get any file
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns>Stream file</returns>
         public async Task<Stream> GetFile(string url)
         {
             try
@@ -63,6 +77,14 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Operating data with some methods: PATH,DELETE,PUT
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="model">any model</param>
+        /// <param name="url"></param>
+        /// <param name="method">Http Method</param>
+        /// <returns></returns>
         public async Task<bool> OperateData<T>(T model, string url, HttpMethod method)
         {
             try
@@ -83,7 +105,6 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
 
-
         public class StreamPack
         {
             public string FullName { get; set; }
@@ -91,6 +112,12 @@ namespace PrivateGallery.Android.Infrastructure
             public byte[] Stream { get; set; }
         }
 
+        /// <summary>
+        /// Store file on server
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
         public bool PostFile(string url, StreamPack file)
         {
             try

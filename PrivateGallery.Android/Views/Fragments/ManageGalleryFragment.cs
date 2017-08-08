@@ -11,7 +11,7 @@ namespace PrivateGallery.Android.Views.Fragments
     [Activity(Theme = "@style/Theme_Custom")]
     public sealed class ManageGalleryFragment : DialogFragment
     {
-        private readonly  Action<string> _action;
+        private readonly Action<string> _action;
 
         public string Header { get; set; }
 
@@ -39,7 +39,6 @@ namespace PrivateGallery.Android.Views.Fragments
                     Dismiss();
                 });
             });
-
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

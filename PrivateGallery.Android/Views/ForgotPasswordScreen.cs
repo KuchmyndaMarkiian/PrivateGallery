@@ -1,7 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Widget;
 using PrivateGallery.Android.Infrastructure;
@@ -16,6 +14,7 @@ namespace PrivateGallery.Android.Views
         private RestorePasswordBindingModel _model = new RestorePasswordBindingModel();
         private Button _mainButton;
         private RestorePasswordFragment _restorePasswordFragment;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -24,7 +23,7 @@ namespace PrivateGallery.Android.Views
 
             #region Init UI
 
-            _restorePasswordFragment=new RestorePasswordFragment(_model,Action,this);
+            _restorePasswordFragment = new RestorePasswordFragment(_model, Action, this);
             _mainButton = FindViewById<Button>(Resource.Id.restorePasswordButton);
             _mainButton.Click += ShowDialogWindow;
             _mainButton.Enabled = false;
@@ -38,9 +37,13 @@ namespace PrivateGallery.Android.Views
             #endregion
         }
 
+        /// <summary>
+        /// Restore password executing
+        /// </summary>
+        /// <param name="dialog"></param>
+        /// <param name="dialogFragment"></param>
         private async void Action(Dialog dialog, DialogFragment dialogFragment)
         {
-            //todo: Need test it
             await Task.Run(() =>
             {
                 using (var service = new AutorizationService())

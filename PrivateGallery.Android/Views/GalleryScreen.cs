@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.Graphics;
 using Android.OS;
-using Android.Provider;
 using Android.Widget;
 using com.refractored.fab;
 using Newtonsoft.Json;
@@ -15,9 +12,7 @@ using PrivateGallery.Android.Helpers;
 using PrivateGallery.Android.Infrastructure;
 using PrivateGallery.Android.Models;
 using PrivateGallery.Common.BindingModels;
-using File = Java.IO.File;
 using Settings = PrivateGallery.Android.Infrastructure.Settings;
-using Uri = Android.Net.Uri;
 
 namespace PrivateGallery.Android.Views
 {
@@ -39,14 +34,22 @@ namespace PrivateGallery.Android.Views
             fab.AttachToListView(_gridView);
             fab.Click += UploadPicture;
         }
-
+        /// <summary>
+        /// Upload picture on floating button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UploadPicture(object sender, EventArgs e)
         {
-            Intent intent=new Intent(this,typeof(PhotoEditScreen));
+            Intent intent = new Intent(this, typeof(PhotoEditScreen));
             intent.PutExtra("galleryName", _galleryStructure.Name);
             StartActivity(intent);
         }
-
+        /// <summary>
+        /// Open picture in new view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShowPicture(object sender, AdapterView.ItemClickEventArgs e)
         {
             Intent intent = new Intent(this, typeof(ShowedPictureScreen));
@@ -82,7 +85,7 @@ namespace PrivateGallery.Android.Views
                 {
                     list.ForEach(async model =>
                         {
-                            model.Content =await cloud.DownloadPicture(model.GalleryName, model.Name);
+                            model.Content = await cloud.DownloadPicture(model.GalleryName, model.Name);
                         }
                     );
                 }
@@ -94,6 +97,5 @@ namespace PrivateGallery.Android.Views
                 });
             });
         }
-        
     }
 }

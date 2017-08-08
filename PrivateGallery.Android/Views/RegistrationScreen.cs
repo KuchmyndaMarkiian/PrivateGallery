@@ -30,7 +30,6 @@ namespace PrivateGallery.Android.Views
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.RegistrationScreen);
-            // Create your application here
             _userAccount = UserAccount.Instance;
 
             #region Dialog Setup
@@ -127,7 +126,6 @@ namespace PrivateGallery.Android.Views
                                 Bitmap bitmap = ((BitmapDrawable) d).Bitmap;
                                 var stream = new MemoryStream();
                                 bitmap.Compress(compressType, 100, stream);
-
                                 if (manager.PostFile(Settings.PictureAdress,
                                     new HttpManager.StreamPack
                                     {
@@ -137,7 +135,6 @@ namespace PrivateGallery.Android.Views
                                     })
                                 )
                                 {
-
                                     RunOnUiThread(() =>
                                     {
                                         loadingDialog.Dismiss();
@@ -197,7 +194,7 @@ namespace PrivateGallery.Android.Views
                     if (resultCode == Result.Ok && data != null)
                     {
                         uri = data.Data;
-                        var path = FileHelper.GetRealPathFromUri(uri,this);
+                        var path = FileHelper.GetRealPathFromUri(uri, this);
                         App.File = new File(path);
                         _imageView.SetImageURI(uri);
                     }
@@ -206,7 +203,5 @@ namespace PrivateGallery.Android.Views
 
             }
         }
-
-        
     }
 }

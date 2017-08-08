@@ -11,9 +11,8 @@ using PrivateGallery.Common.BindingModels;
 
 namespace PrivateGallery.Android.Infrastructure
 {
-    class AutorizationService:IDisposable
+    class AutorizationService : IDisposable
     {
-        
         #region  Fields
 
         private String _message = "";
@@ -23,12 +22,16 @@ namespace PrivateGallery.Android.Infrastructure
 
         #region MainMethods
 
+        /// <summary>
+        /// Registration via REST
+        /// </summary>
+        /// <param name="account"></param>
         public void Register(ref UserAccount account)
         {
             _message = "";
             var model = new
             {
-                FirstName =account.FirstName,
+                FirstName = account.FirstName,
                 LastName = account.FirstName,
                 Email = account.Email,
                 Password = account.Password,
@@ -59,6 +62,10 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Sign In via REST with parsing token
+        /// </summary>
+        /// <param name="account"></param>
         public void SignIn(ref UserAccount account)
         {
             _message = "";
@@ -69,13 +76,18 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
 
+        /// <summary>
+        /// LogOut
+        /// </summary>
+        /// <param name="account"></param>
         public void LogOut(ref UserAccount account)
         {
             using (var client = new HttpClient())
             {
                 try
                 {
-                    _responseMessage = client.SendAsync(HttpRequestMessageCreator.CreateHeaderRequestMessage(HttpMethod.Post,
+                    _responseMessage = client.SendAsync(HttpRequestMessageCreator.CreateHeaderRequestMessage(
+                            HttpMethod.Post,
                             Settings.LogoutAdress, account.UserToken.AccessToken))
                         .Result;
                     if (!_responseMessage.IsSuccessStatusCode)
@@ -92,9 +104,13 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Restoring password via REST
+        /// </summary>
+        /// <param name="model"></param>
         public void RestorePassword(RestorePasswordBindingModel model)
         {
-            using (var client=new HttpClient())
+            using (var client = new HttpClient())
             {
                 try
                 {

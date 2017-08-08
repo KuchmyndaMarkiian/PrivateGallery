@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
-using Android.OS;
 using Android.Provider;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Uri = Android.Net.Uri;
 
 namespace PrivateGallery.Android.Helpers
 {
-    class FileHelper
+    internal sealed class FileHelper
     {
+        /// <summary>
+        /// Get real absolute path of file which selected from the device.
+        /// </summary>
+        /// <param name="contentUri"></param>
+        /// <param name="activity"></param>
+        /// <returns></returns>
         public static string GetRealPathFromUri(Uri contentUri, Activity activity)
         {
             string docId;
@@ -25,12 +22,11 @@ namespace PrivateGallery.Android.Helpers
                 var documentId = c1.GetString(0);
                 docId = documentId.Substring(documentId.LastIndexOf(":", StringComparison.Ordinal) + 1);
             }
-
             string path = null;
-
             // The projection contains the columns we want to return in our query.
             string selection = global::Android.Provider.MediaStore.Images.Media.InterfaceConsts.Id + " =? ";
-            using (var cursor = activity.ManagedQuery(MediaStore.Images.Media.ExternalContentUri, null, selection, new[] { docId },
+            using (var cursor = activity.ManagedQuery(MediaStore.Images.Media.ExternalContentUri, null, selection,
+                new[] {docId},
                 null))
             {
                 if (cursor == null) return path;

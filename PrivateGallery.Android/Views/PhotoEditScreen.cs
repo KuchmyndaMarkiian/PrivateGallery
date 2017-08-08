@@ -23,15 +23,16 @@ using Uri = Android.Net.Uri;
 namespace PrivateGallery.Android.Views
 {
     [Activity(Label = "Anonymous Gallery", Theme = "@style/Theme.Custom")]
-    public class PhotoEditScreen : Activity,ILocationListener
+    public class PhotoEditScreen : Activity, ILocationListener
     {
         private AlertDialog.Builder _dialog;
         private PictureBindingModel _model = new PictureBindingModel();
-        private MemoryStream _stream=new MemoryStream();
+        private MemoryStream _stream = new MemoryStream();
         string _path;
         private Location _currentLocation;
         private LocationManager _locationManager;
         private string _locationProvider;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -86,6 +87,11 @@ namespace PrivateGallery.Android.Views
             InitializeLocationService();
         }
 
+        /// <summary>
+        /// Setting Geolocation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void SetGeo(object sender, EventArgs e)
         {
             if (_currentLocation == null)
@@ -110,7 +116,7 @@ namespace PrivateGallery.Android.Views
         protected override void OnResume()
         {
             base.OnResume();
-            _locationManager.RequestLocationUpdates(_locationProvider,0,0,this);
+            _locationManager.RequestLocationUpdates(_locationProvider, 0, 0, this);
         }
 
         protected override void OnPause()
@@ -119,6 +125,11 @@ namespace PrivateGallery.Android.Views
             _locationManager.RemoveUpdates(this);
         }
 
+        /// <summary>
+        /// Upload photo to server
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UploadPhoto(object sender, EventArgs e)
         {
             if (_model.Content == null || string.IsNullOrEmpty(_path)) return;
@@ -138,8 +149,8 @@ namespace PrivateGallery.Android.Views
                             AccessToken = UserAccount.Instance.UserToken.AccessToken
                         }))
                 {
-
-                    if (await cloud.CreatePicture(name, _model.GalleryName, date, _model.Description, _model.Geolocation))
+                    if (await cloud.CreatePicture(name, _model.GalleryName, date, _model.Description,
+                        _model.Geolocation))
                     {
                         int i = 0;
                         while (i++ < 3)

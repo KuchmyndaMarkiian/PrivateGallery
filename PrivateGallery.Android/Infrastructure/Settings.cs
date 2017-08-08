@@ -2,7 +2,7 @@
 
 namespace PrivateGallery.Android.Infrastructure
 {
-    class Settings
+    internal class Settings
     {
         #region Singleton
 
@@ -17,7 +17,7 @@ namespace PrivateGallery.Android.Infrastructure
         #endregion
 
         #region URL Constants
-        
+
         public static string ServerAdress { get; } = "http://192.168.0.105:57643";
 
         #region Authorization
@@ -29,15 +29,19 @@ namespace PrivateGallery.Android.Infrastructure
         public static string AvatarAdress { get; } = "/api/Account/UpdateAvatar";
 
         public static string RestorePasswordAdress { get; } = "/api/Account/RestorePassword";
+
         #endregion
 
         #region Gallery
+
         public static string GalleryAdress { get; } = "/api/Gallery";
         public static string GalleryListAdress { get; } = "/api/Gallery/List";
-        
+
 
         #endregion
+
         #region Picture
+
         public static string DownloadPictureAdress { get; } = "/api/Picture/Download";
         public static string PictureAdress { get; } = "/api/Picture";
 
@@ -48,7 +52,6 @@ namespace PrivateGallery.Android.Infrastructure
         #region Types
 
         public string MimeJson => "application/json";
-        
 
         #endregion
 

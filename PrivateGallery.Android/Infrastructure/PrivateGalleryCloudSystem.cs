@@ -4,16 +4,17 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Android.Util;
-using Java.Lang;
 using PrivateGallery.Common.BindingModels;
 using Exception = System.Exception;
-using Task = Microsoft.Build.Utilities.Task;
 
 namespace PrivateGallery.Android.Infrastructure
 {
-    class PrivateGalleryCloudSystem : IDisposable
+    /// <summary>
+    /// Storaging Cloud System with managing data
+    /// </summary>
+    public class PrivateGalleryCloudSystem : IDisposable
     {
-        private HttpManager _httpManager;
+        private readonly HttpManager _httpManager;
 
         public PrivateGalleryCloudSystem(HttpManager httpManager)
         {
@@ -21,7 +22,10 @@ namespace PrivateGallery.Android.Infrastructure
         }
 
         #region Galleries
-
+        /// <summary>
+        /// Get list of existing galleries
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<GalleryStructure>> DownloadGalleries()
         {
             try
@@ -35,6 +39,12 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Create Gallery on server (PUT method)
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public async Task<bool> CreateGallery(string name, DateTime dateTime)
         {
             try
@@ -48,7 +58,12 @@ namespace PrivateGallery.Android.Infrastructure
                 return false;
             }
         }
-
+        /// <summary>
+        /// Update gallery
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="newName"></param>
+        /// <returns></returns>
         public async Task<bool> UpdateGallery(string name, string newName)
         {
             try
@@ -62,7 +77,11 @@ namespace PrivateGallery.Android.Infrastructure
                 return false;
             }
         }
-
+        /// <summary>
+        /// Delete gallery from server
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public async Task<bool> DeleteGallery(string name)
         {
             try
@@ -77,11 +96,18 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
 
-
         #endregion
 
         #region Pictures
-
+        /// <summary>
+        /// Create picture on server
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="galleryName"></param>
+        /// <param name="dateTime"></param>
+        /// <param name="description"></param>
+        /// <param name="geolocation"></param>
+        /// <returns></returns>
         public async Task<bool> CreatePicture(string name, string galleryName, DateTime dateTime, string description,
             string geolocation)
         {
@@ -104,7 +130,14 @@ namespace PrivateGallery.Android.Infrastructure
                 return false;
             }
         }
-
+        /// <summary>
+        /// Update picture on server
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="galleryName"></param>
+        /// <param name="description"></param>
+        /// <param name="geolocation"></param>
+        /// <returns></returns>
         public async Task<bool> UpdatePicture(string name, string galleryName, string description, string geolocation)
         {
             try
@@ -125,7 +158,12 @@ namespace PrivateGallery.Android.Infrastructure
                 return false;
             }
         }
-
+        /// <summary>
+        /// Delete picture from server
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="galleryName"></param>
+        /// <returns></returns>
         public async Task<bool> DeletePicture(string name, string galleryName)
         {
             try
@@ -139,8 +177,12 @@ namespace PrivateGallery.Android.Infrastructure
                 return false;
             }
         }
-
-
+        /// <summary>
+        /// Download picture file from server
+        /// </summary>
+        /// <param name="gallery"></param>
+        /// <param name="name"></param>
+        /// <returns>Picture in Stream</returns>
         public async Task<Stream> DownloadPicture(string gallery, string name)
         {
             try
@@ -153,7 +195,11 @@ namespace PrivateGallery.Android.Infrastructure
                 return null;
             }
         }
-
+        /// <summary>
+        /// Upload photo on server
+        /// </summary>
+        /// <param name="pack"></param>
+        /// <returns></returns>
         public bool UploadPicture(HttpManager.StreamPack pack)
         {
             try
@@ -168,8 +214,6 @@ namespace PrivateGallery.Android.Infrastructure
         }
 
         #endregion
-
-
         public void Dispose()
         {
             _httpManager?.Dispose();

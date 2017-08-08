@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery", "PrivateGallery\PrivateGallery.csproj", "{D47CF38F-2DD9-4404-865E-E9B83C376929}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGalleryAPI", "PrivateGalleryAPI\PrivateGalleryAPI.csproj", "{75A3A1B0-BAB4-4E65-9695-C62AC7532727}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.Common", "PrivateGalleryCommon\PrivateGallery.Common.csproj", "{1C9954EC-D172-4292-B9A6-DD9E5A643040}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.DAL", "PrivateGallery.DAL\PrivateGallery.DAL.csproj", "{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGalleryNew", "PrivateGalleryNew\PrivateGalleryNew.csproj", "{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.Android", "PrivateGallery.Android\PrivateGallery.Android.csproj", "{6F23CA34-A1A8-48C8-9A08-EA563518C110}"
 EndProject
@@ -21,12 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D47CF38F-2DD9-4404-865E-E9B83C376929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D47CF38F-2DD9-4404-865E-E9B83C376929}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D47CF38F-2DD9-4404-865E-E9B83C376929}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{D47CF38F-2DD9-4404-865E-E9B83C376929}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D47CF38F-2DD9-4404-865E-E9B83C376929}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D47CF38F-2DD9-4404-865E-E9B83C376929}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{75A3A1B0-BAB4-4E65-9695-C62AC7532727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75A3A1B0-BAB4-4E65-9695-C62AC7532727}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75A3A1B0-BAB4-4E65-9695-C62AC7532727}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,12 +29,6 @@ Global
 		{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8C65EBF-6F95-41A6-946F-B92D810B8CB0}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{6F23CA34-A1A8-48C8-9A08-EA563518C110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6F23CA34-A1A8-48C8-9A08-EA563518C110}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F23CA34-A1A8-48C8-9A08-EA563518C110}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

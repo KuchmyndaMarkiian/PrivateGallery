@@ -1,9 +1,11 @@
 ﻿using Android.Content;
-using Android.Util;
 using Android.Widget;
 
 namespace PrivateGallery.Android.CustomControls
 {
+    /// <summary>
+    /// Custom Control with some textviews
+    /// </summary>
     internal class CustomListItemGallery : LinearLayout
     {
         public string Header { get; set; }
@@ -13,7 +15,6 @@ namespace PrivateGallery.Android.CustomControls
         public CustomListItemGallery(Context context) : base(context)
         {
             Inflate(Context, Resource.Layout.UCGalleryItem, this);
-            
         }
 
         public void Initialize()

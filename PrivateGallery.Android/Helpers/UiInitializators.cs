@@ -8,6 +8,10 @@ namespace PrivateGallery.Android.Helpers
 {
     internal static class UiInitializators
     {
+        /// <summary>
+        /// Loading Dialog Initialization
+        /// </summary>
+        /// <param name="dialog"></param>
         public static void InitializeLoadingDialog(this Dialog dialog)
         {
             dialog.SetContentView(Resource.Layout.LoadingDialog);
@@ -17,7 +21,6 @@ namespace PrivateGallery.Android.Helpers
             layoutParams.CopyFrom(dialog.Window.Attributes);
             layoutParams.Height = layoutParams.Width = ViewGroup.LayoutParams.WrapContent;
             dialog.Window.Attributes = layoutParams;
-            //dialog.Window.RequestFeature(WindowFeatures.NoTitle);
             var indicatorView = dialog.FindViewById<AVLoadingIndicatorView>(Resource.Id.indicator);
             indicatorView.SmoothToShow();
         }

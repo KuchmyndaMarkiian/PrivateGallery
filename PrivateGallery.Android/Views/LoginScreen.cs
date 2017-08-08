@@ -14,12 +14,13 @@ namespace PrivateGallery.Android.Views
     public class LoginScreen : Activity
     {
         private UserAccount _userAccount;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.LoginScreen);
-            // Create your application here
-            _userAccount =UserAccount.Instance;
+            _userAccount = UserAccount.Instance;
+
             #region Buttons init
 
             var registerButton = FindViewById<Button>(Resource.Id.registerButton);
@@ -30,26 +31,33 @@ namespace PrivateGallery.Android.Views
             forgotPasswordLabel.Clickable = true;
             forgotPasswordLabel.Click += (sender, args) =>
             {
-                Intent intent=new Intent(this,typeof(ForgotPasswordScreen));
+                Intent intent = new Intent(this, typeof(ForgotPasswordScreen));
                 StartActivity(intent);
             };
+
             #endregion
 
             #region Textviews init
 
-            
+
             var loginView = FindViewById<EditText>(Resource.Id.loginView);
             var passwordView = FindViewById<EditText>(Resource.Id.passwordView);
             loginView.AfterTextChanged += (sender, args) => _userAccount.Email = (sender as EditText).Text;
             passwordView.AfterTextChanged += (sender, args) => _userAccount.Password = (sender as EditText).Text;
+
             #endregion
         }
 
         #region Autorization
 
-         private void OnSignInButtonOnClick(object o, EventArgs eventArgs)
+        /// <summary>
+        /// Sign In via REST
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="eventArgs"></param>
+        private void OnSignInButtonOnClick(object o, EventArgs eventArgs)
         {
-            var loadingDialog= new Dialog(this);
+            var loadingDialog = new Dialog(this);
             loadingDialog.InitializeLoadingDialog();
             loadingDialog.Show();
             Task.Run(async () =>
@@ -74,18 +82,26 @@ namespace PrivateGallery.Android.Views
                     }
                     else
                     {
-                        RunOnUiThread(() => Toast.MakeText(this,"Signing in isn`t executed.",ToastLength.Short).Show());
+                        RunOnUiThread(
+                            () => Toast.MakeText(this, "Signing in isn`t executed.", ToastLength.Short).Show());
                     }
                 }
                 RunOnUiThread(() => loadingDialog.Dismiss());
             });
         }
+
+        /// <summary>
+        /// Redirecting to Registration window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         void OnRegisterButtonOnClick(object sender, EventArgs args)
         {
             var intent = new Intent(this, typeof(RegistrationScreen));
             StartActivity(intent);
             Finish();
         }
+
         #endregion
     }
 }

@@ -22,34 +22,36 @@ namespace PrivateGallery.Android.Views
         private GalleryAdapter _galleryAdapter;
         private Operation _operation;
         private GalleryBindindModel _model;
+
         private enum Operation
         {
             Create,
             Delete,
             Update
         }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.MainScreen);
-            // Create your application here
             _listView = FindViewById<ListView>(Resource.Id.GalleryList);
             var fab = FindViewById<FloatingActionButton>(Resource.Id.FabButtonGallery);
             _listView.ItemClick += _listView_ItemClick;
             fab.AttachToListView(_listView);
             fab.Click += CreateGallery;
             RegisterForContextMenu(_listView);
-
             _manageGalleryFragment = new ManageGalleryFragment(ApplyGalleryEvent);
         }
 
         #region Gallery operations
+
         private void CreateGallery(object sender, System.EventArgs e)
         {
-            _operation=Operation.Create;
+            _operation = Operation.Create;
             _manageGalleryFragment = new ManageGalleryFragment(ApplyGalleryEvent);
             ShowFragment();
         }
+
         private async void ApplyGalleryEvent(string name)
         {
             bool result;
@@ -63,7 +65,7 @@ namespace PrivateGallery.Android.Views
                         result = await cloud.CreateGallery(name, DateTime.Now);
                         break;
                     case MainScreen.Operation.Update:
-                        result = await cloud.UpdateGallery(_model.Name,name);
+                        result = await cloud.UpdateGallery(_model.Name, name);
                         break;
                     case MainScreen.Operation.Delete:
                         result = await cloud.DeleteGallery(name);
@@ -72,13 +74,11 @@ namespace PrivateGallery.Android.Views
                 return result;
             }
 
-
-            using (var cloud =
-                new PrivateGalleryCloudSystem(
-                    new HttpManager(Settings.ServerAdress)
-                    {
-                        AccessToken = UserAccount.Instance.UserToken.AccessToken
-                    }))
+            var http = new HttpManager(Settings.ServerAdress)
+            {
+                AccessToken = UserAccount.Instance.UserToken.AccessToken
+            };
+            using (var cloud = new PrivateGalleryCloudSystem(http))
             {
                 result = await Operation(cloud, _operation);
             }
@@ -95,14 +95,14 @@ namespace PrivateGallery.Android.Views
                 });
             }
         }
+
         #endregion
-        
 
         private void ShowFragment()
         {
             _manageGalleryFragment.Show(FragmentManager, nameof(ManageGalleryFragment));
         }
-       
+
         protected override void OnResume()
         {
             base.OnResume();
@@ -137,8 +137,8 @@ namespace PrivateGallery.Android.Views
 
         private void _listView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            var @object=_galleryAdapter[e.Position];
-            Intent intent=new Intent(this, typeof(GalleryScreen));
+            var @object = _galleryAdapter[e.Position];
+            Intent intent = new Intent(this, typeof(GalleryScreen));
             intent.PutExtra("gallery", JsonConvert.SerializeObject(@object));
             StartActivity(intent);
         }
@@ -148,26 +148,26 @@ namespace PrivateGallery.Android.Views
             base.OnCreateContextMenu(menu, v, menuInfo);
             if (v.Id == Resource.Id.GalleryList)
             {
-                AdapterView.AdapterContextMenuInfo contextMenuInfo = (AdapterView.AdapterContextMenuInfo)menuInfo;
+                AdapterView.AdapterContextMenuInfo contextMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
                 _model = _galleryAdapter[contextMenuInfo.Position];
                 MenuInflater menuInflater = MenuInflater;
-                menuInflater.Inflate(Resource.Menu.galleryMenu,menu);
+                menuInflater.Inflate(Resource.Menu.galleryMenu, menu);
                 menu.SetHeaderTitle(_model.Name);
             }
         }
 
         public override bool OnContextItemSelected(IMenuItem item)
         {
-            AdapterView.AdapterContextMenuInfo contextMenuInfo = (AdapterView.AdapterContextMenuInfo)item.MenuInfo;
+            AdapterView.AdapterContextMenuInfo contextMenuInfo = (AdapterView.AdapterContextMenuInfo) item.MenuInfo;
             _model = _galleryAdapter[contextMenuInfo.Position];
             switch (item.ItemId)
             {
                 case Resource.Id.editGallery:
-                    _operation=Operation.Update;
+                    _operation = Operation.Update;
                     ShowFragment();
                     return true;
                 case Resource.Id.deleteGallery:
-                    _operation=Operation.Delete;
+                    _operation = Operation.Delete;
                     ApplyGalleryEvent(_model.Name);
                     return true;
                 default: return base.OnContextItemSelected(item);
