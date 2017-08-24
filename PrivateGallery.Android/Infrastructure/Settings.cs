@@ -18,7 +18,7 @@ namespace PrivateGallery.Android.Infrastructure
 
         #region URL Constants
 
-        public static string ServerAdress { get; } = "http://192.168.0.105:57643";
+        public static string ServerAdress { get; } = "http://192.168.0.106:57643";
 
         #region Authorization
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using Android.App;
 using Android.Graphics;
 using Android.OS;
@@ -25,6 +26,7 @@ namespace PrivateGallery.Android.Views
             FindViewById<ImageButton>(Resource.Id.deletePictureButton).Click += DeleteEvent;
             FindViewById<ImageButton>(Resource.Id.infoPictureButton).Click += ShowInfo;
         }
+
         /// <summary>
         /// Show details
         /// </summary>
@@ -32,8 +34,18 @@ namespace PrivateGallery.Android.Views
         /// <param name="e"></param>
         private void ShowInfo(object sender, EventArgs e)
         {
-            //Todo: need detail window
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine($"Name: {_model.Name}");
+            builder.AppendLine($"Date: {_model.DateTime.ToShortDateString()}");
+            builder.AppendLine($"Geo: {_model.Geolocation ?? "Not setted"}");
+            builder.AppendLine($"Descriprion: {_model.Description ?? "Empty"}");
+            AlertDialog.Builder dBuilder =
+                new AlertDialog.Builder(this).SetPositiveButton("Ok", (o, args) => ((AlertDialog) o).Dismiss())
+                    .SetTitle("Information")
+                    .SetMessage(builder.ToString());
+            dBuilder.Show();
         }
+
         /// <summary>
         /// Delete picture from server
         /// </summary>

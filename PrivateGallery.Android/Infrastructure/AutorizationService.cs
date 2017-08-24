@@ -32,7 +32,7 @@ namespace PrivateGallery.Android.Infrastructure
             var model = new
             {
                 FirstName = account.FirstName,
-                LastName = account.FirstName,
+                LastName = account.LastName,
                 Email = account.Email,
                 Password = account.Password,
                 ConfirmPassword = account.Password

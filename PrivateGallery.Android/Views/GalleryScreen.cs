@@ -42,7 +42,7 @@ namespace PrivateGallery.Android.Views
         private void UploadPicture(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(PhotoEditScreen));
-            intent.PutExtra("galleryName", _galleryStructure.Name);
+            intent.PutExtra("gallery", JsonConvert.SerializeObject(_galleryStructure));
             StartActivity(intent);
         }
         /// <summary>
@@ -64,6 +64,12 @@ namespace PrivateGallery.Android.Views
                 Geolocation = x.Geolocation
             }));
             StartActivity(intent);
+        }
+
+        protected override void OnRestart()
+        {
+            _gridView.Adapter = null;
+            OnResume();
         }
 
         protected override void OnResume()

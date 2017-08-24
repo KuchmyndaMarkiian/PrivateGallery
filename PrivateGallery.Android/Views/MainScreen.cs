@@ -118,7 +118,7 @@ namespace PrivateGallery.Android.Views
                             AccessToken = UserAccount.Instance.UserToken.AccessToken
                         });
                 var list = await cloudSystem.DownloadGalleries();
-                list.ForEach(structure =>
+                list?.ForEach(structure =>
                 {
                     var name = structure.Name;
                     foreach (var pictureBindingModel in structure.Pictures)

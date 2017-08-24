@@ -12,6 +12,7 @@ using Android.Locations;
 using Android.OS;
 using Android.Provider;
 using Android.Widget;
+using Newtonsoft.Json;
 using PrivateGallery.Android.Helpers;
 using PrivateGallery.Android.Infrastructure;
 using PrivateGallery.Android.Models;
@@ -27,6 +28,7 @@ namespace PrivateGallery.Android.Views
     {
         private AlertDialog.Builder _dialog;
         private PictureBindingModel _model = new PictureBindingModel();
+        private GalleryStructure _galleryStructure;
         private MemoryStream _stream = new MemoryStream();
         string _path;
         private Location _currentLocation;
@@ -38,7 +40,8 @@ namespace PrivateGallery.Android.Views
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.PhotoEditScreen);
             // Create your application here
-            _model.GalleryName = Intent.GetStringExtra("galleryName");
+            _galleryStructure=JsonConvert.DeserializeObject<GalleryStructure>(Intent.GetStringExtra("gallery"));
+            _model.GalleryName = _galleryStructure.Name;
 
             #region UIElement's events
 
@@ -173,7 +176,10 @@ namespace PrivateGallery.Android.Views
                     RunOnUiThread(() =>
                     {
                         dialog.Dismiss();
-                        this.MoveTaskToBack(true);
+                        var intent = new Intent(this, typeof(GalleryScreen));
+                        intent.PutExtra("gallery", JsonConvert.SerializeObject(_galleryStructure));
+                        StartActivity(intent);
+                        Finish();
                     });
                 }
             });

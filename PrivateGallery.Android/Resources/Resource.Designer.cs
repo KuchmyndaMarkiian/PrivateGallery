@@ -214,16 +214,22 @@ namespace PrivateGallery.Android
 			public const int privatefolder = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int RoundedCornerShape = 2130837514;
+			public const int RegisterScreenShape = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int rubbish_bin_delete_button = 2130837515;
+			public const int RoundedCornerShape = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int uploadfolder = 2130837516;
+			public const int rubbish_bin_delete_button = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int uploadphoto = 2130837517;
+			public const int uploadfolder = 2130837517;
+			
+			// aapt resource value: 0x7f02000e
+			public const int uploadphoto = 2130837518;
+			
+			// aapt resource value: 0x7f02000f
+			public const int user = 2130837519;
 			
 			static Drawable()
 			{

@@ -99,7 +99,6 @@ namespace PrivateGallery.Android.Views
         {
             var intent = new Intent(this, typeof(RegistrationScreen));
             StartActivity(intent);
-            Finish();
         }
 
         #endregion

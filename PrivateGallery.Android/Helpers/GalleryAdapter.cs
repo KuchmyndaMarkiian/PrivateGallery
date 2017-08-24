@@ -18,7 +18,10 @@ namespace PrivateGallery.Android.Helpers
 
         public GalleryAdapter(List<GalleryStructure> list, Activity activity)
         {
-            _list.AddRange(list);
+            if (list != null && list.Any())
+            {
+                _list.AddRange(list);
+            }
             _activity = activity;
         }
 

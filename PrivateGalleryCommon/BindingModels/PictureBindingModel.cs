@@ -13,6 +13,7 @@ namespace PrivateGallery.Common.BindingModels
         [StringLength(100, ErrorMessage = "Empty geolocation for creating object", MinimumLength = 1)]
         public string Geolocation { get; set; } = "null";
         public string GalleryName { get; set; }
+        [Newtonsoft.Json.JsonIgnore]
         public Stream Content { get; set; }
     }
 }

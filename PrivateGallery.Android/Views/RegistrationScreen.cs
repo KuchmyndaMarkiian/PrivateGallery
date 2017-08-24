@@ -126,7 +126,7 @@ namespace PrivateGallery.Android.Views
                                 Bitmap bitmap = ((BitmapDrawable) d).Bitmap;
                                 var stream = new MemoryStream();
                                 bitmap.Compress(compressType, 100, stream);
-                                if (manager.PostFile(Settings.PictureAdress,
+                                if (manager.PostFile(Settings.AvatarAdress,
                                     new HttpManager.StreamPack
                                     {
                                         Stream = stream.ToArray(),
