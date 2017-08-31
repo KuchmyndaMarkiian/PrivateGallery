@@ -14,7 +14,6 @@ namespace PrivateGallery.Android.Views
     public class LoginScreen : Activity
     {
         private UserAccount _userAccount;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

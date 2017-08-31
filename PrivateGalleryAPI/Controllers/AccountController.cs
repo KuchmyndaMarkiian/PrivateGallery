@@ -41,6 +41,7 @@ namespace PrivateGalleryAPI.Controllers
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
+
         // POST api/Account/RemoveLogin
         [System.Web.Http.Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
@@ -49,9 +50,7 @@ namespace PrivateGalleryAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             IdentityResult result;
-
             if (model.LoginProvider == LocalLoginProvider)
             {
                 result = await UserManager.RemovePasswordAsync(User.Identity.GetUserId());
@@ -61,12 +60,10 @@ namespace PrivateGalleryAPI.Controllers
                 result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(),
                     new UserLoginInfo(model.LoginProvider, model.ProviderKey));
             }
-
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
-
             return Ok();
         }
 
@@ -86,7 +83,7 @@ namespace PrivateGalleryAPI.Controllers
                     await UserManager.RemovePasswordAsync(found.Id);
                 if (result.Succeeded)
                 {
-                    result= await UserManager.AddPasswordAsync(found.Id, model.NewPassword);
+                    result = await UserManager.AddPasswordAsync(found.Id, model.NewPassword);
                 }
 
                 if (!result.Succeeded)
@@ -96,7 +93,7 @@ namespace PrivateGalleryAPI.Controllers
             }
             else
             {
-                return  new NotFoundResult(this);
+                return new NotFoundResult(this);
             }
             return Ok();
         }
@@ -115,7 +112,6 @@ namespace PrivateGalleryAPI.Controllers
                 var found = await UnitOfWork.Users.GetAsync(user => user.UserName == name);
                 if (found == null)
                     return GetErrorResult(IdentityResult.Failed("Wrong login or token."));
-
                 return Ok(new AccountInfoViewModel
                 {
                     Email = found.Email,
@@ -130,17 +126,16 @@ namespace PrivateGalleryAPI.Controllers
         }
 
         // POST api/Account/Register
-        [System.Web.Http.AllowAnonymous, 
-            System.Web.Http.Route("Register"), 
-            System.Web.Http.HttpPost, 
-            RequireHttps]
+        [System.Web.Http.AllowAnonymous,
+         System.Web.Http.Route("Register"),
+         System.Web.Http.HttpPost,
+         RequireHttps]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
             var user = new User
             {
                 UserName = model.Email,
@@ -148,20 +143,17 @@ namespace PrivateGalleryAPI.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName
             };
-
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
-
             return Ok();
         }
 
         // POST api/Account/UpdateAvatar
         [System.Web.Http.Route("UpdateAvatar"),
-            System.Web.Http.HttpPost, HostAuthentication(DefaultAuthenticationTypes.ExternalBearer),
+         System.Web.Http.HttpPost, HostAuthentication(DefaultAuthenticationTypes.ExternalBearer),
          ValidateAntiForgeryToken]
         public async Task<IEnumerable<UploadedFile>> UpdateAvatar()
         {
@@ -205,7 +197,6 @@ namespace PrivateGalleryAPI.Controllers
                 "This request is not properly formatted"));
         }
 
-
         // GET api/Account/DownloadAvatar
         [System.Web.Http.Route("DownloadAvatar")]
         [System.Web.Http.HttpGet]
@@ -219,7 +210,7 @@ namespace PrivateGalleryAPI.Controllers
             {
                 return new HttpResponseMessage(HttpStatusCode.NoContent);
             }
-            var user =await UnitOfWork.Instance.Users.GetAsync(x => x.UserName == userName);
+            var user = await UnitOfWork.Instance.Users.GetAsync(x => x.UserName == userName);
             if (user == null)
             {
                 return new HttpResponseMessage(HttpStatusCode.NoContent);
@@ -228,7 +219,7 @@ namespace PrivateGalleryAPI.Controllers
             return await StreamManager.GetStreamContent(file);
         }
 
-        #region Trash
+        #region Stock generated methods
 
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
@@ -267,7 +258,7 @@ namespace PrivateGalleryAPI.Controllers
             };
         }
 
-        
+
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [System.Web.Http.Route("ManageInfo")]
@@ -386,7 +377,7 @@ namespace PrivateGalleryAPI.Controllers
 
             return Ok();
         }
-        
+
         // GET api/Account/ExternalLogin
         [System.Web.Http.OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
@@ -622,15 +613,12 @@ namespace PrivateGalleryAPI.Controllers
             public static string Generate(int strengthInBits)
             {
                 const int bitsPerByte = 8;
-
                 if (strengthInBits % bitsPerByte != 0)
                 {
                     throw new ArgumentException("Значение strengthInBits должно нацело делиться на 8.",
                         "strengthInBits");
                 }
-
                 int strengthInBytes = strengthInBits / bitsPerByte;
-
                 byte[] data = new byte[strengthInBytes];
                 _random.GetBytes(data);
                 return HttpServerUtility.UrlTokenEncode(data);

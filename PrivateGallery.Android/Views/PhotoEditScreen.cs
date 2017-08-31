@@ -26,6 +26,8 @@ namespace PrivateGallery.Android.Views
     [Activity(Label = "Anonymous Gallery", Theme = "@style/Theme.Custom")]
     public class PhotoEditScreen : Activity, ILocationListener
     {
+        #region Variables
+
         private AlertDialog.Builder _dialog;
         private PictureBindingModel _model = new PictureBindingModel();
         private GalleryStructure _galleryStructure;
@@ -35,12 +37,14 @@ namespace PrivateGallery.Android.Views
         private LocationManager _locationManager;
         private string _locationProvider;
 
+        #endregion
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.PhotoEditScreen);
             // Create your application here
-            _galleryStructure=JsonConvert.DeserializeObject<GalleryStructure>(Intent.GetStringExtra("gallery"));
+            _galleryStructure = JsonConvert.DeserializeObject<GalleryStructure>(Intent.GetStringExtra("gallery"));
             _model.GalleryName = _galleryStructure.Name;
 
             #region UIElement's events
@@ -232,6 +236,8 @@ namespace PrivateGallery.Android.Views
             bitmap.Compress(compressType, 100, _stream);
         }
 
+        #region Location Service
+
         public void OnLocationChanged(Location location)
         {
             _currentLocation = location;
@@ -279,5 +285,7 @@ namespace PrivateGallery.Android.Views
         public void OnStatusChanged(string provider, Availability status, Bundle extras)
         {
         }
+
+        #endregion
     }
 }

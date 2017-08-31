@@ -15,7 +15,6 @@ namespace PrivateGallery.Android.Views
     public class ShowedPictureScreen : Activity
     {
         private PictureModel _model;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -64,6 +63,6 @@ namespace PrivateGallery.Android.Views
                 Finish();
                 MoveTaskToBack(true);
             }
-        }
+        }f
     }
 }

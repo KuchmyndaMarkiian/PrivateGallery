@@ -19,9 +19,13 @@ namespace PrivateGallery.Android.Views
     [Activity(Label = "Anonymous Gallery", Theme = "@style/Theme.Custom")]
     class GalleryScreen : Activity
     {
+        #region Fields
+
         private GridView _gridView;
         private PictureAdapter _pictureAdapter;
         private GalleryStructure _galleryStructure;
+
+        #endregion
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -34,6 +38,7 @@ namespace PrivateGallery.Android.Views
             fab.AttachToListView(_gridView);
             fab.Click += UploadPicture;
         }
+
         /// <summary>
         /// Upload picture on floating button
         /// </summary>
@@ -45,6 +50,7 @@ namespace PrivateGallery.Android.Views
             intent.PutExtra("gallery", JsonConvert.SerializeObject(_galleryStructure));
             StartActivity(intent);
         }
+
         /// <summary>
         /// Open picture in new view
         /// </summary>

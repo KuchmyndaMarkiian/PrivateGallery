@@ -14,8 +14,14 @@ namespace PrivateGallery.Android.Helpers
     /// </summary>
     internal class PictureAdapter : BaseAdapter<PictureBindingModel>
     {
+        #region Fields, Properties, Indexators
+
         private readonly List<PictureBindingModel> _list = new List<PictureBindingModel>();
         private readonly Activity _activity;
+        public override int Count => _list.Count;
+        public override PictureBindingModel this[int position] => _list.ElementAt(position);
+
+        #endregion
 
         public PictureAdapter(IEnumerable<PictureBindingModel> list, Activity activity)
         {
@@ -47,9 +53,5 @@ namespace PrivateGallery.Android.Helpers
             }
             return null;
         }
-
-        public override int Count => _list.Count;
-
-        public override PictureBindingModel this[int position] => _list.ElementAt(position);
     }
 }

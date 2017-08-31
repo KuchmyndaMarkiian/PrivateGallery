@@ -8,6 +8,9 @@ using PrivateGallery.DAL.Entities;
 
 namespace PrivateGallery.DAL.Infrastructure
 {
+    /// <summary>
+    /// Template methods
+    /// </summary>
     public class DalEntityCreator
     {
         public Gallery CreateGalleryEntity(GalleryBindindModel model) => new Gallery

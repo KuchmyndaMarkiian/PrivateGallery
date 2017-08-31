@@ -13,8 +13,14 @@ namespace PrivateGallery.Android.Helpers
     /// </summary>
     internal class GalleryAdapter : BaseAdapter<GalleryStructure>
     {
+        #region Fields, Properties, Indexators
+
         private readonly List<GalleryStructure> _list = new List<GalleryStructure>();
         private readonly Activity _activity;
+        public override GalleryStructure this[int position] => _list.ElementAt(position);
+        public override int Count => _list.Count;
+
+        #endregion
 
         public GalleryAdapter(List<GalleryStructure> list, Activity activity)
         {
@@ -24,8 +30,6 @@ namespace PrivateGallery.Android.Helpers
             }
             _activity = activity;
         }
-
-        public override GalleryStructure this[int position] => _list.ElementAt(position);
 
         public override long GetItemId(int position) => position;
 
@@ -46,7 +50,5 @@ namespace PrivateGallery.Android.Helpers
             }
             return null;
         }
-
-        public override int Count => _list.Count;
     }
 }

@@ -14,9 +14,13 @@ namespace PrivateGallery.Android.Infrastructure
     /// </summary>
     public class HttpManager : IDisposable
     {
+        #region Fields & Properties
+
         private readonly HttpClient _client;
         private readonly string _hostUrl;
         public string AccessToken { get; set; }
+
+        #endregion
 
         public HttpManager(string hostUrl)
         {

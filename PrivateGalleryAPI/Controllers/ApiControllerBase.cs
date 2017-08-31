@@ -7,7 +7,7 @@ using PrivateGallery.DAL.Repositories;
 
 namespace PrivateGalleryAPI.Controllers
 {
-    public class ApiControllerBase:ApiController
+    public class ApiControllerBase : ApiController
     {
         protected UnitOfWork UnitOfWork { get; } = UnitOfWork.Instance;
     }

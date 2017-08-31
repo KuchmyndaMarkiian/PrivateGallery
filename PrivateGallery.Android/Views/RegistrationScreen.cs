@@ -22,9 +22,13 @@ namespace PrivateGallery.Android.Views
     [Activity(Label = "Anonymous Gallery", Theme = "@style/Theme.Custom")]
     public class RegistrationScreen : Activity
     {
+        #region Fields & Properties
+
         private ImageView _imageView;
         private AlertDialog.Builder _dialog;
         private UserAccount _userAccount;
+
+        #endregion
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -88,8 +92,6 @@ namespace PrivateGallery.Android.Views
 
             #endregion
         }
-
-
 
         #region Registration
 
@@ -200,7 +202,6 @@ namespace PrivateGallery.Android.Views
                     }
                     break;
                 }
-
             }
         }
     }

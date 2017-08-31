@@ -17,11 +17,15 @@ namespace PrivateGallery.Android.Views
     [Activity(Label = "Anonymous Gallery", Theme = "@style/Theme.Custom")]
     public class MainScreen : Activity
     {
+        #region Fields & Properties
+
         private ManageGalleryFragment _manageGalleryFragment;
         private ListView _listView;
         private GalleryAdapter _galleryAdapter;
         private Operation _operation;
         private GalleryBindindModel _model;
+
+        #endregion
 
         private enum Operation
         {
