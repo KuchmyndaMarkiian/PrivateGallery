@@ -14,9 +14,13 @@ namespace PrivateGallery.Android.Infrastructure
     /// </summary>
     public class HttpManager : IDisposable
     {
+        #region Fields & Properties
+
         private readonly HttpClient _client;
         private readonly string _hostUrl;
         public string AccessToken { get; set; }
+
+        #endregion
 
         public HttpManager(string hostUrl)
         {
@@ -25,7 +29,7 @@ namespace PrivateGallery.Android.Infrastructure
         }
 
         /// <summary>
-        /// Get any object
+        /// Gets any object
         /// </summary>
         /// <typeparam name="T">type of object</typeparam>
         /// <param name="url">secondary url</param>
@@ -52,7 +56,7 @@ namespace PrivateGallery.Android.Infrastructure
         }
 
         /// <summary>
-        /// Get any file
+        /// Gets any file
         /// </summary>
         /// <param name="url"></param>
         /// <returns>Stream file</returns>
@@ -113,7 +117,7 @@ namespace PrivateGallery.Android.Infrastructure
         }
 
         /// <summary>
-        /// Store file on server
+        /// Stores file on server
         /// </summary>
         /// <param name="url"></param>
         /// <param name="file"></param>

@@ -11,9 +11,13 @@ namespace PrivateGallery.Android.Views
     [Activity(Label = "Anonymous Gallery", Theme = "@style/Theme.Custom")]
     public class ForgotPasswordScreen : Activity
     {
+        #region Fields & Properties
+
         private RestorePasswordBindingModel _model = new RestorePasswordBindingModel();
         private Button _mainButton;
         private RestorePasswordFragment _restorePasswordFragment;
+
+        #endregion
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

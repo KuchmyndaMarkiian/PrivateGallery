@@ -19,7 +19,5 @@ namespace PrivateGallery.Android.Models
 
         [JsonProperty(".expires")]
         public DateTime Expires { get; set; }
-
-        public string GetTokenProperty => $"Authorization: {TokenType} {AccessToken}";
     }
 }

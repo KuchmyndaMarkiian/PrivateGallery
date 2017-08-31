@@ -15,7 +15,6 @@ namespace PrivateGallery.Android.Views
     public class ShowedPictureScreen : Activity
     {
         private PictureModel _model;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -28,7 +27,7 @@ namespace PrivateGallery.Android.Views
         }
 
         /// <summary>
-        /// Show details
+        /// Shows details
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -47,7 +46,7 @@ namespace PrivateGallery.Android.Views
         }
 
         /// <summary>
-        /// Delete picture from server
+        /// Deletes picture from server
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -64,6 +63,6 @@ namespace PrivateGallery.Android.Views
                 Finish();
                 MoveTaskToBack(true);
             }
-        }
+        }f
     }
 }

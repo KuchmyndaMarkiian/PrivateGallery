@@ -8,7 +8,7 @@ namespace PrivateGallery.Android.Helpers
     internal sealed class FileHelper
     {
         /// <summary>
-        /// Get real absolute path of file which selected from the device.
+        /// Gets real absolute path of file which selected from the device.
         /// </summary>
         /// <param name="contentUri"></param>
         /// <param name="activity"></param>
@@ -24,14 +24,14 @@ namespace PrivateGallery.Android.Helpers
             }
             string path = null;
             // The projection contains the columns we want to return in our query.
-            string selection = global::Android.Provider.MediaStore.Images.Media.InterfaceConsts.Id + " =? ";
+            string selection = MediaStore.Images.Media.InterfaceConsts.Id + " =? ";
             using (var cursor = activity.ManagedQuery(MediaStore.Images.Media.ExternalContentUri, null, selection,
                 new[] {docId},
                 null))
             {
                 if (cursor == null) return path;
                 var columnIndex =
-                    cursor.GetColumnIndexOrThrow(global::Android.Provider.MediaStore.Images.Media.InterfaceConsts.Data);
+                    cursor.GetColumnIndexOrThrow(MediaStore.Images.Media.InterfaceConsts.Data);
                 cursor.MoveToFirst();
                 path = cursor.GetString(columnIndex);
             }

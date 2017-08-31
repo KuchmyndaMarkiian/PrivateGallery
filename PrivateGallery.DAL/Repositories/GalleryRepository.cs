@@ -14,9 +14,7 @@ namespace PrivateGallery.DAL.Repositories
         public GalleryRepository(PrivateGalleryDbContext context) : base(context)
         {
         }
-
         public override void Update(Gallery item) => Context.Entry(item).State = EntityState.Modified;
-
         public override void Delete(Func<Gallery, bool> func)
         {
             var found = Context.Galleries
@@ -24,12 +22,9 @@ namespace PrivateGallery.DAL.Repositories
             if (found != null)
                 Context.Galleries.Remove(found);
         }
-
         public override IEnumerable<Gallery> GetAll() => Context.Galleries;
-
         public override Gallery Get(Func<Gallery, bool> func) => Context.Galleries.FirstOrDefault(func);
         public override Task<Gallery> GetAsync(Expression<Func<Gallery, bool>> func)=> Context.Galleries.FirstOrDefaultAsync(func);
-
         public override void Create(Gallery item) => Context.Galleries.Add(item);
     }
 }

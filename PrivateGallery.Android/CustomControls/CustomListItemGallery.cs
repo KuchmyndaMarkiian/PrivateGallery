@@ -8,9 +8,13 @@ namespace PrivateGallery.Android.CustomControls
     /// </summary>
     internal class CustomListItemGallery : LinearLayout
     {
+        #region Properties
+
         public string Header { get; set; }
         public string Date { get; set; }
         public int Count { get; set; }
+
+        #endregion
 
         public CustomListItemGallery(Context context) : base(context)
         {

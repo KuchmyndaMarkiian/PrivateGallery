@@ -11,15 +11,16 @@ namespace PrivateGallery.DAL.Contexts
             : base("StockConnection", throwIfV1Schema: false)
         {
         }
-
         public static PrivateGalleryDbContext Create()
         {
             return new PrivateGalleryDbContext();
         }
-
         public virtual DbSet<Gallery> Galleries { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
-
+        /// <summary>
+        /// Setting relationships with entities
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -33,7 +34,6 @@ namespace PrivateGallery.DAL.Contexts
 
             modelBuilder.Entity<User>().HasMany(u => u.Galleries).WithRequired(g => g.OwnerUser);
             modelBuilder.Entity<Gallery>().HasMany(u => u.Photos).WithRequired(g => g.Folder);
-
         }
     }
 }

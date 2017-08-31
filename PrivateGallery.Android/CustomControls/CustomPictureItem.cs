@@ -7,7 +7,11 @@ namespace PrivateGallery.Android.CustomControls
 {
     internal class CustomPictureItem : LinearLayout
     {
+        #region Fields
+
         private readonly PictureBindingModel _model;
+
+        #endregion
 
         public CustomPictureItem(Context context, PictureBindingModel model) : base(context)
         {

@@ -110,7 +110,6 @@ namespace PrivateGalleryAPI.Controllers
                 return InternalServerError(e);
             }
         }
-
         // PATCH api/Picture/
         [System.Web.Http.HttpPatch]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -150,7 +149,6 @@ namespace PrivateGalleryAPI.Controllers
                 return InternalServerError(e);
             }
         }
-
         // DELETE api/Picture
         [System.Web.Http.HttpDelete]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -182,8 +180,6 @@ namespace PrivateGalleryAPI.Controllers
                 return InternalServerError(e);
             }
         }
-
-
         // POST api/Picture
         [System.Web.Http.HttpPost, HostAuthentication(DefaultAuthenticationTypes.ExternalBearer),
          ValidateAntiForgeryToken]

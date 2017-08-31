@@ -51,7 +51,6 @@ namespace PrivateGalleryAPI.Controllers
             }
             if (user.Galleries.Any())
             {
-
                 return Ok(user.Galleries.Select(g => new GalleryStructure
                 {
                     Name = g.Header,

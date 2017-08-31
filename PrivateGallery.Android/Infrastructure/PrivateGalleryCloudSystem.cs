@@ -23,7 +23,7 @@ namespace PrivateGallery.Android.Infrastructure
 
         #region Galleries
         /// <summary>
-        /// Get list of existing galleries
+        /// Gets list of existing galleries
         /// </summary>
         /// <returns></returns>
         public async Task<List<GalleryStructure>> DownloadGalleries()
@@ -40,7 +40,7 @@ namespace PrivateGallery.Android.Infrastructure
         }
 
         /// <summary>
-        /// Create Gallery on server (PUT method)
+        /// Creates Gallery on server (PUT method)
         /// </summary>
         /// <param name="name"></param>
         /// <param name="dateTime"></param>
@@ -59,7 +59,7 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
         /// <summary>
-        /// Update gallery
+        /// Updates gallery
         /// </summary>
         /// <param name="name"></param>
         /// <param name="newName"></param>
@@ -78,7 +78,7 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
         /// <summary>
-        /// Delete gallery from server
+        /// Deletes gallery from server
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -100,7 +100,7 @@ namespace PrivateGallery.Android.Infrastructure
 
         #region Pictures
         /// <summary>
-        /// Create picture on server
+        /// Creates picture on server
         /// </summary>
         /// <param name="name"></param>
         /// <param name="galleryName"></param>
@@ -131,7 +131,7 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
         /// <summary>
-        /// Update picture on server
+        /// Updates picture on server
         /// </summary>
         /// <param name="name"></param>
         /// <param name="galleryName"></param>
@@ -159,7 +159,7 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
         /// <summary>
-        /// Delete picture from server
+        /// Deletes picture from server
         /// </summary>
         /// <param name="name"></param>
         /// <param name="galleryName"></param>
@@ -178,7 +178,7 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
         /// <summary>
-        /// Download picture file from server
+        /// Downloads picture file from server
         /// </summary>
         /// <param name="gallery"></param>
         /// <param name="name"></param>
@@ -196,7 +196,7 @@ namespace PrivateGallery.Android.Infrastructure
             }
         }
         /// <summary>
-        /// Upload photo on server
+        /// Uploads photo on server
         /// </summary>
         /// <param name="pack"></param>
         /// <returns></returns>

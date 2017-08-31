@@ -12,7 +12,6 @@ namespace PrivateGallery.Android.Infrastructure
     class ImagePicker
     {
         private readonly Activity _activity;
-
         public ImagePicker(Activity activity)
         {
             _activity = activity;

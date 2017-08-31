@@ -12,7 +12,6 @@ namespace PrivateGalleryAPI.Infrastructure
             : base(path)
         {
         }
-
         public override string GetLocalFileName(System.Net.Http.Headers.HttpContentHeaders headers)
         {
             var name = !string.IsNullOrWhiteSpace(headers.ContentDisposition.FileName) ? headers.ContentDisposition.FileName : "NoName";

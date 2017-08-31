@@ -27,7 +27,6 @@ namespace PrivateGallery.DAL.Repositories
         }
 
         public override IEnumerable<User> GetAll() => Context.Users;
-
         public override User Get(Func<User, bool> func) => Context.Users.FirstOrDefault(func);
 
         public override Task<User> GetAsync(Expression<Func<User, bool>> func) => Context.Users.FirstOrDefaultAsync(

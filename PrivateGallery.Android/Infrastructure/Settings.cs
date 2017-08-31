@@ -27,7 +27,6 @@ namespace PrivateGallery.Android.Infrastructure
         public static string LogoutAdress { get; } = "/api/Account/LogOut";
         public static string UserInfo { get; } = "/api/Account/AccountInfo";
         public static string AvatarAdress { get; } = "/api/Account/UpdateAvatar";
-
         public static string RestorePasswordAdress { get; } = "/api/Account/RestorePassword";
 
         #endregion
@@ -36,7 +35,6 @@ namespace PrivateGallery.Android.Infrastructure
 
         public static string GalleryAdress { get; } = "/api/Gallery";
         public static string GalleryListAdress { get; } = "/api/Gallery/List";
-
 
         #endregion
 
@@ -52,17 +50,6 @@ namespace PrivateGallery.Android.Infrastructure
         #region Types
 
         public string MimeJson => "application/json";
-
-        #endregion
-
-        #region StorageKeys
-
-        public static class StorageKeys
-        {
-            public static string UserKey { get; } = "userdata_key";
-            public static string ChatKey { get; } = "chatsession_key";
-            public static string PicturesKey { get; } = "pictures_key";
-        }
 
         #endregion
     }
