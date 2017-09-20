@@ -18,6 +18,6 @@ namespace PrivateGallery.DAL.Entities
         public string AvatarPath { get; set; } = null;
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public virtual List<Gallery> Galleries { get; set; } = new List<Gallery>();
+        public virtual List<Folder> Galleries { get; set; } = new List<Folder>();
     }
 }

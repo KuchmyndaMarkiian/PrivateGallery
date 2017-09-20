@@ -1,0 +1,16 @@
+€
+wD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Contexts\PrivateGalleryDbContext.csutf-8p
+gD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Entities\Gallery.csutf-8n
+eD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Entities\Photo.csutf-8m
+dD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Entities\User.csutf-8
+vD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Infrastructure\DalEntityCreator.csutf-8ˆ
+D:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Migrations\201709180553391_InitialCreate.csutf-8€
+wD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Migrations\201709180606521_First.csutf-8x
+oD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Migrations\Configuration.csutf-8w
+nD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Properties\AssemblyInfo.csutf-8~
+uD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Repositories\GalleryRepository.csutf-8x
+oD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Repositories\IRepository.csutf-8|
+sD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Repositories\PhotoRepository.csutf-8{
+rD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Repositories\RepositoryBase.csutf-8w
+nD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Repositories\UnitOfWork.csutf-8{
+rD:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.DAL\Repositories\UserRepository.csutf-8

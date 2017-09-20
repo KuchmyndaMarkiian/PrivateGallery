@@ -7,7 +7,7 @@ using PrivateGallery.DAL.Entities;
 
 namespace PrivateGallery.DAL.Repositories
 {
-    abstract class RepositoryBase<T> : IRepository<T> where T:class
+    internal abstract class RepositoryBase<T> : IRepository<T> where T:class
     {
         protected PrivateGalleryDbContext Context;
         protected RepositoryBase(PrivateGalleryDbContext context) => this.Context = context;

@@ -13,16 +13,16 @@ namespace PrivateGallery.DAL.Repositories
         private static readonly Lazy<UnitOfWork> _unitOfWork =
             new Lazy<UnitOfWork>(LazyThreadSafetyMode.ExecutionAndPublication);
         public static UnitOfWork Instance => _unitOfWork.Value ?? new Lazy<UnitOfWork>().Value;
-        public IRepository<Gallery> Gallery { get; set; } = new GalleryRepository(Context);
-        public IRepository<Photo> Photos { get; set; } = new PhotoRepository(Context);
-        public IRepository<User> Users { get; set; } = new UserRepository(Context);
+        public IRepository<Folder> FolderRepository { get; set; } = new FolderRepository(Context);
+        public IRepository<File> FileRepository { get; set; } = new FileRepository(Context);
+        public IRepository<User> UserRepository { get; set; } = new UserRepository(Context);
         public void Save() => Context.SaveChanges();
-        public Task SaveAsync() => Context.SaveChangesAsync();
+        public void SaveAsync() => Context.SaveChanges();
         public void Dispose()
         {
-            Gallery?.Dispose();
-            Photos?.Dispose();
-            Users?.Dispose();
+            FolderRepository?.Dispose();
+            FileRepository?.Dispose();
+            UserRepository?.Dispose();
         }
     }
 }

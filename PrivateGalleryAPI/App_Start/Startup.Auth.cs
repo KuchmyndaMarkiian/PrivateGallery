@@ -38,28 +38,7 @@ namespace PrivateGalleryAPI
                 // В рабочем режиме задайте AllowInsecureHttp = false
                 AllowInsecureHttp = true
             };
-
-            // Включение использования приложением маркера-носителя для аутентификации пользователей
             app.UseOAuthBearerTokens(OAuthOptions);
-
-            // Раскомментируйте приведенные далее строки, чтобы включить вход с помощью сторонних поставщиков входа
-            //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
-
-            //app.UseTwitterAuthentication(
-            //    consumerKey: "",
-            //    consumerSecret: "");
-
-            //app.UseFacebookAuthentication(
-            //    appId: "",
-            //    appSecret: "");
-
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
         }
     }
 }

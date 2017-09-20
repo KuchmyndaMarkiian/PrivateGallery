@@ -18,6 +18,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 using PrivateGallery.Common.BindingModels;
 using PrivateGallery.Common.ViewModels;
 using PrivateGallery.DAL.Entities;
@@ -76,7 +77,7 @@ namespace PrivateGalleryAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var found = await UnitOfWork.Instance.Users.GetAsync(x => x.Email == model.Email);
+            var found = await UnitOfWork.Instance.UserRepository.GetAsync(x => x.Email == model.Email);
             if (found != null)
             {
                 IdentityResult result =
@@ -109,7 +110,7 @@ namespace PrivateGalleryAPI.Controllers
             try
             {
                 var name = User.Identity.Name;
-                var found = await UnitOfWork.Users.GetAsync(user => user.UserName == name);
+                var found = await UnitOfWork.UserRepository.GetAsync(user => user.UserName == name);
                 if (found == null)
                     return GetErrorResult(IdentityResult.Failed("Wrong login or token."));
                 return Ok(new AccountInfoViewModel
@@ -133,9 +134,7 @@ namespace PrivateGalleryAPI.Controllers
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
             var user = new User
             {
                 UserName = model.Email,
@@ -146,7 +145,13 @@ namespace PrivateGalleryAPI.Controllers
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result);
+                HttpResponseMessage responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent(
+                        JsonConvert.SerializeObject(
+                            new ErrorModel() {ErrorDescription = string.Join("\n", result.Errors)}))
+                };
+                return ResponseMessage(responseMessage);
             }
             return Ok();
         }
@@ -179,11 +184,11 @@ namespace PrivateGalleryAPI.Controllers
                             var filePath = folderName + "\\" + info.Name;
                             lock (obj)
                             {
-                                var user = db.Users.Get(user1 => user1.UserName.Split('@').First() == name);
+                                var user = db.UserRepository.Get(user1 => user1.UserName.Split('@').First() == name);
                                 if (user != null)
                                 {
                                     user.AvatarPath = "~\\" + filePath;
-                                    db.Users.Update(user);
+                                    db.UserRepository.Update(user);
                                 }
                                 db.Save();
                             }
@@ -210,7 +215,7 @@ namespace PrivateGalleryAPI.Controllers
             {
                 return new HttpResponseMessage(HttpStatusCode.NoContent);
             }
-            var user = await UnitOfWork.Instance.Users.GetAsync(x => x.UserName == userName);
+            var user = await UnitOfWork.Instance.UserRepository.GetAsync(x => x.UserName == userName);
             if (user == null)
             {
                 return new HttpResponseMessage(HttpStatusCode.NoContent);

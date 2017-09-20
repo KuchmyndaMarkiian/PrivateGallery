@@ -36,7 +36,7 @@ namespace PrivateGalleryAPI.Providers
 
             if (user == null)
             {
-                context.SetError("invalid_grant", "Имя пользователя или пароль указаны неправильно.");
+                context.SetError("invalid_grant", "Username or password is wrong.");
                 return;
             }
 

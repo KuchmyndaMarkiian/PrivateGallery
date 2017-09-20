@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace PrivateGalleryAPI.Infrastructure
 {
-    public class StreamManager
+    public static class StreamManager
     {
         public static async Task<HttpResponseMessage> GetStreamContent(string file)
         {
