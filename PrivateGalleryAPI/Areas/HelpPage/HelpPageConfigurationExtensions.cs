@@ -1,5 +1,5 @@
-using PrivateGalleryAPI.Areas.HelpPage.ModelDescriptions;
-using PrivateGalleryAPI.Areas.HelpPage.Models;
+using SafeCloud.API.Areas.HelpPage.ModelDescriptions;
+using SafeCloud.API.Areas.HelpPage.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +14,7 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 
-namespace PrivateGalleryAPI.Areas.HelpPage
+namespace SafeCloud.API.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

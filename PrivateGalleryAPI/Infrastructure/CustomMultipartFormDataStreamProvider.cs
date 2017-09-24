@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 
-namespace PrivateGalleryAPI.Infrastructure
+namespace SafeCloud.API.Infrastructure
 {
     public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
     {

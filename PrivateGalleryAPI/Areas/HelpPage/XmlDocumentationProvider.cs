@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using PrivateGalleryAPI.Areas.HelpPage.ModelDescriptions;
+using SafeCloud.API.Areas.HelpPage.ModelDescriptions;
 
-namespace PrivateGalleryAPI.Areas.HelpPage
+namespace SafeCloud.API.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

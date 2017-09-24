@@ -2,9 +2,9 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using PrivateGallery;
+using SafeCloud;
 
-namespace PrivateGalleryAPI
+namespace SafeCloud.API
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

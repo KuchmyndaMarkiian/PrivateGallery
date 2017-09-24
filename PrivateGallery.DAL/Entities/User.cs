@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace PrivateGallery.DAL.Entities
+namespace SafeCloud.DAL.Entities
 {
     public class User : IdentityUser
     {
@@ -18,6 +18,6 @@ namespace PrivateGallery.DAL.Entities
         public string AvatarPath { get; set; } = null;
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public virtual List<Folder> Galleries { get; set; } = new List<Folder>();
+        public virtual List<Folder> Folders { get; set; } = new List<Folder>();
     }
 }

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace PrivateGalleryAPI.Areas.HelpPage.ModelDescriptions
+namespace SafeCloud.API.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

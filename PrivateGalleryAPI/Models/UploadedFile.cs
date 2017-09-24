@@ -1,4 +1,4 @@
-﻿namespace PrivateGalleryAPI.Models
+﻿namespace SafeCloud.API.Models
 {
     public class UploadedFile
     {

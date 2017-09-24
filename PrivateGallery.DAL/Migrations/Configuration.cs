@@ -1,19 +1,19 @@
-namespace PrivateGallery.DAL.Migrations
+namespace SafeCloud.DAL.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<PrivateGallery.DAL.Contexts.PrivateGalleryDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SafeCloud.DAL.Contexts.PrivateGalleryDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "PrivateGallery.DAL.Contexts.PrivateGalleryDbContext";
+            ContextKey = "SafeCloud.DAL.Contexts.PrivateGalleryDbContext";
         }
 
-        protected override void Seed(PrivateGallery.DAL.Contexts.PrivateGalleryDbContext context)
+        protected override void Seed(SafeCloud.DAL.Contexts.PrivateGalleryDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

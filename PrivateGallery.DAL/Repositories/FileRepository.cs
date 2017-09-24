@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using PrivateGallery.DAL.Contexts;
-using File = PrivateGallery.DAL.Entities.File;
+using SafeCloud.DAL.Contexts;
+using File = SafeCloud.DAL.Entities.File;
 
-namespace PrivateGallery.DAL.Repositories
+namespace SafeCloud.DAL.Repositories
 {
     internal class FileRepository : RepositoryBase<File>
     {
@@ -34,7 +34,6 @@ namespace PrivateGallery.DAL.Repositories
                         System.IO.File.Delete(file);
                     }
                 }
-                Context.Attributes.Remove(found.Attribute);
                 Context.Files.Remove(found);
             }
         }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\Clouds\MegaNZ\Self-Development\Android_Xamarin\PrivateGallery\PrivateGallery.Tests\HttpRequestMessageCreator.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Net.Http;
+using System.Net.Http.Headers;
+
+namespace PrivateGallery.Tests
+{
+    public static class HttpRequestMessageCreator
+    {
+        /// &lt;summary&gt;
+        /// Returns full http token header to get some datas from server.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;method&quot;&gt;Get/Post/etc&lt;/param&gt;
+        /// &lt;param name=&quot;uri&quot;&gt;segond segment of Url(not host url)&lt;/param&gt;
+        /// &lt;param name=&quot;accessToken&quot;&gt;user`s access token&lt;/param&gt;
+        /// &lt;returns&gt;HTTP message&lt;/returns&gt;
+        public static HttpRequestMessage CreateHeaderRequestMessage(HttpMethod method, string uri,
+            string accessToken = null)
+        {
+            var requestMessage = new HttpRequestMessage(method, uri);
+            if (accessToken != null)
+            {
+                requestMessage.Headers.Authorization =
+                    new AuthenticationHeaderValue(&quot;Bearer&quot;, accessToken);
+            }
+            return requestMessage;
+        }
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[17,9,17,10,0],[18,13,18,70,0],[19,13,19,37,0],[20,13,20,14,0],[21,17,22,74,0],[23,13,23,14,0],[24,13,24,35,0],[25,9,25,10,0]]);
+    </script>
+  </body>
+</html>

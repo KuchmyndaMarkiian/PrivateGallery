@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace PrivateGalleryAPI.Areas.HelpPage
+namespace SafeCloud.API.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

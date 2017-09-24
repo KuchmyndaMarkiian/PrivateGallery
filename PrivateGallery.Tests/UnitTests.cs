@@ -1,32 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using PrivateGallery.Common.BindingModels;
-using PrivateGallery.Tests;
+using SafeCloud.Common.BindingModels;
+using SafeCloud.Tests;
 
-namespace PrivateGallery.Tests
+namespace SafeCloud.Tests
 {
     [TestClass]
-    //TODO: need refactoring
     public partial class UnitTests
     {
         private readonly string _email = "harrisonford@gmail.com";
         private readonly string _password = "Mark95!";
-        private readonly string _host = "http://192.168.0.106:57643";
-        private readonly string _gallery = "/api/Gallery";
-        private readonly string _picture = "/api/Picture";
-        private readonly string _oldName = "Cars";
+        //private readonly string _host = "http://192.168.0.102:57643";
+        private readonly string _host = "http://safecloud.azurewebsites.net";
+        private readonly string _gallery = "/api/Folder";
+        private readonly string _picture = "/api/File";
+        private readonly string _oldName = "Little Cars";
         private readonly string _newName = "Hype-Cars";
         private string MimeJson => "application/json";
+        string FolderId;
+        string FileId;
 
-        private readonly string _token =
-                "h4TcWNLiymfhbX8SDN_aXCnescwpBdmaSoNwiQpp287-65snKlCZH1WWZIH8NECncZ1uQrarVZqbjfQ95qyukBFhTGhS5bFngiJXPjABCh1qrKlf0vUd5GomQcWTh9sHeP5w8t5uxKjVRt4y2eaFqGzMMuz57izFxMmYlx6aVi4FWp2xY6Q21IyHGgTibV5IJHyRmuP5_DQbpjIW0K95_y0cna5sYWiQ8lSLFbyAxawutPfSHiUlL7Q9IkwJT8NJ-6Qp9bbrp8a-hDtnvDx-CdxCC8YSWHyH7bbhUXHPpr2SRNmR_toVnsFABVa4wUiXMBu2Bamn0Nw6plUtyN9EHpBoUsXeaegsuYfaGC2iZvhiXzBlKcJevtOABWNsuciaRhg7F5Cwg1Gwnkt2pc5i21nxzBzvJdOi8FK5L1fvlaV0poUo5ymJUfv_OkaEimhE66Q0T-aYnIZoWfqEb0Mc5k4CWpHcxDGat2o1o3LetG9erdjLAKE_Pq9FiXq2MDeI";
+        private  string _token ;
 
+        private string gallerypath= "gallery.txt";
+        private string photopath = "photo.txt";
+        private string tokenpath = "token.txt";
         /// <summary>
         /// #1 Get concrete user`s authorization token 
         /// </summary>
@@ -40,10 +45,10 @@ namespace PrivateGallery.Tests
                 new KeyValuePair<string, string>("Password", _password)
             };
             var content = new FormUrlEncodedContent(pairs);
-            dynamic res;
+            UserToken res = null;
             Send();
 
-            Assert.IsTrue(res is UserToken);
+            Assert.IsTrue(!string.IsNullOrEmpty(res.AccessToken));
 
 
             void Send()
@@ -58,27 +63,19 @@ namespace PrivateGallery.Tests
                     if (_responseMessage.IsSuccessStatusCode)
                     {
                         res = JsonConvert.DeserializeObject<UserToken>(result);
-                        return;
-                    }
-                    string key = "error_description";
-                    var messageDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
-                    if (messageDictionary.ContainsKey(key))
-                    {
-                        res = messageDictionary[key];
-                    }
-                    else
-                    {
-                        res = "Server error";
+                        File.WriteAllText(tokenpath,res.AccessToken);
                     }
                 }
             }
         }
+
         /// <summary>
         /// #2  Are obtained data correct?
         /// </summary>
         [TestMethod]
         public void IsCorrectUserInfo()
         {
+            _token = File.ReadAllText(tokenpath);
             string url = "/api/Account/AccountInfo";
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, _host + url);
             requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
@@ -113,12 +110,14 @@ namespace PrivateGallery.Tests
             }
 
         }
+
         /// <summary>
         /// #3 Restore user password
         /// </summary>
         [TestMethod]
         public void RestorePassword()
         {
+            _token = File.ReadAllText(tokenpath);
             RestorePasswordBindingModel model =
                 new RestorePasswordBindingModel()
                 {
@@ -144,48 +143,59 @@ namespace PrivateGallery.Tests
                 }
             }
         }
+
         /// <summary>
         /// #4 Create new Gallery
         /// </summary>
         [TestMethod]
         public void CreateGallery()
         {
-            GalleryBindindModel model = new GalleryBindindModel {DateTime = DateTime.Now, Name = _oldName};
-            Assert.IsTrue(OperateData( model,_gallery,new HttpClient(),HttpMethod.Put ));
+            _token = File.ReadAllText(tokenpath);
+            FolderBindindModel model = new FolderBindindModel {DateTime = DateTime.Now, Name = _oldName};
+            Tuple<bool, string> body = OperateData(model, _gallery, new HttpClient(), HttpMethod.Put);
+            File.WriteAllText(gallerypath,body.Item2);
+            Assert.IsTrue(body.Item1);
         }
+
         /// <summary>
         /// #5 Renaming Gallery
         /// </summary>
         [TestMethod]
         public void RenameGallery()
         {
-            GalleryBindindModel model = new GalleryBindindModel { DateTime = DateTime.Now, Name = _oldName,NewName = _newName};
-            Assert.IsTrue(OperateData(model, _gallery, new HttpClient(), new HttpMethod("PATCH")));
+            _token = File.ReadAllText(tokenpath);
+            FolderId = File.ReadAllText(gallerypath);
+            FolderBindindModel model = new FolderBindindModel {Id = FolderId, NewName = _newName};
+            Tuple<bool, string> body = OperateData(model, _gallery, new HttpClient(), new HttpMethod("PATCH"));
+            Assert.IsTrue(body.Item1);
         }
+
         /// <summary>
         /// #6 Get a renamed gallery
         /// </summary>
         [TestMethod]
         public void GetConcreteGallery()
         {
-            GalleryBindindModel model=new GalleryBindindModel();
+            _token = File.ReadAllText(tokenpath);
+            FolderBindindModel model = new FolderBindindModel();
             Send();
 
-            Assert.IsTrue(model.Name==_newName);
+            Assert.IsTrue(model.Name == _newName);
 
             void Send()
             {
-                var param= $"/api/Gallery?name={_newName}";
+                FolderId = File.ReadAllText(gallerypath);
+                var param = $"/api/Folder?id={FolderId}";
                 HttpRequestMessage requestMessage =
                     HttpRequestMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get,
                         $"{_host}{param}", _token);
-                using (var client=new HttpClient())
+                using (var client = new HttpClient())
                 {
                     var response = client.SendAsync(requestMessage).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         model =
-                            JsonConvert.DeserializeObject<GalleryBindindModel>(response.Content.ReadAsStringAsync()
+                            JsonConvert.DeserializeObject<FolderBindindModel>(response.Content.ReadAsStringAsync()
                                 .Result);
                     }
                 }
@@ -198,10 +208,11 @@ namespace PrivateGallery.Tests
         [TestMethod]
         public void FindGallery()
         {
+            _token = File.ReadAllText(tokenpath);
             List<GalleryStructure> list = null;
 
             var requestMessage =
-                HttpRequestMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get, $"{_host}{"/api/Gallery/List"}",
+                HttpRequestMessageCreator.CreateHeaderRequestMessage(HttpMethod.Get, $"{_host}{"/api/Folder/List"}",
                     _token);
 
 
@@ -222,14 +233,18 @@ namespace PrivateGallery.Tests
         [TestMethod]
         public void PutPhoto()
         {
-            PictureBindingModel model = new PictureBindingModel
+            _token = File.ReadAllText(tokenpath);
+            FolderId = File.ReadAllText(gallerypath);
+            FileBindingModel model = new FileBindingModel
             {
                 DateTime = DateTime.Now,
                 Name = "photo.png",
-                GalleryId = _newName,
+                ParentId = FolderId,
                 Geolocation = "Lviv"
             };
-            Assert.IsTrue(OperateData(model, _picture, new HttpClient(), HttpMethod.Put));
+            Tuple<bool, string> body = OperateData(model, _picture, new HttpClient(), HttpMethod.Put);
+            File.WriteAllText(photopath,body.Item2);
+            Assert.IsTrue(body.Item1);
         }
 
         /// <summary>
@@ -238,12 +253,14 @@ namespace PrivateGallery.Tests
         [TestMethod]
         public void DeletePhoto()
         {
-            PictureBindingModel model = new PictureBindingModel
+            _token = File.ReadAllText(tokenpath);
+            FileId = File.ReadAllText(photopath);
+            FileBindingModel model = new FileBindingModel
             {
-                Name = "photo.png",
-                GalleryId = _newName
+                Id = FileId
             };
-            Assert.IsTrue(OperateData(model, _picture, new HttpClient(), HttpMethod.Delete));
+            Tuple<bool, string> body = OperateData(model, _picture, new HttpClient(), HttpMethod.Delete);
+            Assert.IsTrue(body.Item1);
         }
 
         /// <summary>
@@ -252,11 +269,12 @@ namespace PrivateGallery.Tests
         [TestMethod]
         public void DeleteGallery()
         {
-            GalleryBindindModel model = new GalleryBindindModel {Name = _oldName};
-            Assert.IsTrue(OperateData(model, _gallery, new HttpClient(), HttpMethod.Delete));
+            _token = File.ReadAllText(tokenpath);
+            FolderId = File.ReadAllText(gallerypath);
+            FolderBindindModel model = new FolderBindindModel {Id = FolderId};
+            Tuple<bool, string> body = OperateData(model, _gallery, new HttpClient(), HttpMethod.Delete);
+            Assert.IsTrue(body.Item1);
         }
-
-
 
         #region Helpers
 
@@ -269,15 +287,17 @@ namespace PrivateGallery.Tests
         /// <param name="client"></param>
         /// <param name="method">Http Method</param>
         /// <returns></returns>
-        public bool OperateData<T>(T model, string url, HttpClient client,HttpMethod method)
+        public Tuple<bool, string> OperateData<T>(T model, string url, HttpClient client, HttpMethod method)
         {
-                var requestMessage =
-                    HttpRequestMessageCreator.CreateHeaderRequestMessage(method, $"{_host}{url}", _token);
-                requestMessage.Content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8,
-                    MimeJson);
-                var responseMessage = client.SendAsync(requestMessage).Result;
-                return responseMessage.IsSuccessStatusCode;
+            var requestMessage =
+                HttpRequestMessageCreator.CreateHeaderRequestMessage(method, $"{_host}{url}", _token);
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8,
+                MimeJson);
+            var responseMessage = client.SendAsync(requestMessage).Result;
+            return new Tuple<bool, string>(responseMessage.IsSuccessStatusCode,
+                responseMessage.Content.ReadAsStringAsync().Result.Replace("\"", ""));
         }
+
         #endregion
     }
 }

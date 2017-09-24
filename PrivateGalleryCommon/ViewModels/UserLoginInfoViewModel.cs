@@ -1,4 +1,4 @@
-﻿namespace PrivateGallery.Common.ViewModels
+﻿namespace SafeCloud.Common.ViewModels
 {
     // Модели, возвращаемые действиями AccountController.
 

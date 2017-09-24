@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace PrivateGalleryAPI.Areas.HelpPage.ModelDescriptions
+namespace SafeCloud.API.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

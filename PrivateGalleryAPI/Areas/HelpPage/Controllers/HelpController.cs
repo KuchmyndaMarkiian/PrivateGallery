@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using PrivateGalleryAPI.Areas.HelpPage.ModelDescriptions;
-using PrivateGalleryAPI.Areas.HelpPage.Models;
+using SafeCloud.API.Areas.HelpPage.ModelDescriptions;
+using SafeCloud.API.Areas.HelpPage.Models;
 
-namespace PrivateGalleryAPI.Areas.HelpPage.Controllers
+namespace SafeCloud.API.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

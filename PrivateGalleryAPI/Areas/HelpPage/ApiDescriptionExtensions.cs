@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace PrivateGalleryAPI.Areas.HelpPage
+namespace SafeCloud.API.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

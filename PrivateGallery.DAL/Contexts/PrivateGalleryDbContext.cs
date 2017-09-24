@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using PrivateGallery.DAL.Entities;
+using SafeCloud.DAL.Entities;
 
-namespace PrivateGallery.DAL.Contexts
+namespace SafeCloud.DAL.Contexts
 {
     public class PrivateGalleryDbContext : IdentityDbContext<User>
     {
@@ -17,7 +17,6 @@ namespace PrivateGallery.DAL.Contexts
         }
         public virtual DbSet<Folder> Folders { get; set; }
         public virtual DbSet<File> Files { get; set; }
-        public virtual DbSet<Attribute> Attributes { get; set; }
         /// <summary>
         /// Setting relationships with entities
         /// </summary>
@@ -26,10 +25,7 @@ namespace PrivateGallery.DAL.Contexts
         {
             base.OnModelCreating(modelBuilder);
             
-            modelBuilder.Entity<Attribute>()
-                .Property(attr => attr.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            modelBuilder.Entity<User>().HasMany(u => u.Galleries).WithRequired(g => g.OwnerUser);
+            modelBuilder.Entity<User>().HasMany(u => u.Folders).WithRequired(g => g.OwnerUser);
         }
     }
 }

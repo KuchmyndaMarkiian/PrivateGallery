@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using PrivateGallery.DAL.Entities;
+using SafeCloud.DAL.Entities;
 
-namespace PrivateGallery.DAL.Repositories
+namespace SafeCloud.DAL.Repositories
 {
     public interface IRepository<T>:IDisposable where T:class
     {

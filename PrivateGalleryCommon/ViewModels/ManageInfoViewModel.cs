@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PrivateGallery.Common.ViewModels
+namespace SafeCloud.Common.ViewModels
 {
     public class ManageInfoViewModel
     {

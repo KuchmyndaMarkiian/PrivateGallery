@@ -4,9 +4,9 @@ using System.Linq;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(PrivateGalleryAPI.Startup))]
+[assembly: OwinStartup(typeof(SafeCloud.API.Startup))]
 
-namespace PrivateGalleryAPI
+namespace SafeCloud.API
 {
     public partial class Startup
     {

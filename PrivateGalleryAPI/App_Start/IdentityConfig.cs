@@ -2,10 +2,10 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using PrivateGallery.DAL.Contexts;
-using PrivateGallery.DAL.Entities;
+using SafeCloud.DAL.Contexts;
+using SafeCloud.DAL.Entities;
 
-namespace PrivateGalleryAPI
+namespace SafeCloud.API
 {
     // Настройка диспетчера пользователей приложения. UserManager определяется в ASP.NET Identity и используется приложением.
 

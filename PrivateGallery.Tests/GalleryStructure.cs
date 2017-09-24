@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PrivateGallery.Tests
+namespace SafeCloud.Tests
 {
     public class GalleryStructure: IStructure
     {
