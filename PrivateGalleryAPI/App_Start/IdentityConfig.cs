@@ -18,7 +18,7 @@ namespace SafeCloud.API
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<PrivateGalleryDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<SafeCloudDbContext>()));
             // Настройка логики проверки имен пользователей
             manager.UserValidator = new UserValidator<User>(manager)
             {

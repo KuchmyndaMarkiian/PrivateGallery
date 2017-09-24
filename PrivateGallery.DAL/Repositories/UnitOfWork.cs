@@ -9,7 +9,7 @@ namespace SafeCloud.DAL.Repositories
 {
     public class UnitOfWork:IDisposable
     {
-        private static readonly PrivateGalleryDbContext Context = new PrivateGalleryDbContext();
+        private static readonly SafeCloudDbContext Context = new SafeCloudDbContext();
         private static readonly Lazy<UnitOfWork> _unitOfWork =
             new Lazy<UnitOfWork>(LazyThreadSafetyMode.ExecutionAndPublication);
         public static UnitOfWork Instance => _unitOfWork.Value ?? new Lazy<UnitOfWork>().Value;

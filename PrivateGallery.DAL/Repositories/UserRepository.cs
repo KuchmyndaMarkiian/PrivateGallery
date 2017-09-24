@@ -12,7 +12,7 @@ namespace SafeCloud.DAL.Repositories
 {
     internal class UserRepository : RepositoryBase<User>
     {
-        public UserRepository(PrivateGalleryDbContext context) : base(context)
+        public UserRepository(SafeCloudDbContext context) : base(context)
         {
         }
 

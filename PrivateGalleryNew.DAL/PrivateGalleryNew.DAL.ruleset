@@ -1,4 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="SonarQube - PrivateGallery Sonar way" ToolsVersion="15.0">
-  <Include Path="..\sonarqube\privategallerycsharp.ruleset" Action="Default" />
-</RuleSet>

@@ -1,8 +1,7 @@
 ﻿using System;
-using PrivateGallery.Common.BindingModels;
-using PrivateGallery.DAL.Entities;
-using PrivateGallery.DAL.Repositories;
-using Attribute = PrivateGallery.DAL.Entities.Attribute;
+using SafeCloud.Common.BindingModels;
+using SafeCloud.DAL.Entities;
+using SafeCloud.DAL.Repositories;
 
 namespace SafeCloud.DAL.Infrastructure
 {

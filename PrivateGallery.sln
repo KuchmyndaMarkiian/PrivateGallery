@@ -15,10 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{
 		SonarQube\SolutionBinding.sqconfig = SonarQube\SolutionBinding.sqconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.Unit", "PrivateGallery.Unit\PrivateGallery.Unit.csproj", "{9883D5AB-BC8B-4C4A-9AA5-D45739899C24}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.Tests", "PrivateGallery.Tests\PrivateGallery.Tests.csproj", "{E9446564-79AE-4FE3-83F1-B08D08FF1D56}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +33,6 @@ Global
 		{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9446564-79AE-4FE3-83F1-B08D08FF1D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9446564-79AE-4FE3-83F1-B08D08FF1D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9446564-79AE-4FE3-83F1-B08D08FF1D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9446564-79AE-4FE3-83F1-B08D08FF1D56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

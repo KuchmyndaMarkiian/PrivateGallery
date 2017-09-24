@@ -5,15 +5,15 @@ using SafeCloud.DAL.Entities;
 
 namespace SafeCloud.DAL.Contexts
 {
-    public class PrivateGalleryDbContext : IdentityDbContext<User>
+    public class SafeCloudDbContext : IdentityDbContext<User>
     {
-        public PrivateGalleryDbContext()
+        public SafeCloudDbContext()
             : base("StandartConnection", throwIfV1Schema: false)
         {
         }
-        public static PrivateGalleryDbContext Create()
+        public static SafeCloudDbContext Create()
         {
-            return new PrivateGalleryDbContext();
+            return new SafeCloudDbContext();
         }
         public virtual DbSet<Folder> Folders { get; set; }
         public virtual DbSet<File> Files { get; set; }

@@ -19,7 +19,7 @@ namespace SafeCloud.API
         public void ConfigureAuth(IAppBuilder app)
         {
             // Настройка контекста базы данных и диспетчера пользователей для использования одного экземпляра на запрос
-            app.CreatePerOwinContext(PrivateGalleryDbContext.Create);
+            app.CreatePerOwinContext(SafeCloudDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
 
             // Включение использования файла cookie, в котором приложение может хранить информацию для пользователя, выполнившего вход,

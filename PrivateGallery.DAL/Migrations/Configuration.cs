@@ -5,7 +5,7 @@ namespace SafeCloud.DAL.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SafeCloud.DAL.Contexts.PrivateGalleryDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SafeCloud.DAL.Contexts.SafeCloudDbContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace SafeCloud.DAL.Migrations
             ContextKey = "SafeCloud.DAL.Contexts.PrivateGalleryDbContext";
         }
 
-        protected override void Seed(SafeCloud.DAL.Contexts.PrivateGalleryDbContext context)
+        protected override void Seed(SafeCloud.DAL.Contexts.SafeCloudDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

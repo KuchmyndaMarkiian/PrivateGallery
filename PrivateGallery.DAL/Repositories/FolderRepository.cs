@@ -11,7 +11,7 @@ namespace SafeCloud.DAL.Repositories
 {
     internal class FolderRepository : RepositoryBase<Folder>
     {
-        public FolderRepository(PrivateGalleryDbContext context) : base(context)
+        public FolderRepository(SafeCloudDbContext context) : base(context)
         {
         }
         public override void Update(Folder item) => Context.Entry(item).State = EntityState.Modified;

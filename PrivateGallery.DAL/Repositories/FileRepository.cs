@@ -12,7 +12,7 @@ namespace SafeCloud.DAL.Repositories
 {
     internal class FileRepository : RepositoryBase<File>
     {
-        public FileRepository(PrivateGalleryDbContext context) : base(context)
+        public FileRepository(SafeCloudDbContext context) : base(context)
         {
         }
         public override void Update(File item) => Context.Entry(item).State = EntityState.Modified;

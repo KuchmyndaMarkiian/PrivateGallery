@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E9446564-79AE-4FE3-83F1-B08D08FF1D56}</ProjectGuid>
+    <ProjectGuid>{47C2F084-B50B-4C6B-AB3F-675D07C65FA0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SafeCloud.Tests</RootNamespace>

@@ -7,9 +7,8 @@ using System.Web.Http.Description;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using SafeCloud.Common.BindingModels;
-using SafeCloud.DAL.Entities;
 using SafeCloud.DAL.Infrastructure;
-using File = System.IO.File;
+using FileStructure = SafeCloud.Common.BindingModels.FileStructure;
 
 namespace SafeCloud.API.Controllers
 {

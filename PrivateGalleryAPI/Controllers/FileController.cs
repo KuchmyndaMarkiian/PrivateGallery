@@ -10,11 +10,10 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using PrivateGallery.Common.BindingModels;
-using PrivateGallery.DAL.Entities;
-using PrivateGallery.DAL.Infrastructure;
-using PrivateGalleryAPI.Infrastructure;
-using Attribute = PrivateGallery.DAL.Entities.Attribute;
+using SafeCloud.Common.BindingModels;
+using SafeCloud.DAL.Entities;
+using SafeCloud.DAL.Infrastructure;
+using SafeCloud.API.Infrastructure;
 
 namespace SafeCloud.API.Controllers
 {

@@ -1,4 +1,4 @@
-namespace PrivateGallery.DAL.Migrations
+namespace SafeCloud.DAL.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
