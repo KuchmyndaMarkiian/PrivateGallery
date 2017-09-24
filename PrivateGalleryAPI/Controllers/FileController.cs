@@ -14,8 +14,9 @@ using PrivateGallery.Common.BindingModels;
 using PrivateGallery.DAL.Entities;
 using PrivateGallery.DAL.Infrastructure;
 using PrivateGalleryAPI.Infrastructure;
+using Attribute = PrivateGallery.DAL.Entities.Attribute;
 
-namespace PrivateGalleryAPI.Controllers
+namespace SafeCloud.API.Controllers
 {
     [System.Web.Http.Authorize]
     [System.Web.Http.RoutePrefix("api/File")]

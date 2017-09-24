@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
 
-namespace PrivateGalleryAPI.Models
+namespace SafeCloud.API.Models
 {
     public class ErrorModel
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace PrivateGalleryAPI.Areas.HelpPage.ModelDescriptions
+namespace SafeCloud.API.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

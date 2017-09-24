@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PrivateGalleryAPI.Models.Etc
+namespace SafeCloud.API.Models.Etc
 {
     public class RemoveLoginBindingModel
     {

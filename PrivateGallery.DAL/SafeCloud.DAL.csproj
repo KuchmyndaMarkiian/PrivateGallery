@@ -7,8 +7,8 @@
     <ProjectGuid>{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrivateGallery.DAL</RootNamespace>
-    <AssemblyName>PrivateGallery.DAL</AssemblyName>
+    <RootNamespace>SafeCloud.DAL</RootNamespace>
+    <AssemblyName>SafeCloud.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -79,9 +79,9 @@
     <None Include="PrivateGallery.DAL.ruleset" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PrivateGalleryCommon\PrivateGallery.Common.csproj">
+    <ProjectReference Include="..\PrivateGalleryCommon\SafeCloud.Common.csproj">
       <Project>{1C9954EC-D172-4292-B9A6-DD9E5A643040}</Project>
-      <Name>PrivateGallery.Common</Name>
+      <Name>SafeCloud.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

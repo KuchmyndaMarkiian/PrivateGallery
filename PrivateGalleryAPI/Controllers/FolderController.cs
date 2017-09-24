@@ -6,13 +6,12 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using PrivateGallery.Common.BindingModels;
-using PrivateGallery.DAL.Entities;
-using PrivateGallery.DAL.Infrastructure;
+using SafeCloud.Common.BindingModels;
+using SafeCloud.DAL.Entities;
+using SafeCloud.DAL.Infrastructure;
 using File = System.IO.File;
-using FileStructure = PrivateGallery.Common.BindingModels.FileStructure;
 
-namespace PrivateGalleryAPI.Controllers
+namespace SafeCloud.API.Controllers
 {
     [System.Web.Http.Authorize]
     [System.Web.Http.RoutePrefix("api/Folder")]

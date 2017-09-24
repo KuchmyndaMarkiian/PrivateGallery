@@ -14,8 +14,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrivateGalleryAPI</RootNamespace>
-    <AssemblyName>PrivateGalleryAPI</AssemblyName>
+    <RootNamespace>SafeCloud.API</RootNamespace>
+    <AssemblyName>SafeCloud.API</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -342,13 +342,13 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PrivateGallery.DAL\PrivateGallery.DAL.csproj">
+    <ProjectReference Include="..\PrivateGallery.DAL\SafeCloud.DAL.csproj">
       <Project>{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}</Project>
-      <Name>PrivateGallery.DAL</Name>
+      <Name>SafeCloud.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PrivateGalleryCommon\PrivateGallery.Common.csproj">
+    <ProjectReference Include="..\PrivateGalleryCommon\SafeCloud.Common.csproj">
       <Project>{1C9954EC-D172-4292-B9A6-DD9E5A643040}</Project>
-      <Name>PrivateGallery.Common</Name>
+      <Name>SafeCloud.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

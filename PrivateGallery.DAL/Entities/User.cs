@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace PrivateGallery.DAL.Entities
+namespace SafeCloud.DAL.Entities
 {
     public class User : IdentityUser
     {

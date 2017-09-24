@@ -7,8 +7,8 @@
     <ProjectGuid>{1C9954EC-D172-4292-B9A6-DD9E5A643040}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrivateGallery.Common</RootNamespace>
-    <AssemblyName>PrivateGallery.Common</AssemblyName>
+    <RootNamespace>SafeCloud.Common</RootNamespace>
+    <AssemblyName>SafeCloud.Common</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

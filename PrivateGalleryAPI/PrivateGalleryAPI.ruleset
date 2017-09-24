@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Правила для PrivateGalleryAPI" Description="Правила анализа кода для PrivateGalleryAPI.csproj." ToolsVersion="15.0">
+<RuleSet Name="Правила для SafeCloud.API" Description="Правила анализа кода для SafeCloud.API.csproj." ToolsVersion="15.0">
   <Include Path="..\sonarqube\privategallerycsharp.ruleset" Action="Default" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1001" Action="Warning" />

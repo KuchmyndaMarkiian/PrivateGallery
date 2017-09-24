@@ -2,8 +2,9 @@
 using PrivateGallery.Common.BindingModels;
 using PrivateGallery.DAL.Entities;
 using PrivateGallery.DAL.Repositories;
+using Attribute = PrivateGallery.DAL.Entities.Attribute;
 
-namespace PrivateGallery.DAL.Infrastructure
+namespace SafeCloud.DAL.Infrastructure
 {
     /// <summary>
     /// Template methods

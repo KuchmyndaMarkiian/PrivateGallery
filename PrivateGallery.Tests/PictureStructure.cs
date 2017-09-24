@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PrivateGallery.Tests
+namespace SafeCloud.Tests
 {
     public class PictureStructure: IStructure
     {

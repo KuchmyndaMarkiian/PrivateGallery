@@ -4,10 +4,10 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using PrivateGallery.DAL.Contexts;
-using PrivateGalleryAPI.Providers;
+using SafeCloud.DAL.Contexts;
+using SafeCloud.API.Providers;
 
-namespace PrivateGalleryAPI
+namespace SafeCloud.API
 {
     public partial class Startup
     {

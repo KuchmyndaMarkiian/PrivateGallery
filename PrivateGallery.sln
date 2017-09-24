@@ -1,19 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGalleryAPI", "PrivateGalleryAPI\PrivateGalleryAPI.csproj", "{75A3A1B0-BAB4-4E65-9695-C62AC7532727}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCloud.API", "PrivateGalleryAPI\SafeCloud.API.csproj", "{75A3A1B0-BAB4-4E65-9695-C62AC7532727}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.Common", "PrivateGalleryCommon\PrivateGallery.Common.csproj", "{1C9954EC-D172-4292-B9A6-DD9E5A643040}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCloud.Common", "PrivateGalleryCommon\SafeCloud.Common.csproj", "{1C9954EC-D172-4292-B9A6-DD9E5A643040}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.DAL", "PrivateGallery.DAL\PrivateGallery.DAL.csproj", "{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCloud.DAL", "PrivateGallery.DAL\SafeCloud.DAL.csproj", "{B495EE0C-DA15-4685-B3E7-0BF8C4849E04}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{E8492C6F-FEBB-47B8-9717-396AC666CF2C}"
 	ProjectSection(SolutionItems) = preProject
 		SonarQube\PrivateGalleryCSharp.ruleset = SonarQube\PrivateGalleryCSharp.ruleset
 		SonarQube\SolutionBinding.sqconfig = SonarQube\SolutionBinding.sqconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.Unit", "PrivateGallery.Unit\PrivateGallery.Unit.csproj", "{9883D5AB-BC8B-4C4A-9AA5-D45739899C24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateGallery.Tests", "PrivateGallery.Tests\PrivateGallery.Tests.csproj", "{E9446564-79AE-4FE3-83F1-B08D08FF1D56}"
 EndProject

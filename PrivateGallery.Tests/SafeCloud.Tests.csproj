@@ -7,8 +7,8 @@
     <ProjectGuid>{E9446564-79AE-4FE3-83F1-B08D08FF1D56}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PrivateGallery.Tests</RootNamespace>
-    <AssemblyName>PrivateGallery.Tests</AssemblyName>
+    <RootNamespace>SafeCloud.Tests</RootNamespace>
+    <AssemblyName>SafeCloud.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -65,9 +65,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PrivateGalleryCommon\PrivateGallery.Common.csproj">
+    <ProjectReference Include="..\PrivateGalleryCommon\SafeCloud.Common.csproj">
       <Project>{1C9954EC-D172-4292-B9A6-DD9E5A643040}</Project>
-      <Name>PrivateGallery.Common</Name>
+      <Name>SafeCloud.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

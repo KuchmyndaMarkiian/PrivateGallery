@@ -1,4 +1,4 @@
-﻿namespace PrivateGallery.Common.BindingModels
+﻿namespace SafeCloud.Common.BindingModels
 {
     public class AttributeBindingModel
     {

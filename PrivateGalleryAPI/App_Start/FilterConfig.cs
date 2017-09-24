@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace PrivateGalleryAPI
+namespace SafeCloud.API
 {
     public class FilterConfig
     {

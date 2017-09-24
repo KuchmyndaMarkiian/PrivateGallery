@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.IO;
 
-namespace PrivateGallery.Common.BindingModels
+namespace SafeCloud.Common.BindingModels
 {
     public class FileBindingModel:FolderBindindModel
     {

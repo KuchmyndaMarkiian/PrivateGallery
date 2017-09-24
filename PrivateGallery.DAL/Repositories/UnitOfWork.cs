@@ -2,10 +2,10 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
-using PrivateGallery.DAL.Contexts;
-using PrivateGallery.DAL.Entities;
+using SafeCloud.DAL.Contexts;
+using SafeCloud.DAL.Entities;
 
-namespace PrivateGallery.DAL.Repositories
+namespace SafeCloud.DAL.Repositories
 {
     public class UnitOfWork:IDisposable
     {

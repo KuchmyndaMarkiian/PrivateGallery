@@ -1,4 +1,4 @@
-namespace PrivateGalleryAPI.Areas.HelpPage
+namespace SafeCloud.API.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

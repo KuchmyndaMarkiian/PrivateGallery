@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace PrivateGalleryAPI.Areas.HelpPage.ModelDescriptions
+namespace SafeCloud.API.Areas.HelpPage.ModelDescriptions
 {
     public class EnumTypeModelDescription : ModelDescription
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PrivateGallery.Common.BindingModels
+namespace SafeCloud.Common.BindingModels
 {
     // Модели, используемые в качестве параметров действий AccountController.
 

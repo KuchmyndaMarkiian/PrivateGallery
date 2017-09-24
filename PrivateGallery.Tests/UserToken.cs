@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace PrivateGallery.Tests
+namespace SafeCloud.Tests
 {
     /// <summary>
     /// User  token for access resources on host

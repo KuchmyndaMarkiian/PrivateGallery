@@ -19,17 +19,17 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json;
-using PrivateGallery.Common.BindingModels;
-using PrivateGallery.Common.ViewModels;
-using PrivateGallery.DAL.Entities;
-using PrivateGallery.DAL.Repositories;
-using PrivateGalleryAPI.Infrastructure;
-using PrivateGalleryAPI.Models;
-using PrivateGalleryAPI.Models.Etc;
-using PrivateGalleryAPI.Providers;
-using PrivateGalleryAPI.Results;
+using SafeCloud.Common.BindingModels;
+using SafeCloud.Common.ViewModels;
+using SafeCloud.DAL.Entities;
+using SafeCloud.DAL.Repositories;
+using SafeCloud.API.Infrastructure;
+using SafeCloud.API.Models;
+using SafeCloud.API.Models.Etc;
+using SafeCloud.API.Providers;
+using SafeCloud.API.Results;
 
-namespace PrivateGalleryAPI.Controllers
+namespace SafeCloud.API.Controllers
 {
     [System.Web.Http.Authorize]
     [System.Web.Http.RoutePrefix("api/Account")]

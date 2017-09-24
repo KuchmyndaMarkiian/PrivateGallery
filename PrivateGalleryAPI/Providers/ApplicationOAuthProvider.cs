@@ -9,10 +9,10 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using PrivateGallery.DAL.Entities;
-using PrivateGalleryAPI.Models;
+using SafeCloud.DAL.Entities;
+using SafeCloud.API.Models;
 
-namespace PrivateGalleryAPI.Providers
+namespace SafeCloud.API.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {

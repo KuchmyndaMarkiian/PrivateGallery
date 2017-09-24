@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using PrivateGallery.DAL.Entities;
+using SafeCloud.DAL.Entities;
 
-namespace PrivateGallery.DAL.Contexts
+namespace SafeCloud.DAL.Contexts
 {
     public class PrivateGalleryDbContext : IdentityDbContext<User>
     {

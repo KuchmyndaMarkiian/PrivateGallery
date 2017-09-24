@@ -7,10 +7,10 @@ using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using PrivateGallery.Common.BindingModels;
-using PrivateGallery.Tests;
+using SafeCloud.Common.BindingModels;
+using SafeCloud.Tests;
 
-namespace PrivateGallery.Tests
+namespace SafeCloud.Tests
 {
     [TestClass]
     public partial class UnitTests
