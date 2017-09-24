@@ -27,7 +27,6 @@ namespace PrivateGallery.DAL.Repositories
                 {
                     instance.FileRepository.Delete(x => x.Id == list.First().Id);
                 }
-                Context.Attributes.Remove(found.Attribute);
                 Context.Folders.Remove(found);
             }
         }

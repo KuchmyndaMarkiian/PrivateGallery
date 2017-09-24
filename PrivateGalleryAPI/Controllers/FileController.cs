@@ -14,7 +14,6 @@ using PrivateGallery.Common.BindingModels;
 using PrivateGallery.DAL.Entities;
 using PrivateGallery.DAL.Infrastructure;
 using PrivateGalleryAPI.Infrastructure;
-using Attribute = PrivateGallery.DAL.Entities.Attribute;
 
 namespace PrivateGalleryAPI.Controllers
 {
@@ -37,9 +36,9 @@ namespace PrivateGalleryAPI.Controllers
                 return new HttpResponseMessage(HttpStatusCode.NoContent);
             }
             var user = await UnitOfWork.UserRepository.GetAsync(x => x.UserName == userName);
-            if (user != null && user.Galleries.Any(g => g.Header == gallery && g.Files.Any(p => p.Header == photo)))
+            if (user != null && user.Folders.Any(g => g.Header == gallery && g.Files.Any(p => p.Header == photo)))
             {
-                var gal = user.Galleries.FirstOrDefault(g => g.Header == gallery);
+                var gal = user.Folders.FirstOrDefault(g => g.Header == gallery);
                 var found = gal.Files.FirstOrDefault(p => p.Header == photo);
                 var file = $"{main}{found.Path.TrimStart('~')}";
                 return await StreamManager.GetStreamContent(file);
@@ -50,7 +49,7 @@ namespace PrivateGalleryAPI.Controllers
         [System.Web.Http.HttpGet]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [ValidateAntiForgeryToken]
-        [ResponseType(typeof(PictureBindingModel))]
+        [ResponseType(typeof(FileBindingModel))]
         public async Task<IHttpActionResult> Get
             (string gallery, string photo)
         {
@@ -60,17 +59,17 @@ namespace PrivateGalleryAPI.Controllers
                 return NotFound();
             }
             var user = await UnitOfWork.UserRepository.GetAsync(x => x.UserName == userName);
-            if (user != null && user.Galleries.Any(g => g.Header == gallery && g.Files.Any(p => p.Header == photo)))
+            if (user != null && user.Folders.Any(g => g.Header == gallery && g.Files.Any(p => p.Header == photo)))
             {
-                var gal = user.Galleries.FirstOrDefault(g => g.Header == gallery);
+                var gal = user.Folders.FirstOrDefault(g => g.Header == gallery);
                 var found = gal.Files.FirstOrDefault(p => p.Header == photo);
-                return Ok(new PictureBindingModel
+                return Ok(new FileBindingModel
                 {
                     Name = found.Header,
                     DateTime = found.CreatedDate.Value,
                     Description = found.Description,
                     Geolocation = found.Geolocation,
-                    Attribute = new AttributeBindingModel() { HasPublicAccess = found.Attribute.HasPublicAccess}
+                    
                 });
             }
             return NotFound();
@@ -82,7 +81,7 @@ namespace PrivateGalleryAPI.Controllers
         [ValidateAntiForgeryToken]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> Put(
-            [Bind(Exclude = nameof(PictureBindingModel.NewName))] PictureBindingModel model)
+            [Bind(Exclude = nameof(FileBindingModel.NewName))] FileBindingModel model)
         {
             try
             {
@@ -106,7 +105,7 @@ namespace PrivateGalleryAPI.Controllers
         [ValidateAntiForgeryToken]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> Patch(
-            [Bind(Exclude = nameof(PictureBindingModel.DateTime))] PictureBindingModel model)
+            [Bind(Exclude = nameof(FileBindingModel.DateTime))] FileBindingModel model)
         {
             var func = new Func<Folder, bool>(gallery => gallery.Id == model.Id);
             try
@@ -116,8 +115,8 @@ namespace PrivateGalleryAPI.Controllers
                     return BadRequest(ModelState);
                 }
                 var user = await UnitOfWork.UserRepository.GetAsync(x => x.UserName == User.Identity.Name);
-                if (!user.Galleries.Any(func) ||
-                    user.Galleries.Any(x => x.Files.Any(p => p.Id == model.Id)))
+                if (!user.Folders.Any(func) ||
+                    user.Folders.Any(x => x.Files.Any(p => p.Id == model.Id)))
                 {
                     return NotFound();
                 }
@@ -127,7 +126,7 @@ namespace PrivateGalleryAPI.Controllers
                 editedItem.CreatedDate = model.DateTime;
                 editedItem.Description = model.Description;
                 editedItem.Geolocation = model.Geolocation;
-                editedItem.Attribute = model.Attribute == null ? new Attribute() : new Attribute {HasPublicAccess = model.Attribute.HasPublicAccess};
+                editedItem.AttributeHasPublicAccess = model.AttributeHasPublicAccess;
                 UnitOfWork.FileRepository.Update(editedItem);
                 UnitOfWork.SaveAsync();
                 return Ok("Updated");
@@ -143,7 +142,7 @@ namespace PrivateGalleryAPI.Controllers
         [ValidateAntiForgeryToken]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> Delete(
-            [FromBody] [Bind(Include = "Id")] PictureBindingModel model)
+            [FromBody] [Bind(Include = "Id")] FileBindingModel model)
         {
             try
             {

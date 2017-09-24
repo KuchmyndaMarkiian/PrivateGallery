@@ -34,7 +34,6 @@ namespace PrivateGallery.DAL.Repositories
                         System.IO.File.Delete(file);
                     }
                 }
-                Context.Attributes.Remove(found.Attribute);
                 Context.Files.Remove(found);
             }
         }

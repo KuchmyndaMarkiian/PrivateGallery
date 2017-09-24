@@ -16,8 +16,7 @@ namespace PrivateGallery.DAL.Entities
         public string Description { get; set; }
         public DateTime? CreatedDate { get; set; }
 
-        [Required]
-        public virtual Attribute Attribute { get; set; } = new Attribute();
+        public bool AttributeHasPublicAccess { get; set; } = false;
 
         [Required]
         public virtual User OwnerUser { get; set; }

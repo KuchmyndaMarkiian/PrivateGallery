@@ -3,7 +3,7 @@ using System.IO;
 
 namespace PrivateGallery.Common.BindingModels
 {
-    public class PictureBindingModel:GalleryBindindModel
+    public class FileBindingModel:FolderBindindModel
     {
         [Microsoft.Build.Framework.Required]
         [StringLength(100, ErrorMessage = "Empty geolocation for creating object", MinimumLength = 1)]

@@ -13,8 +13,7 @@ namespace PrivateGallery.DAL.Entities
         public string Description { get; set; }
         public DateTime? CreatedDate { get; set; }
 
-        [Required]
-        public virtual Attribute Attribute { get; set; } = new Attribute();
+        public bool AttributeHasPublicAccess { get; set; } = false;
         public string Path { get; set; }
         public string Geolocation { get; set; }
         //[Required

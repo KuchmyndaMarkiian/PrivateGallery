@@ -10,6 +10,7 @@ using PrivateGallery.Common.BindingModels;
 using PrivateGallery.DAL.Entities;
 using PrivateGallery.DAL.Infrastructure;
 using File = System.IO.File;
+using FileStructure = PrivateGallery.Common.BindingModels.FileStructure;
 
 namespace PrivateGalleryAPI.Controllers
 {
@@ -21,22 +22,23 @@ namespace PrivateGalleryAPI.Controllers
         [System.Web.Http.HttpGet]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [ValidateAntiForgeryToken]
-        [ResponseType(typeof(GalleryBindindModel))]
-        public async Task<IHttpActionResult> Get(string name)
+        [ResponseType(typeof(FolderBindindModel))]
+        public async Task<IHttpActionResult> Get(string id)
         {
             var user = await UnitOfWork.UserRepository.GetAsync(x => x.UserName == User.Identity.Name);
             if (user == null)
             {
                 return InternalServerError();
             }
-            if (user.Galleries.Any(x => x.Header == name))
+            if (user.Folders.Any(x => x.Id == id))
             {
-                var found = user.Galleries.FirstOrDefault(x => x.Header == name);
-                return Ok(new GalleryBindindModel
+                var found = user.Folders.FirstOrDefault(x => x.Id == id);
+                return Ok(new FolderBindindModel
                 {
-                    Name = name,
+                    Name = found.Header,
+                    Id = id,
                     DateTime = found.CreatedDate.Value,
-                    Attribute = new AttributeBindingModel() {HasPublicAccess = found.Attribute.HasPublicAccess}
+                    AttributeHasPublicAccess=found.AttributeHasPublicAccess
                 });
             }
             return NotFound();
@@ -47,7 +49,7 @@ namespace PrivateGalleryAPI.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [ValidateAntiForgeryToken]
         [System.Web.Http.Route("List")]
-        [ResponseType(typeof(ICollection<GalleryStructure>))]
+        [ResponseType(typeof(ICollection<FileStructure>))]
         public async Task<IHttpActionResult> List()
         {
             var user = await UnitOfWork.UserRepository.GetAsync(x => x.UserName == User.Identity.Name);
@@ -55,20 +57,24 @@ namespace PrivateGalleryAPI.Controllers
             {
                 return InternalServerError();
             }
-            if (user.Galleries.Any())
+            if (user.Folders.Any())
             {
-                return Ok(user.Galleries.Select(g => new GalleryStructure
+                return Ok(user.Folders.Select(g => new FileStructure
                 {
                     Id = g.Id,
+                    ParentId = g.ParentFolder?.Id,
                     Name = g.Header,
                     DateTime = g.CreatedDate.Value,
-                    Pictures = g.Files.Select(p => new PictureBindingModel
+                    AttributeHasPublicAccess = g.AttributeHasPublicAccess,
+                    Files = g.Files.Select(p => new FileBindingModel
                     {
                         Id = p.Id,
+                        ParentId = p.ParentFolder?.Id,
                         Name = p.Header,
                         DateTime = p.CreatedDate.Value,
                         Description = p.Description,
-                        Geolocation = p.Geolocation
+                        Geolocation = p.Geolocation,
+                        AttributeHasPublicAccess = p.AttributeHasPublicAccess,
                     })
                 }));
             }
@@ -81,7 +87,7 @@ namespace PrivateGalleryAPI.Controllers
         [ValidateAntiForgeryToken]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> Put(
-            [Bind(Exclude = nameof(GalleryBindindModel.NewName))] GalleryBindindModel model)
+            [Bind(Exclude = nameof(FolderBindindModel.NewName))] FolderBindindModel model)
         {
             try
             {
@@ -98,7 +104,7 @@ namespace PrivateGalleryAPI.Controllers
                     UnitOfWork.SaveAsync();
                     return Ok(newItem.Id);
                 }
-                 return InternalServerError();
+                return InternalServerError();
             }
             catch (Exception e)
             {
@@ -112,7 +118,7 @@ namespace PrivateGalleryAPI.Controllers
         [ValidateAntiForgeryToken]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> Patch(
-            [Bind(Exclude = nameof(GalleryBindindModel.DateTime))] GalleryBindindModel model)
+            [Bind(Exclude = nameof(FolderBindindModel.DateTime))] FolderBindindModel model)
         {
             try
             {
@@ -125,7 +131,7 @@ namespace PrivateGalleryAPI.Controllers
                 {
                     return InternalServerError();
                 }
-                if (user.Galleries.Any(x => x.Id == model.Id))
+                if (user.Folders.Any(x => x.Id == model.Id))
                 {
                     var found = await UnitOfWork.FolderRepository.GetAsync(gallery => gallery.Id == model.Id);
                     found.Header = model.NewName;
@@ -147,17 +153,21 @@ namespace PrivateGalleryAPI.Controllers
         [ValidateAntiForgeryToken]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> Delete(
-            [FromBody] [Bind(Include = nameof(GalleryBindindModel.Id))] GalleryBindindModel model)
+             [Bind(Include = nameof(FolderBindindModel.Id))] FolderBindindModel model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 string username = User.Identity.Name;
                 var user = UnitOfWork.UserRepository.Get(x => x.UserName == username);
                 if (user == null)
                 {
-                    return BadRequest("Doesn`t authorized");
+                    return BadRequest("Not authorized");
                 }
-                if (user.Galleries.Any(x => x.Id == model.Id))
+                if (user.Folders.Any(x => x.Id == model.Id))
                 {
                     UnitOfWork.FolderRepository.Delete(gallery => gallery.Id == model.Id);
                     UnitOfWork.SaveAsync();

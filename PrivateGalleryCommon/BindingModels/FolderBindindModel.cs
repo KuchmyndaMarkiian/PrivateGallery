@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PrivateGallery.Common.BindingModels
 {
-    public class GalleryBindindModel
+    public class FolderBindindModel
     {
         public string Id { get; set; }
         public string ParentId { get; set; }
@@ -18,7 +18,6 @@ namespace PrivateGallery.Common.BindingModels
         public string Description { get; set; }
         [Microsoft.Build.Framework.Required]
         public DateTime DateTime { get; set; }
-        [Required]
-        public AttributeBindingModel Attribute { get; set; }=new AttributeBindingModel();
+        public bool AttributeHasPublicAccess { get; set; }= false;
     }
 }
