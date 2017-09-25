@@ -11,9 +11,6 @@ namespace SafeCloud.Common.BindingModels
         [StringLength(100,ErrorMessage = "Empty header for creating object",MinimumLength = 1)]
         public string Name { get; set; }
         [Microsoft.Build.Framework.Required]
-        [StringLength(100, ErrorMessage = "Empty header for creating object", MinimumLength = 1)]
-        public string NewName { get; set; }
-        [Microsoft.Build.Framework.Required]
         [StringLength(100, ErrorMessage = "Empty description for creating object", MinimumLength = 1)]
         public string Description { get; set; }
         [Microsoft.Build.Framework.Required]

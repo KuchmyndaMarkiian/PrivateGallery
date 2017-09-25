@@ -16,7 +16,7 @@ namespace SafeCloud.DAL.Entities
         public bool AttributeHasPublicAccess { get; set; } = false;
         public string Path { get; set; }
         public string Geolocation { get; set; }
-        //[Required
+        public virtual User OwnerUser { get; set; }
         public virtual Folder ParentFolder { get; set; }
     }
 }

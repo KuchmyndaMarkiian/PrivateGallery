@@ -81,7 +81,7 @@ namespace SafeCloud.API.Controllers
         [ValidateAntiForgeryToken]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> Put(
-            [Bind(Exclude = nameof(FileBindingModel.NewName))] FileBindingModel model)
+             FileBindingModel model)
         {
             try
             {
@@ -89,10 +89,23 @@ namespace SafeCloud.API.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                var newItem = DalEntityCreator.CreatePhotoEntity(model);
-                UnitOfWork.FileRepository.Create(newItem);
-                UnitOfWork.SaveAsync();
-                return Ok(newItem.Id);
+                var user = await UnitOfWork.UserRepository.GetAsync(x => x.UserName == User.Identity.Name);
+                if (user != null)
+                {
+                    if (!user.Folders.Any())
+                    {
+                        user.Folders.Add(new Folder {Id = user.Id, Header = $"{user.FirstName} {user.LastName}"});
+                    }
+                    var newItem = DalEntityCreator.CreatePhotoEntity(model);
+                    if (newItem.ParentFolder == null)
+                    {
+                        newItem.ParentFolder = user.Folders.FirstOrDefault(x => x.Id == user.Id);
+                    }
+                    UnitOfWork.FileRepository.Create(newItem);
+                    UnitOfWork.SaveAsync();
+                    return Ok(newItem.Id);
+                }
+                return InternalServerError();
             }
             catch (Exception e)
             {
@@ -122,7 +135,7 @@ namespace SafeCloud.API.Controllers
                 }
                 var foundGallery =await UnitOfWork.FolderRepository.GetAsync(gallery => gallery.Id == model.Id && gallery.OwnerUser.UserName == user.UserName);
                 var editedItem = foundGallery.Files.FirstOrDefault(p => p.Id == model.Id);
-                editedItem.Header = model.NewName;
+                editedItem.Header = model.Name;
                 editedItem.CreatedDate = model.DateTime;
                 editedItem.Description = model.Description;
                 editedItem.Geolocation = model.Geolocation;

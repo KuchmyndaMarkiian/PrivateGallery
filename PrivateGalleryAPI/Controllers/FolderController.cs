@@ -7,6 +7,7 @@ using System.Web.Http.Description;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using SafeCloud.Common.BindingModels;
+using SafeCloud.DAL.Entities;
 using SafeCloud.DAL.Infrastructure;
 using FileStructure = SafeCloud.Common.BindingModels.FileStructure;
 
@@ -47,8 +48,8 @@ namespace SafeCloud.API.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [ValidateAntiForgeryToken]
         [System.Web.Http.Route("List")]
-        [ResponseType(typeof(ICollection<FileStructure>))]
-        public async Task<IHttpActionResult> List()
+        [ResponseType(typeof(ICollection<FolderBindindModel>))]
+        public async Task<IHttpActionResult> List(FolderBindindModel model)
         {
             var user = await UnitOfWork.UserRepository.GetAsync(x => x.UserName == User.Identity.Name);
             if (user == null)
@@ -57,24 +58,44 @@ namespace SafeCloud.API.Controllers
             }
             if (user.Folders.Any())
             {
-                return Ok(user.Folders.Select(g => new FileStructure
-                {
-                    Id = g.Id,
-                    ParentId = g.ParentFolder?.Id,
-                    Name = g.Header,
-                    DateTime = g.CreatedDate.Value,
-                    AttributeHasPublicAccess = g.AttributeHasPublicAccess,
-                    Files = g.Files.Select(p => new FileBindingModel
+                Folder main = user.Folders.FirstOrDefault(x => x.Id == user.Id);
+                var structures = new List<FolderBindindModel>(user.Folders.Where(f => f.Id != user.Id)
+                    .Select(g => new FileStructure
                     {
-                        Id = p.Id,
-                        ParentId = p.ParentFolder?.Id,
-                        Name = p.Header,
-                        DateTime = p.CreatedDate.Value,
-                        Description = p.Description,
-                        Geolocation = p.Geolocation,
-                        AttributeHasPublicAccess = p.AttributeHasPublicAccess,
-                    })
-                }));
+                        Id = g.Id,
+                        ParentId = g.ParentFolder?.Id,
+                        Name = g.Header,
+                        DateTime = g.CreatedDate.Value,
+                        AttributeHasPublicAccess = g.AttributeHasPublicAccess,
+                        Files = g.Files.Select(p => new FileBindingModel
+                        {
+                            Id = p.Id,
+                            ParentId = p.ParentFolder?.Id,
+                            Name = p.Header,
+                            DateTime = p.CreatedDate.Value,
+                            Description = p.Description,
+                            Geolocation = p.Geolocation,
+                            AttributeHasPublicAccess = p.AttributeHasPublicAccess,
+                        })
+                    }).ToList());
+                foreach (var file in UnitOfWork.FileRepository.GetAll())
+                {
+                    if (file.ParentFolder.Id == main.Id)
+                    {
+                        structures.Add(
+                            new FileBindingModel
+                            {
+                                Id = file.Id,
+                                ParentId = file.ParentFolder?.Id,
+                                Name = file.Header,
+                                DateTime = file.CreatedDate.Value,
+                                Description= file.Description,
+                                Geolocation = file.Geolocation,
+                                AttributeHasPublicAccess = file.AttributeHasPublicAccess,
+                    });
+                    }
+                }
+                return Ok(structures);
             }
             return NotFound();
         }
@@ -85,7 +106,7 @@ namespace SafeCloud.API.Controllers
         [ValidateAntiForgeryToken]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> Put(
-            [Bind(Exclude = nameof(FolderBindindModel.NewName))] FolderBindindModel model)
+            FolderBindindModel model)
         {
             try
             {
@@ -96,8 +117,16 @@ namespace SafeCloud.API.Controllers
                 var user = await UnitOfWork.UserRepository.GetAsync(x => x.UserName == User.Identity.Name);
                 if (user != null)
                 {
+                    if (!user.Folders.Any())
+                    {
+                        user.Folders.Add(new Folder { Id = user.Id, Header = $"{user.FirstName} {user.LastName}" });
+                    }
                     var newItem = DalEntityCreator.CreateGalleryEntity(model);
                     newItem.OwnerUser = user;
+                    if (newItem.ParentFolder == null)
+                    {
+                        newItem.ParentFolder = user.Folders.FirstOrDefault(x => x.Id == user.Id);
+                    }
                     UnitOfWork.FolderRepository.Create(newItem);
                     UnitOfWork.SaveAsync();
                     return Ok(newItem.Id);
@@ -132,7 +161,8 @@ namespace SafeCloud.API.Controllers
                 if (user.Folders.Any(x => x.Id == model.Id))
                 {
                     var found = await UnitOfWork.FolderRepository.GetAsync(gallery => gallery.Id == model.Id);
-                    found.Header = model.NewName;
+                    found.Header = model.Name;
+                    found.Description = model.Description;
                     UnitOfWork.FolderRepository.Update(found);
                     UnitOfWork.SaveAsync();
                     return Ok("Renamed");
