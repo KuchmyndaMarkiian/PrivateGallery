@@ -60,22 +60,23 @@ namespace SafeCloud.API.Controllers
             {
                 Folder main = user.Folders.FirstOrDefault(x => x.Id == user.Id);
                 var structures = new List<FolderBindindModel>(user.Folders.Where(f => f.Id != user.Id)
-                    .Select(g => new FileStructure
+                    .Select(item => new FileStructure
                     {
-                        Id = g.Id,
-                        ParentId = g.ParentFolder?.Id,
-                        Name = g.Header,
-                        DateTime = g.CreatedDate.Value,
-                        AttributeHasPublicAccess = g.AttributeHasPublicAccess,
-                        Files = g.Files.Select(p => new FileBindingModel
+                        Id = item.Id,
+                        ParentId = item.ParentFolder?.Id,
+                        Name = item.Header,
+                        DateTime = item.CreatedDate.Value,
+                        AttributeHasPublicAccess = item.AttributeHasPublicAccess,
+                        Files = item.Files.Select(file => new FileBindingModel
                         {
-                            Id = p.Id,
-                            ParentId = p.ParentFolder?.Id,
-                            Name = p.Header,
-                            DateTime = p.CreatedDate.Value,
-                            Description = p.Description,
-                            Geolocation = p.Geolocation,
-                            AttributeHasPublicAccess = p.AttributeHasPublicAccess,
+                            Id = file.Id,
+                            ParentId = file.ParentFolder?.Id,
+                            Name = file.Header,
+                            DateTime = file.CreatedDate.Value,
+                            Description = file.Description,
+                            Size = file.Size,
+                            Geolocation = file.Geolocation,
+                            AttributeHasPublicAccess = file.AttributeHasPublicAccess,
                         })
                     }).ToList());
                 foreach (var file in UnitOfWork.FileRepository.GetAll())
@@ -91,11 +92,98 @@ namespace SafeCloud.API.Controllers
                                 DateTime = file.CreatedDate.Value,
                                 Description= file.Description,
                                 Geolocation = file.Geolocation,
+                                Size = file.Size,
                                 AttributeHasPublicAccess = file.AttributeHasPublicAccess,
                     });
                     }
                 }
                 return Ok(structures);
+            }
+            return NotFound();
+        }
+        // GET api/Folder/Structure
+        [System.Web.Http.HttpGet]
+        [RequireHttps]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [ValidateAntiForgeryToken]
+        [System.Web.Http.Route("Structure")]
+        [ResponseType(typeof(ICollection<FolderBindindModel>))]
+        public async Task<IHttpActionResult> Structure([FromUri][Bind(Include = nameof(FolderBindindModel.Id))]FolderBindindModel model)
+        {
+            var user = await UnitOfWork.UserRepository.GetAsync(x => x.UserName == User.Identity.Name);
+            if (user == null)
+            {
+                return InternalServerError();
+            }
+            String folderId = model.Id??user.Id;
+            if (user.Folders.Any(x=>x.Id==folderId))
+            {
+                Folder foundFolder = UnitOfWork.FolderRepository.Get(x => x.Id == folderId && x.OwnerUser==user);
+                var structure= new LinkedList<FolderBindindModel>();
+                foreach (var item in UnitOfWork.FolderRepository.GetAll(f=>f.ParentFolder==foundFolder))
+                {
+                    structure.AddLast(new FolderBindindModel
+                    {
+                        Id = item.Id,
+                        ParentId = item.ParentFolder?.Id,
+                        Name = item.Header,
+                        DateTime = item.CreatedDate.Value,
+                        AttributeHasPublicAccess = item.AttributeHasPublicAccess
+                    });
+                }
+                foundFolder.Files.ForEach(file =>
+                {
+                    structure.AddLast(new FileBindingModel
+                    {
+                        Id = file.Id,
+                        ParentId = file.ParentFolder?.Id,
+                        Name = file.Header,
+                        DateTime = file.CreatedDate.Value,
+                        Description = file.Description,
+                        Size = file.Size,
+                        Geolocation = file.Geolocation,
+                        AttributeHasPublicAccess = file.AttributeHasPublicAccess,
+                    });
+                });
+                //var structures = new List<FolderBindindModel>(user.Folders.Where(f => f.Id != user.Id)
+                //    .Select(item => new FileStructure
+                //    {
+                //        Id = item.Id,
+                //        ParentId = item.ParentFolder?.Id,
+                //        Name = item.Header,
+                //        DateTime = item.CreatedDate.Value,
+                //        AttributeHasPublicAccess = item.AttributeHasPublicAccess,
+                //        Files = item.Files.Select(file => new FileBindingModel
+                //        {
+                //            Id = file.Id,
+                //            ParentId = file.ParentFolder?.Id,
+                //            Name = file.Header,
+                //            DateTime = file.CreatedDate.Value,
+                //            Description = file.Description,
+                //            Size = file.Size,
+                //            Geolocation = file.Geolocation,
+                //            AttributeHasPublicAccess = file.AttributeHasPublicAccess,
+                //        })
+                //    }).ToList());
+                //foreach (var file in UnitOfWork.FileRepository.GetAll())
+                //{
+                //    if (file.ParentFolder.Id == foundFolder.Id)
+                //    {
+                //        structures.Add(
+                //            new FileBindingModel
+                //            {
+                //                Id = file.Id,
+                //                ParentId = file.ParentFolder?.Id,
+                //                Name = file.Header,
+                //                DateTime = file.CreatedDate.Value,
+                //                Description = file.Description,
+                //                Geolocation = file.Geolocation,
+                //                Size = file.Size,
+                //                AttributeHasPublicAccess = file.AttributeHasPublicAccess,
+                //            });
+                //    }
+                //}
+                return Ok(structure);
             }
             return NotFound();
         }

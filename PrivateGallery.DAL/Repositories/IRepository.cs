@@ -9,10 +9,10 @@ namespace SafeCloud.DAL.Repositories
     public interface IRepository<T>:IDisposable where T:class
     {
         /// <summary>
-        /// Gets all objects by the preset type
+        /// Gets all objects by the preset type with conctere condition
         /// </summary>
         /// <returns></returns>
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(Func<T,bool> func = null);
         /// <summary>
         /// Gets the concrete object by the preset type through some condition(-s)
         /// </summary>

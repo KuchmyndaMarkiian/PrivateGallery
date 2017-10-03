@@ -205,6 +205,7 @@ namespace SafeCloud.API.Controllers
                                 if (user != null && found!=null)
                                 {
                                     found.Path = "~\\" + filePath;
+                                    found.Size = info.Length;
                                     UnitOfWork.FileRepository.Update(found);
                                 }
                                 UnitOfWork.Save();

@@ -14,6 +14,7 @@ namespace SafeCloud.DAL.Entities
         public DateTime? CreatedDate { get; set; }
 
         public bool AttributeHasPublicAccess { get; set; } = false;
+        public long Size { get; set; } = 0;
         public string Path { get; set; }
         public string Geolocation { get; set; }
         public virtual User OwnerUser { get; set; }

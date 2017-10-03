@@ -30,7 +30,8 @@ namespace SafeCloud.DAL.Repositories
                 Context.Folders.Remove(found);
             }
         }
-        public override IEnumerable<Folder> GetAll() => Context.Folders;
+
+        public override IEnumerable<Folder> GetAll(Func<Folder, bool> func = null) => func == null ? Context.Folders : Context.Folders.Where(func);
         public override Folder Get(Func<Folder, bool> func) => Context.Folders.FirstOrDefault(func);
         public override Task<Folder> GetAsync(Expression<Func<Folder, bool>> func)=> Context.Folders.FirstOrDefaultAsync(func);
         public override void Create(Folder item) => Context.Folders.Add(item);

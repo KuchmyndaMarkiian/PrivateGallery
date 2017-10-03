@@ -26,7 +26,7 @@ namespace SafeCloud.DAL.Repositories
                 Context.Users.Remove(found);
         }
 
-        public override IEnumerable<User> GetAll() => Context.Users;
+        public override IEnumerable<User> GetAll(Func<User, bool> func = null) => func == null ? Context.Users : Context.Users.Where(func);
         public override User Get(Func<User, bool> func) => Context.Users.FirstOrDefault(func);
 
         public override Task<User> GetAsync(Expression<Func<User, bool>> func) => Context.Users.FirstOrDefaultAsync(

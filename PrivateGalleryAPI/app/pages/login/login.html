@@ -1,0 +1,13 @@
+﻿
+<div style="text-align: center;">
+    <h1>Login</h1>
+    <fieldset>
+        <p><label>E-mail</label><input type="email" [(ngModel)] ="email"/></p>
+        <br/>
+        <p><label>Password</label><input type="password" [(ngModel)] ="password"/></p>
+        <br/>
+        <label style="color: red;" [style.display]="state">{{message}}</label>
+        <br/>
+        <button (click)="signIn()">Sign In</button>
+    </fieldset>
+</div>

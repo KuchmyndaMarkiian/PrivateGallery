@@ -37,8 +37,7 @@ namespace SafeCloud.DAL.Repositories
                 Context.Files.Remove(found);
             }
         }
-
-        public override IEnumerable<File> GetAll() => Context.Files;
+        public override IEnumerable<File> GetAll(Func<File, bool> func = null) => func == null ? Context.Files : Context.Files.Where(func);
         public override File Get(Func<File, bool> func) => Context.Files.FirstOrDefault(func);
         public override Task<File> GetAsync(Expression<Func<File, bool>> func)=> Context.Files.FirstOrDefaultAsync(func);
         public override void Create(File item) => Context.Files.Add(item);
