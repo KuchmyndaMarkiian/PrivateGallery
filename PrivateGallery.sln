@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCloud.API", "PrivateGalleryAPI\SafeCloud.API.csproj", "{75A3A1B0-BAB4-4E65-9695-C62AC7532727}"
 EndProject
@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCloud.WebClient", "SafeCloud.WebClient\SafeCloud.WebClient.csproj", "{7ECEB81D-2B54-4CBF-95A1-AD9A0D696B70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCloud.Tests", "PrivateGallery.Tests\SafeCloud.Tests.csproj", "{47C2F084-B50B-4C6B-AB3F-675D07C65FA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7ECEB81D-2B54-4CBF-95A1-AD9A0D696B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ECEB81D-2B54-4CBF-95A1-AD9A0D696B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7ECEB81D-2B54-4CBF-95A1-AD9A0D696B70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47C2F084-B50B-4C6B-AB3F-675D07C65FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47C2F084-B50B-4C6B-AB3F-675D07C65FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47C2F084-B50B-4C6B-AB3F-675D07C65FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47C2F084-B50B-4C6B-AB3F-675D07C65FA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,7 +8,6 @@ using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using SafeCloud.Common.BindingModels;
-using SafeCloud.Tests;
 
 namespace SafeCloud.Tests
 {
@@ -165,7 +164,7 @@ namespace SafeCloud.Tests
         {
             _token = File.ReadAllText(tokenpath);
             FolderId = File.ReadAllText(gallerypath);
-            FolderBindindModel model = new FolderBindindModel {Id = FolderId, NewName = _newName};
+            FolderBindindModel model = new FolderBindindModel {Id = FolderId, Name = _newName};
             Tuple<bool, string> body = OperateData(model, _gallery, new HttpClient(), new HttpMethod("PATCH"));
             Assert.IsTrue(body.Item1);
         }
