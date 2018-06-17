@@ -131,7 +131,7 @@ namespace SafeCloud.Web.Controllers
          System.Web.Http.Route("Register"),
          System.Web.Http.HttpPost,
          RequireHttps]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register([FromBody]RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

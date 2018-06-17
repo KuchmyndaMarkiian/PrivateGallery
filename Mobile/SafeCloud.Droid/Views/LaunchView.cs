@@ -4,7 +4,7 @@ using Android.OS;
 
 namespace SafeCloud.Droid.Views
 {
-    [Activity(Label = "SafeCloud", MainLauncher = true, NoHistory = true)]
+    [Activity(Label = "SafeCloud", MainLauncher = true, NoHistory = true, Theme = "@style/LauncherTheme")]
     public class LauncherView : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
