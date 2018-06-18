@@ -2,7 +2,7 @@
 using Android.OS;
 using Android.Widget;
 using ReactiveUI;
-using SafeCloud.ClientCore.ViewModels;
+using SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure;
 using SafeCloud.Droid.Abstractions.View;
 
 namespace SafeCloud.Droid.Views
@@ -21,16 +21,24 @@ namespace SafeCloud.Droid.Views
 
             ViewModel = new AuthorizationViewModel();
 
-            this.Bind(ViewModel, x => x.Login, x => x.LoginEditView.Text);
-            this.Bind(ViewModel, x => x.Password, x => x.PasswordEditView.Text);
-            this.Bind(ViewModel, x => x.FullContent, x => x.ResultTextView.Text);
-
             base.OnCreate(savedInstanceState);
         }
-        
+
+        protected override void BindProperties()
+        {
+            this.Bind(ViewModel, x => x.LoginModel.Login, x => x.LoginEditView.Text);
+            this.Bind(ViewModel, x => x.LoginModel.Password, x => x.PasswordEditView.Text);
+            
+        }
+
+        protected override void BindCommands()
+        {
+            this.BindCommand(ViewModel, x => x.LoginCommand, x => x.LoginButton);
+        }
+
 
         public EditText LoginEditView => this.GetControl<EditText>();
         public EditText PasswordEditView => this.GetControl<EditText>();
-        public TextView ResultTextView => this.GetControl<TextView>();
+        public Button LoginButton => this.GetControl<Button>();
     }
 }

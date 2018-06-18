@@ -1,8 +1,8 @@
 ﻿using SafeCloud.ClientCore.Abstractions.ViewModel;
 
-namespace SafeCloud.ClientCore.ViewModels
+namespace SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure
 {
-    public class ProfileViewModel : ReactiveViewModel
+    public class RegistrationViewModel : ReactiveModel
     {
         public override void Initialize()
         {

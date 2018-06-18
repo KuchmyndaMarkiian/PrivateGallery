@@ -1,8 +1,8 @@
 ﻿using SafeCloud.ClientCore.Abstractions.ViewModel;
 
-namespace SafeCloud.ClientCore.ViewModels
+namespace SafeCloud.ClientCore.MVVM.ViewModels.UserStructure
 {
-    public class FileListViewModel : ReactiveViewModel
+    public class ProfileViewModel : ReactiveModel
     {
         public override void Initialize()
         {

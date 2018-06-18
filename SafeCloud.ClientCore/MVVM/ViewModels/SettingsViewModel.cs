@@ -1,8 +1,8 @@
 ﻿using SafeCloud.ClientCore.Abstractions.ViewModel;
 
-namespace SafeCloud.ClientCore.ViewModels
+namespace SafeCloud.ClientCore.MVVM.ViewModels
 {
-    public class RegistrationViewModel : ReactiveViewModel
+    public class SettingsViewModel : ReactiveModel
     {
         public override void Initialize()
         {

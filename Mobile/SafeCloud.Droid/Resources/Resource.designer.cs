@@ -1969,6 +1969,9 @@ namespace SafeCloud.Droid
 			// aapt resource value: 0x7f060026
 			public const int FUNCTION = 2131099686;
 			
+			// aapt resource value: 0x7f060068
+			public const int LoginButton = 2131099752;
+			
 			// aapt resource value: 0x7f060066
 			public const int LoginEditView = 2131099750;
 			
@@ -1977,9 +1980,6 @@ namespace SafeCloud.Droid
 			
 			// aapt resource value: 0x7f060067
 			public const int PasswordEditView = 2131099751;
-			
-			// aapt resource value: 0x7f060068
-			public const int ResultTextView = 2131099752;
 			
 			// aapt resource value: 0x7f060028
 			public const int SHIFT = 2131099688;

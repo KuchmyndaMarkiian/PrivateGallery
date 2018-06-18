@@ -8,8 +8,8 @@ namespace SafeCloud.Console
     {
         private static void Main(string[] args)
         {
-            //LoginTest();
-            RegisterTest();
+            LoginTest();
+            //RegisterTest();
 
             System.Console.ReadKey();
         }
@@ -24,7 +24,7 @@ namespace SafeCloud.Console
             var request = new
             {
                 grant_type = "password",
-                username = "harrisonford@gmail.com",
+                username = "mark0611@gmail.com",
                 password = "Mark95!"
             };
 

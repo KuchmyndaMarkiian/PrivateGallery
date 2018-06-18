@@ -9,8 +9,13 @@ namespace SafeCloud.Droid.Abstractions.View
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            BindProperties();
             base.OnCreate(savedInstanceState);
             Initialize();
+            BindCommands();
         }
+
+        protected abstract void BindProperties();
+        protected abstract void BindCommands();
     }
 }

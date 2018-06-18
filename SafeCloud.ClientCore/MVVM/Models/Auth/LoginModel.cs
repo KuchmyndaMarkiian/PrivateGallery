@@ -4,12 +4,12 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SafeCloud.ClientCore.Abstractions.ViewModel;
 
-namespace SafeCloud.ClientCore.ViewModels
+namespace SafeCloud.ClientCore.MVVM.Models.Auth
 {
-    public class AuthorizationViewModel : ReactiveViewModel
+    public class LoginModel : ReactiveModel
     {
         public override void Initialize() => this.WhenAnyValue(x => x.Login, x => x.Password,
-                (login, password) => $"{login}({string.Join("", password.Select(x => "*"))}")
+                (login, password) => $"{login}({string.Join("", password.Select(x => "*"))})")
             .Subscribe(s => FullContent = s);
 
         [Reactive]
@@ -19,6 +19,6 @@ namespace SafeCloud.ClientCore.ViewModels
         public string Password { get; set; } = "";
 
         [Reactive]
-        public string FullContent { get; set; } = "";
+        public string FullContent { get; set; }
     }
 }

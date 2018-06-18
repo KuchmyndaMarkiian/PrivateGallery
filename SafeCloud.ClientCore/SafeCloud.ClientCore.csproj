@@ -44,16 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\ViewModel\ReactiveViewModel.cs" />
+    <Compile Include="Abstractions\ViewModel\ReactiveModel.cs" />
     <Compile Include="Abstractions\Infrastructure\RestClientBase.cs" />
     <Compile Include="Infrastructure\RestClient.cs" />
+    <Compile Include="MVVM\Models\Auth\LoginModel.cs" />
+    <Compile Include="MVVM\ViewModels\AuthStructure\AuthorizationViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\AuthStructure\RegistrationViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\FileInfoStructure\MapViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\FileStructure\FileListViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\UserStructure\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AuthorizationViewModel.cs" />
-    <Compile Include="ViewModels\FileListViewModel.cs" />
-    <Compile Include="ViewModels\MapViewModel.cs" />
-    <Compile Include="ViewModels\ProfileViewModel.cs" />
-    <Compile Include="ViewModels\RegistrationViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fody">
@@ -72,5 +73,6 @@
   <ItemGroup>
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
