@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Autofac;
 using SafeCloud.ClientCore.Abstractions;
+using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure;
+using SafeCloud.ClientCore.MVVM.ViewModels.FileStructure;
 using SafeCloud.Droid.Views;
 
 namespace SafeCloud.Droid.Facade
@@ -26,6 +28,8 @@ namespace SafeCloud.Droid.Facade
         protected override void SetupMapping()
         {
             ViewMapper.Add(typeof(AuthorizationViewModel), typeof(AuthorizationView));
+            ViewMapper.Add(typeof(LauncherViewModel), typeof(LauncherView));
+            ViewMapper.Add(typeof(FileListViewModel), typeof(MainView));
         }
         
     }

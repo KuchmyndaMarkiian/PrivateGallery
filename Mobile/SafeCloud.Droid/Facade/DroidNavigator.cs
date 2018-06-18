@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Newtonsoft.Json;
+using Android.Widget;
 using SafeCloud.ClientCore.Abstractions;
 
 namespace SafeCloud.Droid.Facade
@@ -18,7 +17,7 @@ namespace SafeCloud.Droid.Facade
             if (PlatformNavigationController == null)
                 throw new NullReferenceException("PlatformNavigationController == null");
 
-            var newVm = Activator.CreateInstance<TViewModel>();
+            var newVm = ApplicationFacade.Facade.CreateViewModel<TViewModel>();
             newVm?.Initialize();
             initViewAction?.Invoke(newVm);
 
@@ -31,6 +30,12 @@ namespace SafeCloud.Droid.Facade
 
             CurrenViewModel = newVm;
             return Task.FromResult(newVm);
+        }
+
+        public Task ShowErrorMessage(string s)
+        {
+            Toast.MakeText(PlatformNavigationController, s, ToastLength.Short).Show();
+            return Task.CompletedTask;
         }
 
         public Activity PlatformNavigationController { get; set; }

@@ -5,7 +5,7 @@
 
   <!-- Кастомная AppTheme.Launcher. Устанавливает в качестве фона вашу drawable -->
   <style name="LauncherTheme">
-    <item name="android:windowBackground">@drawable/ic_cloud_computing</item>
+    <!--<item name="android:windowBackground">@drawable/ic_cloud_computing</item>-->
     <!-- для Android 5+ вы можете поменять цвет colorPrimaryDark, чтобы соответствовать цвету windowBackground -->
     <!-- <item name="colorPrimaryDark">@android:color/white</item> -->
   </style>

@@ -4,6 +4,7 @@ using ReactiveUI.Fody.Helpers;
 using SafeCloud.ClientCore.Abstractions;
 using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.ClientCore.MVVM.Models.Auth;
+using SafeCloud.ClientCore.MVVM.ViewModels.FileStructure;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure
 {
@@ -25,8 +26,18 @@ namespace SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure
 
                 IRestClient client = new RestClient();
                 await client.Post("http://192.168.10.187:57641/Token", null, request, ContentType.Form,
-                    async message => System.Console.WriteLine($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}"),
-                    async message => System.Console.WriteLine($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}"));
+                    async message =>
+                    {
+                        System.Console.WriteLine($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}");
+
+                        await ApplicationFacade.Facade.Navigator.RedirectTo<FileListViewModel>();
+                    },
+                    async message =>
+                    {
+                        System.Console.WriteLine($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}");
+
+                        await ApplicationFacade.Facade.Navigator.ShowErrorMessage($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}");
+                    });
             });
         }
 

@@ -10,6 +10,7 @@ namespace SafeCloud.Console
         {
             LoginTest();
             //RegisterTest();
+            AccountInfoTest();
 
             System.Console.ReadKey();
         }
@@ -56,6 +57,28 @@ namespace SafeCloud.Console
             IRestClient clientBase = new RestClient();
 
             await clientBase.Post("http://localhost:57641/api/Account/Register", null, request, ContentType.Form,
+                async message => System.Console.WriteLine(await message.Content.ReadAsStringAsync()),
+                async message => System.Console.WriteLine(await message.Content.ReadAsStringAsync()));
+
+            LogFinish();
+        }
+
+        private static async void AccountInfoTest()
+        {
+            LogStart();
+
+            var request = new
+            {
+                Email = "mark0611@gmail.com",
+                Password = "Mark95!",
+                ConfirmPassword = "Mark95!",
+                FirstName = "Harrison",
+                LastName = "Ford"
+            };
+
+            IRestClient clientBase = new RestClient();
+
+            await clientBase.Get("http://localhost:57641/api/Account/AccountInfo", new Headers(){{ "Authorization" ,@"bearer " } }, request, ContentType.Form,
                 async message => System.Console.WriteLine(await message.Content.ReadAsStringAsync()),
                 async message => System.Console.WriteLine(await message.Content.ReadAsStringAsync()));
 

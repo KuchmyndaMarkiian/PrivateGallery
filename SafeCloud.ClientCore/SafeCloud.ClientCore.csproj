@@ -50,6 +50,7 @@
     <Compile Include="Abstractions\RestClientBase.cs" />
     <Compile Include="Infrastructure\RestClient.cs" />
     <Compile Include="MVVM\Models\Auth\LoginModel.cs" />
+    <Compile Include="MVVM\ViewModels\AuthorizationViewModel.cs" />
     <Compile Include="MVVM\ViewModels\AuthStructure\AuthorizationViewModel.cs" />
     <Compile Include="MVVM\ViewModels\AuthStructure\RegistrationViewModel.cs" />
     <Compile Include="MVVM\ViewModels\FileInfoStructure\MapViewModel.cs" />

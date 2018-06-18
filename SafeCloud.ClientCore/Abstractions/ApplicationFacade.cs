@@ -28,5 +28,7 @@ namespace SafeCloud.ClientCore.Abstractions
         {
             return ViewMapper.ContainsKey(typeof(T)) ? ViewMapper[typeof(T)] : null;
         }
+
+        public TViewModel CreateViewModel<TViewModel>() where TViewModel : class => Activator.CreateInstance<TViewModel>();
     }
 }
