@@ -11,10 +11,6 @@ namespace SafeCloud.Droid.Views
     [Activity(Label = "SafeCloud", MainLauncher = true, NoHistory = true, Theme = "@style/LauncherTheme")]
     public class LauncherView : ReactiveView<AuthorizationView>
     {
-        public override void Initialize()
-        {
-        }
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -23,18 +19,14 @@ namespace SafeCloud.Droid.Views
             SetContentView(Resource.Layout.Launcher);
         }
 
-        protected override void BindProperties()
-        {
-        }
-
-        protected override void BindCommands()
-        {
-        }
-
         protected override void OnResume()
         {
             base.OnResume();
-            ApplicationFacade.Facade.Navigator.RedirectTo<AuthorizationViewModel>(removeFromHistory:true);
+            ApplicationFacade.Facade.Navigator.RedirectTo<AuthorizationViewModel>(model =>
+                {
+                    model.LoginModel.Login = "mark0611@gmail.com";
+                    model.LoginModel.Password = "Mark95!";
+                },true);
         }
     }
 }

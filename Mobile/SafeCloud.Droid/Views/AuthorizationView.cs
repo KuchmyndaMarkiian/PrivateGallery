@@ -10,16 +10,10 @@ namespace SafeCloud.Droid.Views
     [Activity(Label = "AuthorizationView")]
     public class AuthorizationView : ReactiveView<AuthorizationViewModel>
     {
-        public override void Initialize()
-        {
-            ViewModel?.Initialize();
-        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             SetContentView(Resource.Layout.Authorization);
-
-            ViewModel = new AuthorizationViewModel();
 
             base.OnCreate(savedInstanceState);
         }

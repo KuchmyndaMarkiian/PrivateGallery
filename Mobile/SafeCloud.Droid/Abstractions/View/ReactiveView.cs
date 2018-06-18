@@ -1,7 +1,5 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
-using Newtonsoft.Json;
 using ReactiveUI;
 using SafeCloud.ClientCore.Abstractions;
 using SafeCloud.Droid.Facade;
@@ -10,34 +8,30 @@ namespace SafeCloud.Droid.Abstractions.View
 {
     public abstract class ReactiveView<TViewModel> : ReactiveActivity<TViewModel> where TViewModel : class
     {
-        public abstract void Initialize();
-
-        protected override void OnCreate(Bundle savedInstanceState)
+        public virtual void Initialize()
         {
             if (ApplicationFacade.Facade == null)
             {
                 DroidFacade.Initialize();
-
-                if (ApplicationFacade.Facade.Navigator is INavigator<Activity> facadeNavigator)
-                    facadeNavigator.PlatformNavigationController = this;
             }
-            else
-            {
-                if (ApplicationFacade.Facade.Navigator is INavigator<Activity> facadeNavigator)
-                    facadeNavigator.PlatformNavigationController = this;
 
-                var value = Intent?.Extras?.GetString("ViewModel");
-                if (!string.IsNullOrEmpty(value))
-                    ViewModel = JsonConvert.DeserializeObject<TViewModel>(value);
-            }
-           
-            BindProperties();
+            if (ApplicationFacade.Facade.Navigator is INavigator<Activity> facadeNavigator)
+                facadeNavigator.PlatformNavigationController = this;
+
+            var model = ApplicationFacade.Facade.Navigator.CurrenViewModel as TViewModel;
+            if (model != null)
+                ViewModel = model;
+        }
+
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
             base.OnCreate(savedInstanceState);
             Initialize();
+            BindProperties();
             BindCommands();
         }
 
-        protected abstract void BindProperties();
-        protected abstract void BindCommands();
+        protected virtual void BindProperties() { }
+        protected virtual void BindCommands() { }
     }
 }

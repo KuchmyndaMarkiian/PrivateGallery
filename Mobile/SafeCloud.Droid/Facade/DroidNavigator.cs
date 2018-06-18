@@ -19,15 +19,13 @@ namespace SafeCloud.Droid.Facade
                 throw new NullReferenceException("PlatformNavigationController == null");
 
             var newVm = Activator.CreateInstance<TViewModel>();
+            newVm?.Initialize();
             initViewAction?.Invoke(newVm);
 
             var newActivity = new Intent(PlatformNavigationController,
                 ApplicationFacade.Facade.GetMappedView<TViewModel>());
-
-            var bundleOptions = new Bundle();
-            bundleOptions.PutString("ViewModel", JsonConvert.SerializeObject(newVm));
-
-            PlatformNavigationController.StartActivity(newActivity, bundleOptions);
+            
+            PlatformNavigationController.StartActivity(newActivity);
             if (removeFromHistory)
                 PlatformNavigationController.Finish();
 
