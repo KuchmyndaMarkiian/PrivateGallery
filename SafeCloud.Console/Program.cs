@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using SafeCloud.ClientCore.Abstractions.Infrastructure;
+using SafeCloud.ClientCore.Abstractions;
 using SafeCloud.ClientCore.Infrastructure;
 
 namespace SafeCloud.Console

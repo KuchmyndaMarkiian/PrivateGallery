@@ -1,8 +1,8 @@
-﻿using SafeCloud.ClientCore.Abstractions.ViewModel;
+﻿using SafeCloud.ClientCore.Abstractions;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels.FileInfoStructure
 {
-    public class MapViewModel : ReactiveModel
+    public class MapViewModel : ReactiveViewModel
     {
         public override void Initialize()
         {

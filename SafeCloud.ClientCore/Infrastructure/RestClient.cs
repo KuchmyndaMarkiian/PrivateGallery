@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using SafeCloud.ClientCore.Abstractions.Infrastructure;
+using SafeCloud.ClientCore.Abstractions;
 
 namespace SafeCloud.ClientCore.Infrastructure
 {
@@ -82,7 +82,8 @@ namespace SafeCloud.ClientCore.Infrastructure
             if (contentType == ContentType.Json)
                 requestMessage.Content = new StringContent(stringBody);
             else
-                requestMessage.Content = new FormUrlEncodedContent(JsonConvert.DeserializeObject<Dictionary<string, string>>(stringBody));
+                requestMessage.Content =
+                    new FormUrlEncodedContent(JsonConvert.DeserializeObject<Dictionary<string, string>>(stringBody));
         }
     }
 }

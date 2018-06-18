@@ -44,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\ViewModel\ReactiveModel.cs" />
-    <Compile Include="Abstractions\Infrastructure\RestClientBase.cs" />
+    <Compile Include="Abstractions\ApplicationFacade.cs" />
+    <Compile Include="Abstractions\Navigator.cs" />
+    <Compile Include="Abstractions\ReactiveObjects.cs" />
+    <Compile Include="Abstractions\RestClientBase.cs" />
     <Compile Include="Infrastructure\RestClient.cs" />
     <Compile Include="MVVM\Models\Auth\LoginModel.cs" />
     <Compile Include="MVVM\ViewModels\AuthStructure\AuthorizationViewModel.cs" />
@@ -57,6 +59,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Autofac">
+      <Version>4.8.1</Version>
+    </PackageReference>
     <PackageReference Include="Fody">
       <Version>3.0.4</Version>
     </PackageReference>

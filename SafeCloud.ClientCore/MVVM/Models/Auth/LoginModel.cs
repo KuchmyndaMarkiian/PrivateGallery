@@ -2,11 +2,11 @@
 using System.Linq;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using SafeCloud.ClientCore.Abstractions.ViewModel;
+using SafeCloud.ClientCore.Abstractions;
 
 namespace SafeCloud.ClientCore.MVVM.Models.Auth
 {
-    public class LoginModel : ReactiveModel
+    public class LoginModel : ReactiveViewModel
     {
         public override void Initialize() => this.WhenAnyValue(x => x.Login, x => x.Password,
                 (login, password) => $"{login}({string.Join("", password.Select(x => "*"))})")
