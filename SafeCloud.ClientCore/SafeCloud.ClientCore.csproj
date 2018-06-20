@@ -48,8 +48,10 @@
     <Compile Include="Abstractions\Navigator.cs" />
     <Compile Include="Abstractions\ReactiveObjects.cs" />
     <Compile Include="Abstractions\RestClientBase.cs" />
+    <Compile Include="Infrastructure\PersistentStorage.cs" />
     <Compile Include="Infrastructure\RestClient.cs" />
     <Compile Include="MVVM\Models\Auth\LoginModel.cs" />
+    <Compile Include="MVVM\Models\SettingModel.cs" />
     <Compile Include="MVVM\ViewModels\AuthorizationViewModel.cs" />
     <Compile Include="MVVM\ViewModels\AuthStructure\AuthorizationViewModel.cs" />
     <Compile Include="MVVM\ViewModels\AuthStructure\RegistrationViewModel.cs" />
@@ -75,9 +77,14 @@
     <PackageReference Include="ReactiveUI.Fody">
       <Version>8.3.1</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugins.Settings">
+      <Version>3.1.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="FodyWeavers.xml" />
+    <None Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

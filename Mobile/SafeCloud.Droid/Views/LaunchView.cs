@@ -5,7 +5,7 @@ using SafeCloud.Droid.Abstractions.View;
 
 namespace SafeCloud.Droid.Views
 {
-    [Activity(Label = "SafeCloud", MainLauncher = true, NoHistory = true, Theme = "@style/LauncherTheme")]
+    [Activity(Label = "SafeCloud", /*MainLauncher = true,*/ NoHistory = true, Theme = "@style/LauncherTheme")]
     public class LauncherView : ReactiveView<LauncherViewModel>
     {
         protected override void OnCreate(Bundle savedInstanceState)

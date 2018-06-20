@@ -1987,6 +1987,12 @@ namespace SafeCloud.Droid
 			// aapt resource value: 0x7f060029
 			public const int SYM = 2131099689;
 			
+			// aapt resource value: 0x7f06007d
+			public const int SaveButton = 2131099773;
+			
+			// aapt resource value: 0x7f06007c
+			public const int ServerEditView = 2131099772;
+			
 			// aapt resource value: 0x7f06006c
 			public const int action0 = 2131099756;
 			
@@ -2161,8 +2167,8 @@ namespace SafeCloud.Droid
 			// aapt resource value: 0x7f06006f
 			public const int media_actions = 2131099759;
 			
-			// aapt resource value: 0x7f06007c
-			public const int message = 2131099772;
+			// aapt resource value: 0x7f06007e
+			public const int message = 2131099774;
 			
 			// aapt resource value: 0x7f060023
 			public const int middle = 2131099683;
@@ -2521,10 +2527,13 @@ namespace SafeCloud.Droid
 			public const int select_dialog_singlechoice_material = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public const int support_simple_spinner_dropdown_item = 2130903088;
+			public const int Settings = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public const int tooltip = 2130903089;
+			public const int support_simple_spinner_dropdown_item = 2130903089;
+			
+			// aapt resource value: 0x7f030032
+			public const int tooltip = 2130903090;
 			
 			static Layout()
 			{
