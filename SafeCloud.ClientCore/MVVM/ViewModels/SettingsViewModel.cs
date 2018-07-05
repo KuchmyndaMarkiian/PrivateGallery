@@ -11,14 +11,14 @@ namespace SafeCloud.ClientCore.MVVM.ViewModels
     public class SettingsViewModel : ReactiveViewModel
     {
         private const string Key = "AppSettings";
+        public IKeyValuePairStorage Storage { get; set; }
 
         public override void Initialize()
         {
-            SettingModel = PersistentStorage.Settings.ReadValue<SettingModel>(Key) ?? new SettingModel();
-
+            SettingModel = (SettingModel) (Storage.Read<SettingModel>(Key) ?? new SettingModel());
             SaveCommand = ReactiveCommand.CreateFromTask(() =>
             {
-                PersistentStorage.Settings.SaveValue(Key, SettingModel);
+                Storage.Write(Key, SettingModel);
                 return Task.CompletedTask;
             });
         }

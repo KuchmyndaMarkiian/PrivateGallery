@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.Widget;
 using SafeCloud.ClientCore.Abstractions;
+using SafeCloud.ClientCore.Infrastructure;
 
 namespace SafeCloud.Droid.Facade
 {
@@ -17,12 +18,12 @@ namespace SafeCloud.Droid.Facade
             if (PlatformNavigationController == null)
                 throw new NullReferenceException("PlatformNavigationController == null");
 
-            var newVm = ApplicationFacade.Facade.CreateViewModel<TViewModel>();
+            var newVm = ApplicationFacade.Facade.Resolver.CreateObject<TViewModel>();
             newVm?.Initialize();
             initViewAction?.Invoke(newVm);
 
             var newActivity = new Intent(PlatformNavigationController,
-                ApplicationFacade.Facade.GetMappedView<TViewModel>());
+                ApplicationFacade.Facade.Resolver.ResolveMappedType<TViewModel>());
             
             PlatformNavigationController.StartActivity(newActivity);
             if (removeFromHistory)

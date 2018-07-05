@@ -131,6 +131,8 @@
     <Compile Include="Abstractions\View\ReactiveView.cs" />
     <Compile Include="Facade\DroidFacade.cs" />
     <Compile Include="Facade\DroidNavigator.cs" />
+    <Compile Include="Infractructure\AndroidAppResolver.cs" />
+    <Compile Include="Infractructure\SharedPreferences.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\AuthorizationView.cs" />

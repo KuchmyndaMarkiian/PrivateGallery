@@ -44,11 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\ApplicationFacade.cs" />
-    <Compile Include="Abstractions\Navigator.cs" />
+    <Compile Include="Infrastructure\ApplicationFacade.cs" />
+    <Compile Include="Infrastructure\AppResolver.cs" />
+    <Compile Include="Infrastructure\Navigator.cs" />
     <Compile Include="Abstractions\ReactiveObjects.cs" />
     <Compile Include="Abstractions\RestClientBase.cs" />
-    <Compile Include="Infrastructure\PersistentStorage.cs" />
+    <Compile Include="Infrastructure\IKeyValuePairStorage.cs" />
+    <Compile Include="Infrastructure\Permissions.cs" />
     <Compile Include="Infrastructure\RestClient.cs" />
     <Compile Include="MVVM\Models\Auth\LoginModel.cs" />
     <Compile Include="MVVM\Models\SettingModel.cs" />
@@ -76,9 +78,6 @@
     </PackageReference>
     <PackageReference Include="ReactiveUI.Fody">
       <Version>8.3.1</Version>
-    </PackageReference>
-    <PackageReference Include="Xam.Plugins.Settings">
-      <Version>3.1.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using Autofac;
+
+namespace SafeCloud.ClientCore.Infrastructure
+{
+    public abstract class AppResolver
+    {
+        protected IContainer Container;
+        protected Dictionary<Type, Type> ViewMapper;
+
+        protected abstract void SetupContainer();
+        protected abstract void SetupMapping();
+
+        protected AppResolver()
+        {
+            SetupContainer();
+            SetupMapping();
+        }
+
+        public T Resolve<T>() => Container.Resolve<T>();
+        public T Resolve<T>(Action<T> initializationAction)
+        {
+            var resolved = Resolve<T>();
+            initializationAction?.Invoke(resolved);
+            return resolved;
+        }
+
+        public Type ResolveMappedType<T>()
+        {
+            if(ViewMapper == null)
+                throw new NullReferenceException();
+            return ViewMapper.ContainsKey(typeof(T)) ? ViewMapper[typeof(T)] : null;
+        }
+
+        public T CreateObject<T>() where T : class => Activator.CreateInstance<T>();
+    }
+}

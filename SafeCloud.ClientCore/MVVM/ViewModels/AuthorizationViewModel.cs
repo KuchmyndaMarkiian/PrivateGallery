@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using ReactiveUI;
 using SafeCloud.ClientCore.Abstractions;
+using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels

@@ -2,6 +2,7 @@
 using Android.OS;
 using Android.Widget;
 using ReactiveUI;
+using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.Droid.Abstractions.View;
 
@@ -12,6 +13,10 @@ namespace SafeCloud.Droid.Views
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            ViewModelReassignation = model =>
+                model.Storage =
+                    ApplicationFacade.Facade.Resolver.Resolve<IKeyValuePairStorage<Activity>>(storage =>
+                        storage.PlatformObject = this);
             SetContentView(Resource.Layout.Settings);
             base.OnCreate(savedInstanceState);
         }

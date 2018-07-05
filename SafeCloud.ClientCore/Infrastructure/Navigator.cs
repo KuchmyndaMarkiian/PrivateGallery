@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using SafeCloud.ClientCore.Abstractions;
 
-namespace SafeCloud.ClientCore.Abstractions
+namespace SafeCloud.ClientCore.Infrastructure
 {
     public interface INavigator
     {

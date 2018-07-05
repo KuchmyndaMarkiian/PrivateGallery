@@ -1,13 +1,16 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.OS;
 using ReactiveUI;
 using SafeCloud.ClientCore.Abstractions;
+using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.Droid.Facade;
 
 namespace SafeCloud.Droid.Abstractions.View
 {
     public abstract class ReactiveView<TViewModel> : ReactiveActivity<TViewModel> where TViewModel : ReactiveViewModel
     {
+        public Action<TViewModel> ViewModelReassignation { get; set; }
         public virtual void Initialize()
         {
             if (ApplicationFacade.Facade == null)
@@ -16,12 +19,12 @@ namespace SafeCloud.Droid.Abstractions.View
             if (ApplicationFacade.Facade.Navigator is INavigator<Activity> facadeNavigator)
                 facadeNavigator.PlatformNavigationController = this;
 
-            var model = ApplicationFacade.Facade.Navigator.CurrenViewModel as TViewModel;
-            if (model != null)
+            if (ApplicationFacade.Facade.Navigator.CurrenViewModel is TViewModel model)
                 ViewModel = model;
             else
             {
-                ViewModel = ApplicationFacade.Facade.CreateViewModel<TViewModel>();
+                ViewModel = ApplicationFacade.Facade.Resolver.CreateObject<TViewModel>();
+                ViewModelReassignation?.Invoke(ViewModel);
                 ViewModel.Initialize();
             }
         }

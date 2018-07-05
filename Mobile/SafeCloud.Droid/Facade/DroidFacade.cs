@@ -1,10 +1,6 @@
-﻿using System.Threading.Tasks;
-using Autofac;
-using SafeCloud.ClientCore.Abstractions;
-using SafeCloud.ClientCore.MVVM.ViewModels;
-using SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure;
-using SafeCloud.ClientCore.MVVM.ViewModels.FileStructure;
-using SafeCloud.Droid.Views;
+﻿using SafeCloud.ClientCore.Abstractions;
+using SafeCloud.ClientCore.Infrastructure;
+using SafeCloud.Droid.Infractructure;
 
 namespace SafeCloud.Droid.Facade
 {
@@ -14,23 +10,13 @@ namespace SafeCloud.Droid.Facade
         {
             if (Facade == null)
             {
-                Facade = new DroidFacade { Navigator = new DroidNavigator() };
+                Facade = new DroidFacade();
                 Facade.Initalize();
             }
         }
 
-        protected override void SetupContainer()
+        public DroidFacade() : base(new AndroidAppResolver())
         {
-            var builder = new ContainerBuilder();
-
         }
-
-        protected override void SetupMapping()
-        {
-            ViewMapper.Add(typeof(AuthorizationViewModel), typeof(AuthorizationView));
-            ViewMapper.Add(typeof(LauncherViewModel), typeof(LauncherView));
-            ViewMapper.Add(typeof(FileListViewModel), typeof(MainView));
-        }
-        
     }
 }
