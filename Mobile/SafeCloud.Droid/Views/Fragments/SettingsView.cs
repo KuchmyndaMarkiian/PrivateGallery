@@ -6,23 +6,27 @@ using ReactiveUI;
 using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.Droid.Abstractions.View;
+using SafeCloud.Droid.Infractructure;
 
 namespace SafeCloud.Droid.Views
 {
     public class SettingsView : RxFragment<SettingsViewModel>
     {
-        public SettingsView()
-        {
-            Initialize();
-            ViewModelInitialize = model =>
-                model.Storage = ApplicationFacade.Facade.Resolver.Resolve<IKeyValuePairStorage<Activity>>(storage =>
-                        storage.PlatformObject = Activity);
-        }
-
+        private View currentView;
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
-            return inflater.Inflate(Resource.Layout.Settings, container, false);
+            currentView = inflater.Inflate(Resource.Layout.Settings, container, false);
+            Initialize();
+            return currentView;
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            ViewModel.Storage = ApplicationFacade.Facade.Resolver.Resolve<IKeyValuePairStorage<Activity>>(storage =>
+                storage.PlatformObject = Activity);
         }
 
         protected override void BindProperties()
@@ -37,7 +41,7 @@ namespace SafeCloud.Droid.Views
             this.BindCommand(ViewModel, x => x.SaveCommand, x => x.SaveButton);
         }
 
-        public EditText ServerEditView => this.GetControl<EditText>();
-        public Button SaveButton => this.GetControl<Button>();
+        public EditText ServerEditView => currentView.GetControl<EditText>();
+        public Button SaveButton => currentView.GetControl<Button>();
     }
 }

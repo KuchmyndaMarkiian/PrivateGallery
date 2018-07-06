@@ -4,11 +4,4 @@
     android:layout_height="match_parent"
     android:minHeight="25px"
     android:minWidth="25px">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="Hello, User!" />
 </RelativeLayout>

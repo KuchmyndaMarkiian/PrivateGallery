@@ -1,11 +1,10 @@
 ﻿using System.Windows.Input;
 using ReactiveUI;
-using SafeCloud.ClientCore.Abstractions;
 using SafeCloud.ClientCore.Infrastructure;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
 {
-    public class MainNavigationViewModel : ReactiveViewModel, IInnerViewModelKeeper
+    public class MainNavigationViewModel : ReactiveNavigatedViewModel
     {
         public override void Initialize()
         {
@@ -13,13 +12,11 @@ namespace SafeCloud.ClientCore.MVVM.ViewModels
 
         public ICommand DebugPageCommand => ReactiveCommand.CreateFromTask(async () =>
         {
-            await ApplicationFacade.Facade.Navigator.RedirectTo<DebugViewModel>();
+            await ApplicationFacade.Facade.Navigator.PushToPartialView<DebugViewModel>();
         });
         public ICommand SettingsPageCommand => ReactiveCommand.CreateFromTask(async () =>
         {
-            await ApplicationFacade.Facade.Navigator.RedirectTo<SettingsViewModel>();
+            await ApplicationFacade.Facade.Navigator.PushToPartialView<SettingsViewModel>();
         });
-
-        public ReactiveViewModel InnerViewModel { get; set; }
     }
 }

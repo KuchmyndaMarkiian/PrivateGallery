@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Android.App;
 using Autofac;
 using SafeCloud.ClientCore.Infrastructure;
+using SafeCloud.ClientCore.MVVM;
 using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.Droid.Facade;
 using SafeCloud.Droid.Views;
@@ -25,13 +26,13 @@ namespace SafeCloud.Droid.Infractructure
 
         protected override void SetupMapping()
         {
-            if (ViewMapper == null) ViewMapper = new Dictionary<Type, (Type ParentPage, Type ContentPage)>();
-            ViewMapper.Add(typeof(AuthorizationViewModel), (null, typeof(AuthorizationView)));
-            ViewMapper.Add(typeof(LauncherViewModel), (null, typeof(LauncherView)));
-            ViewMapper.Add(typeof(MainNavigationViewModel), (typeof(MainNavigationScreen), null));
-            ViewMapper.Add(typeof(FileListViewModel), (typeof(MainNavigationScreen), typeof(MainView)));
-            ViewMapper.Add(typeof(DebugViewModel), (typeof(MainNavigationScreen), typeof(DebugView)));
-            ViewMapper.Add(typeof(SettingsViewModel), (typeof(MainNavigationScreen), typeof(SettingsView)));
+            if (ViewMapper == null) ViewMapper = new Dictionary<Type, Type>();
+            ViewMapper.Add(typeof(AuthorizationViewModel), typeof(AuthorizationView));
+            ViewMapper.Add(typeof(LauncherViewModel), typeof(LauncherView));
+            ViewMapper.Add(typeof(MainNavigationViewModel), typeof(MainNavigationScreen));
+            ViewMapper.Add(typeof(FileListViewModel), typeof(MainView));
+            ViewMapper.Add(typeof(DebugViewModel), typeof(DebugView));
+            ViewMapper.Add(typeof(SettingsViewModel), typeof(SettingsView));
         }
     }
 }

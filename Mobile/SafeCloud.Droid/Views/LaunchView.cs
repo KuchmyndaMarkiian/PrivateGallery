@@ -10,6 +10,7 @@ namespace SafeCloud.Droid.Views
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            ViewModel = new LauncherViewModel();
             base.OnCreate(savedInstanceState);
 
             // Create your application here

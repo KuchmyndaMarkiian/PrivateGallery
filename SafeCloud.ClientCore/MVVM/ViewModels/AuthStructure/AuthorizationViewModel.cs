@@ -29,7 +29,7 @@ namespace SafeCloud.ClientCore.MVVM.ViewModels
                     {
                         System.Console.WriteLine($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}");
 
-                        await ApplicationFacade.Facade.Navigator.RedirectTo<FileListViewModel>();
+                        await ApplicationFacade.Facade.Navigator.PushToViewWithPartialView<MainNavigationViewModel, FileListViewModel>();
                     },
                     async message =>
                     {
