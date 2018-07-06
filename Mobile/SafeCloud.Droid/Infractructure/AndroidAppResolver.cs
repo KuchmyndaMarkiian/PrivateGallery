@@ -5,9 +5,11 @@ using Autofac;
 using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure;
+using SafeCloud.ClientCore.MVVM.ViewModels.Debug;
 using SafeCloud.ClientCore.MVVM.ViewModels.FileStructure;
 using SafeCloud.Droid.Facade;
 using SafeCloud.Droid.Views;
+using SafeCloud.Droid.Views.Fragments;
 
 namespace SafeCloud.Droid.Infractructure
 {
@@ -18,6 +20,7 @@ namespace SafeCloud.Droid.Infractructure
             var builder = new ContainerBuilder();
 
             builder.RegisterType<DroidNavigator>().As<INavigator>();
+            builder.RegisterType<DroidPermissionManager>().As<IPermissionManager<Activity>>();
             builder.RegisterType<SharedPreferences>().As<IKeyValuePairStorage<Activity>>();
 
             Container = builder.Build();
@@ -25,10 +28,11 @@ namespace SafeCloud.Droid.Infractructure
 
         protected override void SetupMapping()
         {
-            if (ViewMapper == null) ViewMapper = new Dictionary<Type, Type>();
-            ViewMapper.Add(typeof(AuthorizationViewModel), typeof(AuthorizationView));
-            ViewMapper.Add(typeof(LauncherViewModel), typeof(LauncherView));
-            ViewMapper.Add(typeof(FileListViewModel), typeof(MainView));
+            if (ViewMapper == null) ViewMapper = new Dictionary<Type, (Type ParentPage, Type ContentPage)>();
+            ViewMapper.Add(typeof(AuthorizationViewModel), (null, typeof(AuthorizationView)));
+            ViewMapper.Add(typeof(LauncherViewModel), (null, typeof(LauncherView)));
+            ViewMapper.Add(typeof(FileListViewModel), (typeof(MainNavigationScreen), typeof(MainView)));
+            ViewMapper.Add(typeof(DebugViewModel), (typeof(MainNavigationScreen), typeof(DebugView)));
         }
     }
 }

@@ -46,19 +46,21 @@
   <ItemGroup>
     <Compile Include="Infrastructure\ApplicationFacade.cs" />
     <Compile Include="Infrastructure\AppResolver.cs" />
-    <Compile Include="Infrastructure\Navigator.cs" />
+    <Compile Include="Infrastructure\INavigator.cs" />
     <Compile Include="Abstractions\ReactiveObjects.cs" />
     <Compile Include="Abstractions\RestClientBase.cs" />
     <Compile Include="Infrastructure\IKeyValuePairStorage.cs" />
-    <Compile Include="Infrastructure\Permissions.cs" />
+    <Compile Include="Infrastructure\PermissionCodes.cs" />
     <Compile Include="Infrastructure\RestClient.cs" />
     <Compile Include="MVVM\Models\Auth\LoginModel.cs" />
     <Compile Include="MVVM\Models\SettingModel.cs" />
     <Compile Include="MVVM\ViewModels\AuthorizationViewModel.cs" />
     <Compile Include="MVVM\ViewModels\AuthStructure\AuthorizationViewModel.cs" />
     <Compile Include="MVVM\ViewModels\AuthStructure\RegistrationViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\Debug\DebugViewModel.cs" />
     <Compile Include="MVVM\ViewModels\FileInfoStructure\MapViewModel.cs" />
     <Compile Include="MVVM\ViewModels\FileStructure\FileListViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\MainNavigationViewModel.cs" />
     <Compile Include="MVVM\ViewModels\SettingsViewModel.cs" />
     <Compile Include="MVVM\ViewModels\UserStructure\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +80,9 @@
     </PackageReference>
     <PackageReference Include="ReactiveUI.Fody">
       <Version>8.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.3.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

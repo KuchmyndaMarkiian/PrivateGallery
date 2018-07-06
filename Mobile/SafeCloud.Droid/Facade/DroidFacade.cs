@@ -1,5 +1,4 @@
-﻿using SafeCloud.ClientCore.Abstractions;
-using SafeCloud.ClientCore.Infrastructure;
+﻿using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.Droid.Infractructure;
 
 namespace SafeCloud.Droid.Facade

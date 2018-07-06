@@ -8,12 +8,12 @@ using SafeCloud.Droid.Abstractions.View;
 
 namespace SafeCloud.Droid.Views
 {
-    [Activity(Label = "SafeCloud", MainLauncher = true, NoHistory = true, Theme = "@style/LauncherTheme")]
-    public class SettingsView : ReactiveView<SettingsViewModel>
+    [Activity(Label = "SafeCloud", NoHistory = true, Theme = "@style/LauncherTheme")]
+    public class SettingsView : RxActivity<SettingsViewModel>
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            ViewModelReassignation = model =>
+            ViewModelInitialize = model =>
                 model.Storage =
                     ApplicationFacade.Facade.Resolver.Resolve<IKeyValuePairStorage<Activity>>(storage =>
                         storage.PlatformObject = this);

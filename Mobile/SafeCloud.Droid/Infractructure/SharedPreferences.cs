@@ -2,10 +2,8 @@
 using Android;
 using Android.App;
 using Android.Content;
-using Android.Content.PM;
 using Android.OS;
 using Android.Preferences;
-using Android.Support.V4.App;
 using Newtonsoft.Json;
 using SafeCloud.ClientCore.Infrastructure;
 
@@ -13,23 +11,18 @@ namespace SafeCloud.Droid.Infractructure
 {
     public class SharedPreferences : IKeyValuePairStorage<Activity>
     {
-        private ISharedPreferences _sharedPreferences;
-        private Activity _platformObject;
+        private readonly ISharedPreferences _sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
+        private IPermissionManager<Activity> _permissionManager;
 
-        public Activity PlatformObject
-        {
-            get => _platformObject;
-            set
-            {
-                _platformObject = value; 
-                _sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(value);
-            }
-        }
+        public Activity PlatformObject { get; set; }
 
         public void Write(string key, object obj)
         {
             CheckPermissions();
             var editor = _sharedPreferences.Edit();
+            if (_sharedPreferences.Contains(key))
+                editor.Remove(key);
+            
             switch (obj)
             {
                 case bool b:
@@ -46,10 +39,15 @@ namespace SafeCloud.Droid.Infractructure
                     break;
                 default:
                     if (obj != null)
-                        editor.PutString(key, JsonConvert.SerializeObject(obj));
+                    {
+                        var serializeObject = JsonConvert.SerializeObject(obj);
+                        editor.PutString(key, serializeObject);
+                    }
+
                     break;
             }
 
+            editor.Commit();
             editor.Apply();
         }
 
@@ -64,28 +62,31 @@ namespace SafeCloud.Droid.Infractructure
             if (type == ConstTypes.Single) return _sharedPreferences.GetFloat(key, 0.0f);
             if (type == ConstTypes.String) return _sharedPreferences.GetString(key, null);
 
-            return JsonConvert.DeserializeObject(_sharedPreferences.GetString(key, null));
+            var deserializeObject = JsonConvert.DeserializeObject<T>(_sharedPreferences.GetString(key, null));
+            return deserializeObject;
         }
 
         public void Clear() => _sharedPreferences.Edit().Clear();
 
         public void Dispose() => _sharedPreferences?.Dispose();
 
-        // Todo: Permissions still does not work
+        // Todo: PermissionCodes still does not work
         private void CheckPermissions()
         {
+            if(_permissionManager == null)
+                _permissionManager = ApplicationFacade.Facade.Resolver.Resolve<IPermissionManager<Activity>>(manager => manager.PlatformObject = PlatformObject);
             if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
             {
                 var permissions = new (string permission, int code, bool isNeeded)[]
                 {
-                    (Manifest.Permission.ReadExternalStorage, Permissions.ReadFromStorage, false),
-                    (Manifest.Permission.WriteExternalStorage, Permissions.WriteToStorage, false)
+                    (Manifest.Permission.ReadExternalStorage, PermissionCodes.ReadFromStorage, false),
+                    (Manifest.Permission.WriteExternalStorage, PermissionCodes.WriteToStorage, false),
+                    (Manifest.Permission.AccessFineLocation, PermissionCodes.WriteToStorage, false)
                 };
                 foreach (var t in permissions)
                 {
                     var permission = t;
-                    var checkSelfPermission = PlatformObject.CheckSelfPermission(permission.permission);
-                    if (checkSelfPermission != Permission.Granted)
+                    if (!_permissionManager.IsGrantedPermission(permission.permission))
                         permission.isNeeded = true;
                 }
 
@@ -93,15 +94,13 @@ namespace SafeCloud.Droid.Infractructure
                 {
                     foreach (var deniedPermission in permissions.Where(x => x.isNeeded))
                     {
-                        if (ActivityCompat.ShouldShowRequestPermissionRationale(PlatformObject,
-                            deniedPermission.permission))
+                        if (_permissionManager.NeedToShowRequestPermissions(deniedPermission.permission))
                         {
 
                         }
                         else
                         {
-                            ActivityCompat.RequestPermissions(PlatformObject, new[] {deniedPermission.permission},
-                                deniedPermission.code);
+                            _permissionManager.RequestPermissions(deniedPermission.permission, deniedPermission.code);
                         }
                     }
                 }

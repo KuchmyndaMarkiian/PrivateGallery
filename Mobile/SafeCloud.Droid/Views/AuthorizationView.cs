@@ -8,7 +8,7 @@ using SafeCloud.Droid.Abstractions.View;
 namespace SafeCloud.Droid.Views
 {
     [Activity(Label = "AuthorizationView")]
-    public class AuthorizationView : ReactiveView<AuthorizationViewModel>
+    public class AuthorizationView : RxActivity<AuthorizationViewModel>
     {
 
         protected override void OnCreate(Bundle savedInstanceState)

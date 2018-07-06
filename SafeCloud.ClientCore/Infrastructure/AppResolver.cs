@@ -7,7 +7,7 @@ namespace SafeCloud.ClientCore.Infrastructure
     public abstract class AppResolver
     {
         protected IContainer Container;
-        protected Dictionary<Type, Type> ViewMapper;
+        protected Dictionary<Type, (Type ParentPage, Type ContentPage)> ViewMapper;
 
         protected abstract void SetupContainer();
         protected abstract void SetupMapping();
@@ -26,13 +26,14 @@ namespace SafeCloud.ClientCore.Infrastructure
             return resolved;
         }
 
-        public Type ResolveMappedType<T>()
+        public (Type ParentPage, Type ContentPage)? ResolveMappedType<T>()
         {
             if(ViewMapper == null)
                 throw new NullReferenceException();
-            return ViewMapper.ContainsKey(typeof(T)) ? ViewMapper[typeof(T)] : null;
+            return ViewMapper.ContainsKey(typeof(T)) ? ViewMapper[typeof(T)] : (null,null);
         }
 
         public T CreateObject<T>() where T : class => Activator.CreateInstance<T>();
+        public object CreateObject(Type type) => Activator.CreateInstance(type);
     }
 }

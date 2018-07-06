@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{4B05E8AA-6DAC-4824-8838-5FECC4F18862}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{087E2093-ED7D-4495-B385-2646EA61A30C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{087E2093-ED7D-4495-B385-2646EA61A30C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCloud.Droid", "Mobile\SafeCloud.Droid\SafeCloud.Droid.csproj", "{2F6E3A13-3A75-4A05-9208-5C9A95995D6C}"
 EndProject
@@ -20,6 +20,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCloud.ClientCore", "SafeCloud.ClientCore\SafeCloud.ClientCore.csproj", "{DDB0E7AA-6F74-47E9-B99A-A137D63EF87F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeCloud.Console", "SafeCloud.Console\SafeCloud.Console.csproj", "{C30735CB-28AA-4B03-ABDE-443FF58F44CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "adm-Hosting", "adm-Hosting", "{AD5F807F-316D-49E8-B4C4-60292508E16E}"
+	ProjectSection(SolutionItems) = preProject
+		.vs\config\applicationhost.config = .vs\config\applicationhost.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
