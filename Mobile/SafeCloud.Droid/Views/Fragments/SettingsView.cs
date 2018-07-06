@@ -2,11 +2,11 @@
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using MkCoreLibrary.PlatformManagement.Infrastructure;
 using ReactiveUI;
 using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.Droid.Abstractions.View;
-using SafeCloud.Droid.Infractructure;
 
 namespace SafeCloud.Droid.Views
 {

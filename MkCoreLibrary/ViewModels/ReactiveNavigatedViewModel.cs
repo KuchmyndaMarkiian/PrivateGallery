@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using SafeCloud.ClientCore.Abstractions;
 
-namespace SafeCloud.ClientCore.MVVM.ViewModels
+namespace MkCoreLibrary.ViewModels
 {
     public abstract class ReactiveNavigatedViewModel : ReactiveViewModel, IInnerViewModelKeeper, IInnerViewModelStackKeeper {
         public ReactiveViewModel InnerViewModel { get; private set; }

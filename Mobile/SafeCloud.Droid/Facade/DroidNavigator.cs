@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Widget;
+using MkCoreLibrary.PlatformManagement.Infrastructure;
+using MkCoreLibrary.ViewModels;
 using ReactiveUI;
-using SafeCloud.ClientCore.Abstractions;
 using SafeCloud.ClientCore.Infrastructure;
-using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.Droid.Abstractions.View;
 
 namespace SafeCloud.Droid.Facade

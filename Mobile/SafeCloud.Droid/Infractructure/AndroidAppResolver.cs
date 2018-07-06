@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Android.App;
 using Autofac;
+using MkCoreLibrary.Core;
+using MkCoreLibrary.PlatformManagement.Infrastructure;
 using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.ClientCore.MVVM;
 using SafeCloud.ClientCore.MVVM.ViewModels;

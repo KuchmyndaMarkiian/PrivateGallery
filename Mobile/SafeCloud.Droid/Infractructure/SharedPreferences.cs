@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Preferences;
+using MkCoreLibrary.PlatformManagement.Infrastructure;
 using Newtonsoft.Json;
 using SafeCloud.ClientCore.Infrastructure;
 

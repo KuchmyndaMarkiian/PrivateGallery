@@ -1,13 +1,15 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
+using MkCoreLibrary.Infrastructure;
+using MkCoreLibrary.ViewModels;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using SafeCloud.ClientCore.Abstractions;
 using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.ClientCore.MVVM.Models;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
 { 
-    public class AuthorizationViewModel : ReactiveViewModel
+    public class AuthorizationViewModel : ReactiveNavigatedViewModel
     {
         public override void Initialize()
         {
@@ -27,13 +29,13 @@ namespace SafeCloud.ClientCore.MVVM.ViewModels
                 await client.Post("http://192.168.10.187:57641/Token", null, request, ContentType.Form,
                     async message =>
                     {
-                        System.Console.WriteLine($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}");
+                        Console.WriteLine($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}");
 
                         await ApplicationFacade.Facade.Navigator.PushToViewWithPartialView<MainNavigationViewModel, FileListViewModel>();
                     },
                     async message =>
                     {
-                        System.Console.WriteLine($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}");
+                        Console.WriteLine($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}");
 
                         await ApplicationFacade.Facade.Navigator.ShowErrorMessage($"{message.StatusCode}:{await message.Content.ReadAsStringAsync()}");
                     });

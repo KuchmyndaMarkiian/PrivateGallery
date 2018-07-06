@@ -1,6 +1,5 @@
-﻿using ReactiveUI;
-using SafeCloud.ClientCore.Abstractions;
-using SafeCloud.Droid.Facade;
+﻿using MkCoreLibrary.ViewModels;
+using ReactiveUI;
 
 namespace SafeCloud.Droid.Abstractions.View
 {

@@ -48,8 +48,8 @@
     <AndroidSupportedAbis>x86;arm64-v8a</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>C:\Users\mark0\.nuget\packages\autofac\4.8.1\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.8.1\lib\netstandard1.1\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
@@ -339,6 +339,14 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MkCoreLibrary.PlatfirmManagement\MkCoreLibrary.PlatformManagement.csproj">
+      <Project>{1E46218F-CC9C-41F2-8D1D-5C2146B9067E}</Project>
+      <Name>MkCoreLibrary.PlatformManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MkCoreLibrary\MkCoreLibrary.csproj">
+      <Project>{CC51F63C-5F1C-4C0F-B792-534124567DFC}</Project>
+      <Name>MkCoreLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SafeCloud.ClientCore\SafeCloud.ClientCore.csproj">
       <Project>{DDB0E7AA-6F74-47E9-B99A-A137D63EF87F}</Project>
       <Name>SafeCloud.ClientCore</Name>

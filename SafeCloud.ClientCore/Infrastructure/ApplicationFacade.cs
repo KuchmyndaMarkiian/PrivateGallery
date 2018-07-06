@@ -1,4 +1,7 @@
-﻿namespace SafeCloud.ClientCore.Infrastructure
+﻿using MkCoreLibrary.Core;
+using MkCoreLibrary.PlatformManagement.Infrastructure;
+
+namespace SafeCloud.ClientCore.Infrastructure
 {
     public abstract class ApplicationFacade
     {

@@ -4,9 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using SafeCloud.ClientCore.Abstractions;
 
-namespace SafeCloud.ClientCore.Infrastructure
+namespace MkCoreLibrary.Infrastructure
 {
     public class RestClient : IRestClient
     {

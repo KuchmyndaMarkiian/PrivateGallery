@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SafeCloud.ClientCore.Infrastructure
+namespace MkCoreLibrary.PlatformManagement.Infrastructure
 {
     public interface IKeyValuePairStorage : IDisposable {
         void Write(string key, object obj);

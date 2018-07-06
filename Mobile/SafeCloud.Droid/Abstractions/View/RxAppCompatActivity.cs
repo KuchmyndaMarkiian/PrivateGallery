@@ -1,9 +1,8 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
-using ReactiveUI;
+using MkCoreLibrary.PlatformManagement.Infrastructure;
+using MkCoreLibrary.ViewModels;
 using ReactiveUI.AndroidSupport;
-using SafeCloud.ClientCore.Abstractions;
 using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.Droid.Facade;
 

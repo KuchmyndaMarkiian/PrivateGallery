@@ -1,11 +1,8 @@
-﻿using SafeCloud.ClientCore.Abstractions;
+﻿using MkCoreLibrary.ViewModels;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
 {
     public class ProfileViewModel : ReactiveViewModel
     {
-        public override void Initialize()
-        {
-        }
     }
 }

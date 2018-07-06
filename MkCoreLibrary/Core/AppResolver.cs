@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Autofac;
 
-namespace SafeCloud.ClientCore.Infrastructure
+namespace MkCoreLibrary.Core
 {
     public abstract class AppResolver
     {

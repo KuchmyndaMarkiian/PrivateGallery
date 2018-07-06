@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SafeCloud.ClientCore.Abstractions;
-using SafeCloud.ClientCore.MVVM.ViewModels;
+using MkCoreLibrary.ViewModels;
 
-namespace SafeCloud.ClientCore.Infrastructure
+namespace MkCoreLibrary.PlatformManagement.Infrastructure
 {
     public interface INavigator
     {

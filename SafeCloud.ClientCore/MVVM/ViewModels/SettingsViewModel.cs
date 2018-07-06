@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using MkCoreLibrary.PlatformManagement.Infrastructure;
+using MkCoreLibrary.ViewModels;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using SafeCloud.ClientCore.Abstractions;
-using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.ClientCore.MVVM.Models;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
