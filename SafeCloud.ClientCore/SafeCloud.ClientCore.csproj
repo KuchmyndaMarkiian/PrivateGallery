@@ -60,6 +60,7 @@
     <Compile Include="MVVM\ViewModels\Debug\DebugViewModel.cs" />
     <Compile Include="MVVM\ViewModels\FileInfoStructure\MapViewModel.cs" />
     <Compile Include="MVVM\ViewModels\FileStructure\FileListViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\IInnerViewModelKeeper.cs" />
     <Compile Include="MVVM\ViewModels\MainNavigationViewModel.cs" />
     <Compile Include="MVVM\ViewModels\SettingsViewModel.cs" />
     <Compile Include="MVVM\ViewModels\UserStructure\ProfileViewModel.cs" />

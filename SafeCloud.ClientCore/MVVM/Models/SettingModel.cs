@@ -1,15 +1,13 @@
-﻿
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json;
 using ReactiveUI.Fody.Helpers;
 using SafeCloud.ClientCore.Abstractions;
 
 namespace SafeCloud.ClientCore.MVVM.Models
 {
-    public class SettingModel : ReactiveModel
+    public class SettingModel : ReactiveViewModel
     {
         [Reactive, JsonProperty("ServerUri")]
-        public string HostUri { get; set; } = "http://localhost:57641/";
+        public string ServerUri { get; set; } = "http://localhost:57641/";
         public override void Initialize()
         {
             

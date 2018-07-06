@@ -1,6 +1,6 @@
 ﻿using SafeCloud.ClientCore.Abstractions;
 
-namespace SafeCloud.ClientCore.MVVM.ViewModels.FileStructure
+namespace SafeCloud.ClientCore.MVVM.ViewModels
 {
     public class FileListViewModel : ReactiveViewModel
     {

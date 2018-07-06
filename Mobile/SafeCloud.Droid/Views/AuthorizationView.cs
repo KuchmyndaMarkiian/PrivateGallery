@@ -2,7 +2,7 @@
 using Android.OS;
 using Android.Widget;
 using ReactiveUI;
-using SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure;
+using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.Droid.Abstractions.View;
 
 namespace SafeCloud.Droid.Views
@@ -29,8 +29,7 @@ namespace SafeCloud.Droid.Views
         {
             this.BindCommand(ViewModel, x => x.LoginCommand, x => x.LoginButton);
         }
-
-
+        
         public EditText LoginEditView => this.GetControl<EditText>();
         public EditText PasswordEditView => this.GetControl<EditText>();
         public Button LoginButton => this.GetControl<Button>();

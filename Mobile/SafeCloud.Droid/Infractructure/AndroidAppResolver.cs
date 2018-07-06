@@ -4,9 +4,6 @@ using Android.App;
 using Autofac;
 using SafeCloud.ClientCore.Infrastructure;
 using SafeCloud.ClientCore.MVVM.ViewModels;
-using SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure;
-using SafeCloud.ClientCore.MVVM.ViewModels.Debug;
-using SafeCloud.ClientCore.MVVM.ViewModels.FileStructure;
 using SafeCloud.Droid.Facade;
 using SafeCloud.Droid.Views;
 using SafeCloud.Droid.Views.Fragments;
@@ -31,8 +28,10 @@ namespace SafeCloud.Droid.Infractructure
             if (ViewMapper == null) ViewMapper = new Dictionary<Type, (Type ParentPage, Type ContentPage)>();
             ViewMapper.Add(typeof(AuthorizationViewModel), (null, typeof(AuthorizationView)));
             ViewMapper.Add(typeof(LauncherViewModel), (null, typeof(LauncherView)));
+            ViewMapper.Add(typeof(MainNavigationViewModel), (typeof(MainNavigationScreen), null));
             ViewMapper.Add(typeof(FileListViewModel), (typeof(MainNavigationScreen), typeof(MainView)));
             ViewMapper.Add(typeof(DebugViewModel), (typeof(MainNavigationScreen), typeof(DebugView)));
+            ViewMapper.Add(typeof(SettingsViewModel), (typeof(MainNavigationScreen), typeof(SettingsView)));
         }
     }
 }

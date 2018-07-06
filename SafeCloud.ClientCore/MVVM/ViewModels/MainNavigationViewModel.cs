@@ -1,19 +1,25 @@
-﻿using System.Threading.Tasks;
+﻿using System.Windows.Input;
+using ReactiveUI;
 using SafeCloud.ClientCore.Abstractions;
 using SafeCloud.ClientCore.Infrastructure;
-using SafeCloud.ClientCore.MVVM.ViewModels.Debug;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
 {
-    public class MainNavigationViewModel : ReactiveViewModel
+    public class MainNavigationViewModel : ReactiveViewModel, IInnerViewModelKeeper
     {
         public override void Initialize()
         {
         }
 
-        public async Task GoToDebugPage()
+        public ICommand DebugPageCommand => ReactiveCommand.CreateFromTask(async () =>
         {
             await ApplicationFacade.Facade.Navigator.RedirectTo<DebugViewModel>();
-        }
+        });
+        public ICommand SettingsPageCommand => ReactiveCommand.CreateFromTask(async () =>
+        {
+            await ApplicationFacade.Facade.Navigator.RedirectTo<SettingsViewModel>();
+        });
+
+        public ReactiveViewModel InnerViewModel { get; set; }
     }
 }

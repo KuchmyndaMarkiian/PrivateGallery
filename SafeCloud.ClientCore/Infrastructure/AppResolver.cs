@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Autofac;
 
 namespace SafeCloud.ClientCore.Infrastructure
@@ -26,11 +27,18 @@ namespace SafeCloud.ClientCore.Infrastructure
             return resolved;
         }
 
-        public (Type ParentPage, Type ContentPage)? ResolveMappedType<T>()
+        public (Type ParentPage, Type ContentPage)? ResolveMappedPageByViewModel<T>()
         {
             if(ViewMapper == null)
                 throw new NullReferenceException();
             return ViewMapper.ContainsKey(typeof(T)) ? ViewMapper[typeof(T)] : (null,null);
+        }
+
+        public Type ResolveMappedViewModelByPage(Type parentPage)
+        {
+            if (ViewMapper == null)
+                throw new NullReferenceException();
+            return ViewMapper.FirstOrDefault(x => x.Value.ParentPage.IsAssignableFrom(parentPage)).Key;
         }
 
         public T CreateObject<T>() where T : class => Activator.CreateInstance<T>();

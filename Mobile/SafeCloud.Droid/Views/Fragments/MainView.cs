@@ -1,6 +1,6 @@
 ﻿using Android.OS;
 using Android.Views;
-using SafeCloud.ClientCore.MVVM.ViewModels.FileStructure;
+using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.Droid.Abstractions.View;
 
 namespace SafeCloud.Droid.Views.Fragments

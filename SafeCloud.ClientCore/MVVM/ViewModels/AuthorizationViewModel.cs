@@ -2,7 +2,6 @@
 using ReactiveUI;
 using SafeCloud.ClientCore.Abstractions;
 using SafeCloud.ClientCore.Infrastructure;
-using SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
 {
@@ -12,11 +11,12 @@ namespace SafeCloud.ClientCore.MVVM.ViewModels
         {
             StartCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                await ApplicationFacade.Facade.Navigator.RedirectTo<AuthorizationViewModel>(model =>
+                /*await ApplicationFacade.Facade.Navigator.RedirectTo<AuthorizationViewModel>(model =>
                 {
                     model.LoginModel.Login = "mark0611@gmail.com";
                     model.LoginModel.Password = "Mark95!";
-                }, true);
+                }, true);*/
+                await ApplicationFacade.Facade.Navigator.RedirectTo<FileListViewModel>(removeFromHistory:true);
             });
         }
 

@@ -3,11 +3,10 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SafeCloud.ClientCore.Abstractions;
 using SafeCloud.ClientCore.Infrastructure;
-using SafeCloud.ClientCore.MVVM.Models.Auth;
-using SafeCloud.ClientCore.MVVM.ViewModels.FileStructure;
+using SafeCloud.ClientCore.MVVM.Models;
 
-namespace SafeCloud.ClientCore.MVVM.ViewModels.AuthStructure
-{
+namespace SafeCloud.ClientCore.MVVM.ViewModels
+{ 
     public class AuthorizationViewModel : ReactiveViewModel
     {
         public override void Initialize()

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SafeCloud.ClientCore.Abstractions;
 
-namespace SafeCloud.ClientCore.MVVM.Models.Auth
+namespace SafeCloud.ClientCore.MVVM.Models
 {
     public class LoginModel : ReactiveViewModel
     {
