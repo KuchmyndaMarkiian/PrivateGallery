@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
+using MkCoreLibrary.PlatformManagement.Core;
 using MkCoreLibrary.PlatformManagement.Infrastructure;
 using MkCoreLibrary.ViewModels;
 using ReactiveUI;
@@ -8,7 +9,7 @@ using SafeCloud.ClientCore.MVVM.Models;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
 {
-    public class SettingsViewModel : ReactiveViewModel
+    public class SettingsViewModel : ReactiveNavigatableViewModel
     {
         private const string Key = "AppSettings";
         public IKeyValuePairStorage Storage { get; set; }

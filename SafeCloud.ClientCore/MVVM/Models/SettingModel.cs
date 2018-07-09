@@ -1,10 +1,10 @@
-﻿using MkCoreLibrary.ViewModels;
+﻿using MkCoreLibrary.PlatformManagement.Core;
 using Newtonsoft.Json;
 using ReactiveUI.Fody.Helpers;
 
 namespace SafeCloud.ClientCore.MVVM.Models
 {
-    public class SettingModel : ReactiveViewModel
+    public class SettingModel : ReactiveNavigatableViewModel
     {
         [Reactive, JsonProperty("ServerUri")]
         public string ServerUri { get; set; } = "http://localhost:57641/";

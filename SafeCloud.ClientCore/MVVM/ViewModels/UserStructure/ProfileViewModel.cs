@@ -1,8 +1,9 @@
-﻿using MkCoreLibrary.ViewModels;
+﻿using MkCoreLibrary.PlatformManagement.Core;
+using MkCoreLibrary.ViewModels;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
 {
-    public class ProfileViewModel : ReactiveViewModel
+    public class ProfileViewModel : ReactiveNavigatableViewModel
     {
     }
 }

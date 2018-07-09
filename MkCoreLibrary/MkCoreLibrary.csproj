@@ -55,7 +55,6 @@
     <Compile Include="Infrastructure\RestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\IInnerViewModelKeeper.cs" />
-    <Compile Include="ViewModels\ReactiveNavigatedViewModel.cs" />
     <Compile Include="ViewModels\ReactiveViewModel.cs" />
     <Compile Include="Infrastructure\RestClientBase.cs" />
   </ItemGroup>

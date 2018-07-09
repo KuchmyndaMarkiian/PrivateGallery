@@ -5,7 +5,6 @@ using Autofac;
 using MkCoreLibrary.Core;
 using MkCoreLibrary.PlatformManagement.Infrastructure;
 using SafeCloud.ClientCore.Infrastructure;
-using SafeCloud.ClientCore.MVVM;
 using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.Droid.Facade;
 using SafeCloud.Droid.Views;
@@ -22,6 +21,7 @@ namespace SafeCloud.Droid.Infractructure
             builder.RegisterType<DroidNavigator>().As<INavigator>();
             builder.RegisterType<DroidPermissionManager>().As<IPermissionManager<Activity>>();
             builder.RegisterType<SharedPreferences>().As<IKeyValuePairStorage<Activity>>();
+            builder.RegisterType<DroidMessageController>().As<IMessageController<Activity>>();
 
             Container = builder.Build();
         }

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using MkCoreLibrary.ViewModels;
 
-namespace MkCoreLibrary.ViewModels
+namespace MkCoreLibrary.PlatformManagement.Core
 {
-    public abstract class ReactiveNavigatedViewModel : ReactiveViewModel, IInnerViewModelKeeper, IInnerViewModelStackKeeper {
+    public abstract class ReactiveMainViewModel : ReactiveNavigatableViewModel, IInnerViewModelKeeper, IInnerViewModelStackKeeper {
         public ReactiveViewModel InnerViewModel { get; private set; }
         public void SetInnerViewModel(ReactiveViewModel reactiveViewModel)
         {

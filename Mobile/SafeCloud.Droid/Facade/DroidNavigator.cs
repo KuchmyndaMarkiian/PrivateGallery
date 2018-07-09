@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.Widget;
+using MkCoreLibrary.PlatformManagement.Core;
 using MkCoreLibrary.PlatformManagement.Infrastructure;
 using MkCoreLibrary.ViewModels;
 using ReactiveUI;
@@ -13,20 +13,24 @@ namespace SafeCloud.Droid.Facade
 {
     public class DroidNavigator : INavigator<Activity>
     {
-        public ReactiveNavigatedViewModel MainViewModel { get; private set; }
+        public ReactiveMainViewModel MainViewModel { get; private set; }
         public ReactiveViewModel CurrenViewModel { get; private set; }
-        
-        public async Task PushToViewWithPartialView<TViewModel1, TViewModel2>(Action<TViewModel1> initViewAction1 = null, Action<TViewModel2> initViewAction2 = null, bool removeFromHistory = false) where TViewModel1 : ReactiveNavigatedViewModel where TViewModel2 : ReactiveViewModel
+
+        public IMessageController MessageController =>
+            ApplicationFacade.Facade.Resolver.Resolve<IMessageController<Activity>>(controller =>
+                controller.PlatformMessageController = NavigationController);
+
+        public async Task PushToViewWithPartialView<TViewModel1, TViewModel2>(Action<TViewModel1> initViewAction1 = null, Action<TViewModel2> initViewAction2 = null, bool removeFromHistory = false) where TViewModel1 : ReactiveMainViewModel where TViewModel2 : ReactiveViewModel
         {
             await PushToView(initViewAction1, removeFromHistory);
             await PushToPartialView(initViewAction2);
         }
 
-        public async Task PushToView<TViewModel>(Action<TViewModel> initViewAction = null, bool removeFromHistory = false) where TViewModel : ReactiveNavigatedViewModel
+        public async Task PushToView<TViewModel>(Action<TViewModel> initViewAction = null, bool removeFromHistory = false) where TViewModel : ReactiveMainViewModel
         {
             TViewModel newVm = await ResolveViewModel(initViewAction, removeFromHistory);
 
-            if (PlatformNavigationController is IViewFor<TViewModel> activity)
+            if (NavigationController is IViewFor<TViewModel> activity)
             {
                 activity.ViewModel = newVm;
                 CurrenViewModel = null;
@@ -35,7 +39,7 @@ namespace SafeCloud.Droid.Facade
             else await ShowErrorMessage("MainViewModel is not match to Activity");
         }
 
-        private async Task<TViewModel> ResolveViewModel<TViewModel>(Action<TViewModel> initViewAction, bool removeFromHistory) where TViewModel : ReactiveNavigatedViewModel
+        private async Task<TViewModel> ResolveViewModel<TViewModel>(Action<TViewModel> initViewAction, bool removeFromHistory) where TViewModel : ReactiveMainViewModel
         {
             ResolveView(initViewAction, out var newVm, out var typedPage);
             await ChangeActivity(removeFromHistory, typedPage);
@@ -58,11 +62,14 @@ namespace SafeCloud.Droid.Facade
 
         private void ResolveView<TViewModel>(Action<TViewModel> initViewAction, out TViewModel newVm, out Type typedPage) where TViewModel : ReactiveViewModel
         {
-            if (PlatformNavigationController == null)
-                throw new NullReferenceException("PlatformNavigationController == null");
+            if (NavigationController == null)
+                throw new NullReferenceException("NavigationController == null");
 
             newVm = CreateVm(initViewAction);
             typedPage = ApplicationFacade.Facade.Resolver.ResolveMappedType<TViewModel>();
+
+            if (newVm is INavigatedObject navigatedObject)
+                navigatedObject.Navigator = this;
         }
 
         private static TViewModel CreateVm<TViewModel>(Action<TViewModel> initViewAction) where TViewModel : ReactiveViewModel
@@ -75,9 +82,9 @@ namespace SafeCloud.Droid.Facade
 
         private Fragment ChangeMainFragment(Type pageType)
         {
-            if (PlatformNavigationController is IFragmentKeeper fragmentKeeper)
+            if (NavigationController is IFragmentKeeper fragmentKeeper)
             {
-                var tran = PlatformNavigationController.FragmentManager.BeginTransaction();
+                var tran = NavigationController.FragmentManager.BeginTransaction();
                 var fragment = (Fragment) ApplicationFacade.Facade.Resolver.CreateObject(pageType);
                 tran.Replace(fragmentKeeper.MainFragmentContainerId, fragment);
                 tran.Commit();
@@ -88,21 +95,18 @@ namespace SafeCloud.Droid.Facade
 
         private async Task ChangeActivity(bool removeFromHistory,Type pageType)
         {
-            var newActivity = new Intent(PlatformNavigationController, pageType);
-            PlatformNavigationController.StartActivity(newActivity);
+            var newActivity = new Intent(NavigationController, pageType);
+            NavigationController.StartActivity(newActivity);
             if (removeFromHistory)
-                PlatformNavigationController.Finish();
+                NavigationController.Finish();
             await Task.Delay(300);
         }
 
-        public Task ShowErrorMessage(string s)
+        public async Task ShowErrorMessage(string s)
         {
-            if (PlatformNavigationController == null)
-                throw new NullReferenceException("PlatformNavigationController == null");
-            Toast.MakeText(PlatformNavigationController, s, ToastLength.Short).Show();
-            return Task.CompletedTask;
+            await MessageController.ShowPopupMessage(s);
         }
 
-        public Activity PlatformNavigationController { get; set; }
+        public Activity NavigationController { get; set; }
     }
 }

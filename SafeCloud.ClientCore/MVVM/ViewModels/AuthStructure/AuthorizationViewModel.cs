@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using MkCoreLibrary.Infrastructure;
+using MkCoreLibrary.PlatformManagement.Core;
 using MkCoreLibrary.ViewModels;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -9,7 +10,7 @@ using SafeCloud.ClientCore.MVVM.Models;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
 { 
-    public class AuthorizationViewModel : ReactiveNavigatedViewModel
+    public class AuthorizationViewModel : ReactiveNavigatableViewModel
     {
         public override void Initialize()
         {

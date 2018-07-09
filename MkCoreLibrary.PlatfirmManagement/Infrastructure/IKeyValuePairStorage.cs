@@ -9,7 +9,7 @@ namespace MkCoreLibrary.PlatformManagement.Infrastructure
     }
     public interface IKeyValuePairStorage <T>: IKeyValuePairStorage
     {
-        T PlatformObject { get; set; }
+        T PlatformController { get; set; }
     }
 
     public class ConstTypes

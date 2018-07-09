@@ -1,8 +1,9 @@
-﻿using MkCoreLibrary.ViewModels;
+﻿using MkCoreLibrary.PlatformManagement.Core;
+using MkCoreLibrary.ViewModels;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
 {
-    public class MapViewModel : ReactiveViewModel
+    public class MapViewModel : ReactiveNavigatableViewModel
     {
     }
 }

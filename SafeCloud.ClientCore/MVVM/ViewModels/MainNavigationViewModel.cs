@@ -1,11 +1,12 @@
 ﻿using System.Windows.Input;
-using MkCoreLibrary.ViewModels;
+using MkCoreLibrary.PlatformManagement.Core;
 using ReactiveUI;
 using SafeCloud.ClientCore.Infrastructure;
+using SafeCloud.ClientCore.MVVM.ViewModels.Debug;
 
 namespace SafeCloud.ClientCore.MVVM.ViewModels
 {
-    public class MainNavigationViewModel : ReactiveNavigatedViewModel
+    public class MainNavigationViewModel : ReactiveMainViewModel
     {
         public ICommand DebugPageCommand => ReactiveCommand.CreateFromTask(async () =>
         {

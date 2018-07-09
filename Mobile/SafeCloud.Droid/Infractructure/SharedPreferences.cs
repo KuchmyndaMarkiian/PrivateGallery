@@ -15,7 +15,7 @@ namespace SafeCloud.Droid.Infractructure
         private readonly ISharedPreferences _sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
         private IPermissionManager<Activity> _permissionManager;
 
-        public Activity PlatformObject { get; set; }
+        public Activity PlatformController { get; set; }
 
         public void Write(string key, object obj)
         {
@@ -75,7 +75,7 @@ namespace SafeCloud.Droid.Infractructure
         private void CheckPermissions()
         {
             if(_permissionManager == null)
-                _permissionManager = ApplicationFacade.Facade.Resolver.Resolve<IPermissionManager<Activity>>(manager => manager.PlatformObject = PlatformObject);
+                _permissionManager = ApplicationFacade.Facade.Resolver.Resolve<IPermissionManager<Activity>>(manager => manager.PlatformObject = PlatformController);
             if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
             {
                 var permissions = new (string permission, int code, bool isNeeded)[]

@@ -2,7 +2,7 @@
 using Android.Views;
 using Android.Widget;
 using ReactiveUI;
-using SafeCloud.ClientCore.MVVM;
+using SafeCloud.ClientCore.MVVM.ViewModels;
 using SafeCloud.Droid.Abstractions.View;
 
 namespace SafeCloud.Droid.Views.Fragments

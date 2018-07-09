@@ -26,7 +26,7 @@ namespace SafeCloud.Droid.Views
             base.Initialize();
 
             ViewModel.Storage = ApplicationFacade.Facade.Resolver.Resolve<IKeyValuePairStorage<Activity>>(storage =>
-                storage.PlatformObject = Activity);
+                storage.PlatformController = Activity);
         }
 
         protected override void BindProperties()

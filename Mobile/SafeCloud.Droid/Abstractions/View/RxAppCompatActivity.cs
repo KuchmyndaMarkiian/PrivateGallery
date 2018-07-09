@@ -20,7 +20,7 @@ namespace SafeCloud.Droid.Abstractions.View
             BindProperties();
             BindCommands();
             if (ApplicationFacade.Facade.Navigator is INavigator<Activity> facadeNavigator)
-                facadeNavigator.PlatformNavigationController = this;
+                facadeNavigator.NavigationController = this;
         }
 
         protected virtual void BindProperties() { }

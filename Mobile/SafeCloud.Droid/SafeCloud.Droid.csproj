@@ -82,7 +82,6 @@
       <HintPath>..\..\packages\System.Reactive.PlatformServices.3.1.1\lib\netstandard1.3\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime" />
-    <Reference Include="Java.Interop" />
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
@@ -144,6 +143,7 @@
     <Compile Include="Facade\DroidFacade.cs" />
     <Compile Include="Facade\DroidNavigator.cs" />
     <Compile Include="Infractructure\AndroidAppResolver.cs" />
+    <Compile Include="Infractructure\DroidMessageController.cs" />
     <Compile Include="Infractructure\DroidPermissionManager.cs" />
     <Compile Include="Infractructure\SharedPreferences.cs" />
     <Compile Include="Views\Fragments\DebugView.cs" />

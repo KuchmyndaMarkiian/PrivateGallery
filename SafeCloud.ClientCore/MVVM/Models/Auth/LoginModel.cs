@@ -24,10 +24,5 @@ namespace SafeCloud.ClientCore.MVVM.Models
 
         [Reactive]
         public string FullContent { get; set; }
-
-        public override void Initialize()
-        {
-            Activator.Activate();
-        }
     }
 }
