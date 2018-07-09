@@ -25,6 +25,17 @@ namespace SafeCloud.Droid.Abstractions.View
 
         protected virtual void BindProperties() { }
         protected virtual void BindCommands() { }
+
+        public override void OnBackPressed()
+        {
+            if (ViewModel is INavigatedObject navigatedObject)
+            {
+                navigatedObject.Navigator.PopView();
+                if (navigatedObject.Navigator.CanCloseView())
+                    base.OnBackPressed();
+            }
+            else base.OnBackPressed();
+        }
     }
 
     public interface IFragmentKeeper

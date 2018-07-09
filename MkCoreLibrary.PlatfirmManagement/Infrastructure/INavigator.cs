@@ -17,6 +17,8 @@ namespace MkCoreLibrary.PlatformManagement.Infrastructure
             where TViewModel1 : ReactiveMainViewModel where TViewModel2 : ReactiveViewModel;
         Task PushToView<TViewModel>(Action<TViewModel> initViewAction = null , bool removeFromHistory = false) where TViewModel : ReactiveMainViewModel;
         Task PushToPartialView<TViewModel>(Action<TViewModel> initViewAction = null) where TViewModel : ReactiveViewModel;
+        Task PopView();
+        bool CanCloseView();
         Task ShowErrorMessage(string s);
     }
     public interface INavigator<TPlatformController> : INavigator

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using MkCoreLibrary.PlatformManagement.Core;
 using MkCoreLibrary.PlatformManagement.Infrastructure;
 using MkCoreLibrary.ViewModels;
@@ -59,6 +62,21 @@ namespace SafeCloud.Droid.Facade
             }
             else await ShowErrorMessage("CurrenViewModel is not match to Fragment");
         }
+
+        public Task PopView()
+        {
+            if (MainViewModel.InnerViewModelStack.Any())
+            {
+                MainViewModel.InnerViewModelStack.Pop();
+                CurrenViewModel = MainViewModel.InnerViewModelStack.Any()
+                    ? MainViewModel.InnerViewModelStack.Peek()
+                    : null;
+                NavigationController.FragmentManager.PopBackStack();
+            }
+            return Task.CompletedTask;
+        }
+
+        public bool CanCloseView() => !MainViewModel.InnerViewModelStack.Any();
 
         private void ResolveView<TViewModel>(Action<TViewModel> initViewAction, out TViewModel newVm, out Type typedPage) where TViewModel : ReactiveViewModel
         {

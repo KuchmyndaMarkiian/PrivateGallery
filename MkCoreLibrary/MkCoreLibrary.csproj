@@ -39,7 +39,7 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI">
-      <HintPath>C:\Users\mark0\.nuget\packages\reactiveui\8.3.1\lib\net461\ReactiveUI.dll</HintPath>
+      <HintPath>C:\Users\USER\.nuget\packages\reactiveui\8.3.1\lib\net461\ReactiveUI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
