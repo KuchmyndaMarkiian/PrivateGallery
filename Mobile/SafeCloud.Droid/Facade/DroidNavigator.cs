@@ -105,6 +105,7 @@ namespace SafeCloud.Droid.Facade
                 var tran = NavigationController.FragmentManager.BeginTransaction();
                 var fragment = (Fragment) ApplicationFacade.Facade.Resolver.CreateObject(pageType);
                 tran.Replace(fragmentKeeper.MainFragmentContainerId, fragment);
+                tran.AddToBackStack(null);
                 tran.Commit();
                 return fragment;
             }
